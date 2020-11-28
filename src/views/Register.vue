@@ -46,7 +46,10 @@
 
 				<div id="pass-info" v-bind:class="clearfix" v-show="err.errflag">{{err.errinfo}}</div>
 				<input type="submit" id="reg" class="btn_1 rounded full-width" value="现在注册!">
-				<div class="text-center add_top_10">已有帐号? <strong><a href="{% url 'login' %}">登录</a></strong></div>
+				<div class="text-center add_top_10">
+          已有帐号?
+          <strong>登录</strong>
+        </div>
       </form>
       <CopyRight></CopyRight>
 		</aside>
