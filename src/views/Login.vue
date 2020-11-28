@@ -31,7 +31,10 @@
           </div>
           <div id="pass-info" v-bind:class="classlo"></div>
           <input type="submit" id="losu" class="btn_1 rounded full-width" value="登录食客之家">
-          <div class="text-center add_top_10">新用户/商家? <strong><a href="{% url 'register' %}">注册!</a></strong></div>
+          <div class="text-center add_top_10">
+            新用户/商家?
+            <strong>注册!</strong>
+          </div>
         </form>
         <CopyRight></CopyRight>
       </aside>
