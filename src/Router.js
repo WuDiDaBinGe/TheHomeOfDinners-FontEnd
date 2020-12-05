@@ -5,7 +5,7 @@ Vue.use(VueRouter);
 
 const routes=[
   {
-    path:'/',
+    path:'/index',
     component:()=>import("./views/index.vue")
   },
   {
@@ -15,7 +15,11 @@ const routes=[
   {
     path: '/register',
     component:()=>import("./views/Register.vue")
-  }
+  },
+  {
+    path:'/new_res',
+    component:()=>import("./views/New_Restaurant")
+  },
 ];
 
 const router = new VueRouter({

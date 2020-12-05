@@ -4,14 +4,17 @@ import Vue from 'vue';
 import App from './App';
 import VueRouter from "vue-router";
 import router from "./Router.js";
+//引入全局样式
 import "../static/css/bootstrap.min.css";
 import "../static/css/style.css";
 import "../static/css/custom.css";
 import "../static/css/vendors.css";
+//引入全局JS
 
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
+
 
 //全局注册组件
 
