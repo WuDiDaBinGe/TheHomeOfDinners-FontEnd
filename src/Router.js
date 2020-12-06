@@ -20,6 +20,14 @@ const routes=[
     path:'/new_res',
     component:()=>import("./views/New_Restaurant")
   },
+  {
+    path:'/write_reviews',
+    component:()=>import("./views/WriteReviews")
+  },
+  {
+    path:"/all_restaurant",
+    component:()=>import("./views/RestaurantList")
+  }
 ];
 
 const router = new VueRouter({
