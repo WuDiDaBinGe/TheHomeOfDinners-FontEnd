@@ -27,6 +27,10 @@ const routes=[
   {
     path:"/all_restaurant",
     component:()=>import("./views/RestaurantList")
+  },
+  {
+    path:"/test_http",
+    component:()=>import("./views/testHttp")
   }
 ];
 

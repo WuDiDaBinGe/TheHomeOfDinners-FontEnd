@@ -10,7 +10,16 @@ import "../static/css/style.css";
 import "../static/css/custom.css";
 import "../static/css/vendors.css";
 //引入全局JS
+//接口
+import api from './http/api'
+//请求方法
+import http from './http/http'
+//axios拦截器
+import './http/axios'
 
+//全局注册
+Vue.prototype.$api=api;
+Vue.prototype.$httpM=http;
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
