@@ -20,14 +20,8 @@
 								</div>
 							</div>
 							<div class="col-lg-4">
-								<select class="wide">
-									<option>All Categories</option>
-									<option>Shops</option>
-									<option>Hotels</option>
-									<option>Restaurants</option>
-									<option>Bars</option>
-									<option>Events</option>
-									<option>Fitness</option>
+								<select class="wide nice-select">
+									<option v-for="item in categories_list">{{item}}</option>
 								</select>
 							</div>
 							<div class="col-xl-1 col-lg-1">
@@ -48,13 +42,7 @@
 							<i class="icon_pin_alt"></i>
 						</div>
 						<select class="wide">
-							<option>All Categories</option>
-							<option>Shops</option>
-							<option>Hotels</option>
-							<option>Restaurants</option>
-							<option>Bars</option>
-							<option>Events</option>
-							<option>Fitness</option>
+							<option v-for="item in categories_list">{{item}}</option>
 						</select>
 						<input type="submit" value="Search">
 					</div>
@@ -162,7 +150,7 @@
 		<div class="container margin_60_35">
 
 			<div class="isotope-wrapper">
-				{% for Restaurant in Restaurant_data %}
+
 				<div class="company_listing isotope-item high">
 					<div class="row">
 
@@ -184,7 +172,7 @@
 
 				</div>
 				<!-- /company_listing -->
-				{% endfor %}
+
 				<div class="company_listing isotope-item high">
 					<div class="row">
 						<div class="col-md-9">
@@ -204,81 +192,6 @@
 				</div>
 				<!-- /company_listing -->
 
-				<div class="company_listing isotope-item low">
-					<div class="row">
-						<div class="col-md-9">
-							<div class="company_info">
-								<figure><a href="{% url 'reviews-page' %}"><img src="/static/img/brands/3.png" alt=""></a></figure>
-								<h3>Elite</h3>
-								<p>Tale tollit vocent quo ut. Eu vix menandri persequeris accommodare, nam ei virtute dissentiet. Nec prima indoctum ei, vis eu justo dictas tamquam...</p>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="text-center float-lg-right">
-							<span class="rating"><strong>Based on 265 reviews</strong><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star empty"></i><i class="icon_star empty"></i></span>
-							<a href="{% url 'reviews-page' %}" class="btn_1 small">Read more</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /company_listing -->
-
-				<div class="company_listing isotope-item low">
-					<div class="row">
-						<div class="col-md-9">
-							<div class="company_info">
-								<figure><a href="{% url 'reviews-page' %}"><img src="/static/img/brands/5.png" alt=""></a></figure>
-								<h3>Williams</h3>
-								<p>Tale tollit vocent quo ut. Eu vix menandri persequeris accommodare, nam ei virtute dissentiet. Nec prima indoctum ei, vis eu justo dictas tamquam...</p>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="text-center float-lg-right">
-							<span class="rating"><strong>Based on 265 reviews</strong><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star empty"></i><i class="icon_star empty"></i><i class="icon_star empty"></i></span>
-							<a href="{% url 'reviews-page' %}" class="btn_1 small">Read more</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /company_listing -->
-
-				<div class="company_listing isotope-item high">
-					<div class="row">
-						<div class="col-md-9">
-							<div class="company_info">
-								<figure><a href="{% url 'reviews-page' %}"><img src="/static/img/brands/6.png" alt=""></a></figure>
-								<h3>Fairlane</h3>
-								<p>Tale tollit vocent quo ut. Eu vix menandri persequeris accommodare, nam ei virtute dissentiet. Nec prima indoctum ei, vis eu justo dictas tamquam...</p>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="text-center float-lg-right">
-							<span class="rating"><strong>Based on 265 reviews</strong><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star empty"></i></span>
-							<a href="{% url 'reviews-page' %}" class="btn_1 small">Read more</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /company_listing -->
-
-				<div class="company_listing isotope-item high">
-					<div class="row">
-						<div class="col-md-9">
-							<div class="company_info">
-								<figure><a href="{% url 'reviews-page' %}"><img src="/static/img/brands/8.png" alt=""></a></figure>
-								<h3>Fairlane Clothing</h3>
-								<p>Tale tollit vocent quo ut. Eu vix menandri persequeris accommodare, nam ei virtute dissentiet. Nec prima indoctum ei, vis eu justo dictas tamquam...</p>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="text-center float-lg-right">
-							<span class="rating"><strong>Based on 265 reviews</strong><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star empty"></i></span>
-							<a href="{% url 'reviews-page' %}" class="btn_1 small">Read more</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /company_listing -->
 
 			</div>
 			<!-- /isotope-wrapper -->
@@ -301,7 +214,12 @@
     import Footer_com from "../components/Footer_com";
     export default {
         name: "RestaurantList",
-      components: {Footer_com, Header_WB}
+        data(){
+          return{
+            categories_list:["All Categories","Lebanese","Cafe","Bar","Pizza","Seafood","Roast","Spaghetti","Dessert"],
+          }
+        },
+        components: {Footer_com, Header_WB}
     }
 </script>
 

@@ -5,7 +5,8 @@ export default{
   },
   //用户
   User:{
-    userInfo:'/user/info'
+    user_register:'/users/',  //注册
+    user_register_mobilenumber:'/mobiles/18635151267/count/', //手机号判断
   },
   //评论
   //餐馆

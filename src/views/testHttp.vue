@@ -12,14 +12,13 @@
         data(){
           return{
             post_data:[{
-                        title: 'foo',
-                        body: 'bar',
-                        userId: 1,
-                        },
-                        {
-                        title: 'foo',
-                        body: 'bar',
-                        userId: 1,
+                        username:yxb,
+                        password:123456789,
+                        password2:123456789,
+                        mobile:15180450364,
+                        sms_code:512698,
+                        role:1,
+                        allow:true,
                         }]
           }
         },

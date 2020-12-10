@@ -29,6 +29,10 @@ const routes=[
     component:()=>import("./views/RestaurantList")
   },
   {
+    path:"/userinfo",
+    component:()=>import("./views/UserInfoSetting")
+  },
+  {
     path:"/test_http",
     component:()=>import("./views/testHttp")
   }

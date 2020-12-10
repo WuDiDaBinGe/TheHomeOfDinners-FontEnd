@@ -115,7 +115,8 @@
 		</div>
 	</footer>
 	<!--/footer-->
-	</div>
+
+
 	<!-- page -->
 </template>
 

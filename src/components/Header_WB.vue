@@ -1,5 +1,5 @@
 <template>
-  <header class="header_in is_fixed menu_fixed">
+  <header class="header_in">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3 col-12">
@@ -30,12 +30,12 @@
 							<li><span><a href="{% url 'category-companies-listings-filterstop-mer' %}?name=">Reviews</a></span>
 							</li>
 
-                            <li><span><a href="{% url 'mer-dashboard' %}">User Dashboard</a></span></li>
-                            <li><span><a href="{% url 'user-settings-mer' %}">User Settings</a></span></li>
+              <li><span><a href="{% url 'mer-dashboard' %}">User Dashboard</a></span></li>
+              <li><span><a href="{% url 'user-settings-mer' %}">User Settings</a></span></li>
 							<li><span><a href="#0">About</a></span>
 								<ul>
 									<li><a href="{% url 'login' %}">Login</a></li>
-						            <li><a href="{% url 'register' %}">Register</a></li>
+                  <li><a href="{% url 'register' %}">Register</a></li>
 
 								</ul>
 							</li>
@@ -54,7 +54,12 @@
 
 <script>
     export default {
-        name: "Header_WB"
+        name: "Header_WB",
+        data(){
+          return{
+
+          }
+        }
     }
 </script>
 

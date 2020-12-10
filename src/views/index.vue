@@ -25,12 +25,13 @@
 </template>
 
 <script>
-    import I_Header from "../components/I_Header";
-    import Search_part from "../components/I_Search_part";
-    import I_Cards from "../components/I_Cards";
-    import I_CallSection from "../components/I_CallSection";
-    import I_LastReviews from "../components/I_LastReviews";
-    import I_RegionList from "../components/I_RegionList";
+    import I_Header from "../components/index_components/I_Header";
+    import Search_part from "../components/index_components/I_Search_part";
+    import I_Cards from "../components/index_components/I_Cards";
+    import I_CallSection from "../components/index_components/I_CallSection";
+    import I_LastReviews from "../components/index_components/I_LastReviews";
+    import I_RegionList from "../components/index_components/I_RegionList";
+
     export default {
         name: "index",
         components: {I_RegionList, I_LastReviews, I_CallSection, Search_part, I_Header,I_Cards}

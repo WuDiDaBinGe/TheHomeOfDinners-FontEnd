@@ -9,7 +9,9 @@ import "../static/css/bootstrap.min.css";
 import "../static/css/style.css";
 import "../static/css/custom.css";
 import "../static/css/vendors.css";
+
 //引入全局JS
+
 //接口
 import api from './http/api'
 //请求方法
