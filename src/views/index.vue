@@ -1,7 +1,7 @@
 <template>
   <div id="page">
 
-  <I_Header></I_Header>
+    <I_Header></I_Header>
 
 	<main>
     <search_part></search_part>
@@ -34,7 +34,11 @@
 
     export default {
         name: "index",
-        components: {I_RegionList, I_LastReviews, I_CallSection, Search_part, I_Header,I_Cards}
+        components: {I_RegionList, I_LastReviews, I_CallSection, Search_part, I_Header,I_Cards},
+        mounted:function(){
+            console.log("asdjlksam______!");
+            
+        }
     }
 </script>
 

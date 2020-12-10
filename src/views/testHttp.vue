@@ -12,13 +12,9 @@
         data(){
           return{
             post_data:[{
-                        username:yxb,
-                        password:123456789,
-                        password2:123456789,
-                        mobile:15180450364,
-                        sms_code:512698,
-                        role:1,
-                        allow:true,
+                        title: 'foo',
+                        body: 'bar',
+                        userId: 1,
                         }]
           }
         },
@@ -27,6 +23,7 @@
             this.$httpM.post(this.$api.Test.test_post,this.post_data,false)
               .then(function (response) {
                   console.log(response);
+                  alert(response);
               })
               .catch(function (err) {
                   console.log(err);
@@ -36,7 +33,8 @@
             this.$httpM.get(this.$api.Test.test_get
               ,{params:{id:1}},false)
             .then(function (response) {
-                console.log(response)
+                console.log(response);
+                alert(response);
             })
             .catch(function (err) {
                 console.log(err)

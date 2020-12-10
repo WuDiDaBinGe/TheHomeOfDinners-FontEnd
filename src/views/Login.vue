@@ -3,10 +3,9 @@
     <div id="login" style="position :relative ;">
       <aside >
         <figure>
-          <a href="index.html"><img src="../../static/img/logo_sticky.svg" width="140" height="35" alt="" class="logo_sticky"></a>
+          <router-link to="/index"><img src="../../static/img/logo_sticky.svg" width="140" height="35" alt="" class="logo_sticky"></router-link>
         </figure>
         <form action="/login" method="post">
-                    {% csrf_token %}
           <div class="divider"><span>Login</span></div>
           <div class="form-group">
             <input class="form-control" id="name" type="text" placeholder="Name" name="username">
@@ -33,7 +32,7 @@
           <input type="submit" id="losu" class="btn_1 rounded full-width" value="登录食客之家">
           <div class="text-center add_top_10">
             新用户/商家?
-            <strong>注册!</strong>
+            <strong><router-link to="/register">注册!</router-link></strong>
           </div>
         </form>
         <CopyRight></CopyRight>
