@@ -5,7 +5,7 @@ Vue.use(VueRouter);
 
 const routes=[
   {
-    path:'/',
+    path:'/index',
     component:()=>import("./views/index.vue")
   },
   {
@@ -15,6 +15,26 @@ const routes=[
   {
     path: '/register',
     component:()=>import("./views/Register.vue")
+  },
+  {
+    path:'/new_res',
+    component:()=>import("./views/New_Restaurant")
+  },
+  {
+    path:'/write_reviews',
+    component:()=>import("./views/WriteReviews")
+  },
+  {
+    path:"/all_restaurant",
+    component:()=>import("./views/RestaurantList")
+  },
+  {
+    path:"/userinfo",
+    component:()=>import("./views/UserInfoSetting")
+  },
+  {
+    path:"/test_http",
+    component:()=>import("./views/testHttp")
   }
 ];
 

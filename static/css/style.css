@@ -1609,9 +1609,7 @@ ul#additional_links li:after {
     border-right: none;
   }
 }
-.custom-search-input-2 select {
-  display: none;
-}
+
 .custom-search-input-2 .nice-select .current {
   font-weight: 500;
   color: #6f787f;

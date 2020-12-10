@@ -7,31 +7,28 @@
 			</figure>
 
       <div class="divider"><span>Register</span></div>
-			<form  enctype="multipart/form-data">
+			<form>
 				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Name" v-model="peopleInfo.name" @blur="verifyName">
+					<input class="form-control" type="text" placeholder="Name" v-model="peopleInfo.username" @blur="verifyName">
 					<i class="ti-user"></i>
 				</div>
 				<div class="form-group">
-					<input class="form-control"  type="phone" placeholder="Phonenumber" v-model="peopleInfo.phonenumber" @blur="verifyPhone">
+					<input class="form-control"  type="phone" placeholder="Phonenumber" v-model="peopleInfo.mobile" @blur="verifyPhone">
 					<i class="icon-phone"></i>
 				</div>
 				<div class="form-group">
-					<input class="form-control" type="password"  placeholder="Password" v-model="peopleInfo.pwd" @blur="verifyPwd">
+					<input class="form-control" type="password"  placeholder="Password" v-model="peopleInfo.password" @blur="verifyPwd">
 					<i class="icon_lock_alt"></i>
 				</div>
 				<div class="form-group">
-					<input class="form-control" type="password"  placeholder="Confirm Password" v-model="peopleInfo.pwd2" @blur="verifyPwd2">
+					<input class="form-control" type="password"  placeholder="Confirm Password" v-model="peopleInfo.password2" @blur="verifyPwd2">
 					<i class="icon_lock_alt"></i>
 				</div>
-        <div class="form-group" >
-					<input class="form-control" type="file"  @change="triggerFile($event)">
-          <i class="icon-picture-2"></i>
-				</div>
+
         <div class="form-group">
-					<select class="form-control"  style="padding: 0 10%;" v-model="peopleInfo.type">
-            <option value="User">用户</option>
-            <option value="Merchant">商家</option>
+					<select class="form-control"  style="padding: 0 10%;" v-model="peopleInfo.role">
+            <option value="1">用户</option>
+            <option value="2">商家</option>
           </select>
           <i class="ti-user"></i>
 				</div>
@@ -45,7 +42,7 @@
 				</div>
 
 				<div id="pass-info" v-bind:class="clearfix" v-show="err.errflag">{{err.errinfo}}</div>
-				<input type="submit" id="reg" class="btn_1 rounded full-width" value="现在注册!">
+				<input type="submit" id="reg" class="btn_1 rounded full-width" value="现在注册!" @click="user_register">
 				<div class="text-center add_top_10">
           已有帐号?
           <strong>登录</strong>
@@ -67,14 +64,14 @@
       data(){
           return{
             peopleInfo:{
-              name:"",
-              phonenumber:"",
-              pwd:"",
-              pwd2:"",
-              photofile:"",
-              type:"",
+              username:"yxbdsg",
+              mobile:"15180450364",
+              password:"987654321",
+              password2:"987654321",
+              role:1,
+              sms_code:"512698",
+              allow:"true",
             },
-            verifyCode:"",
             err:{
               errflag:false,
               errinfo:"",
@@ -89,7 +86,7 @@
               codeMsg: '获取验证码',
               // 定时器
               timer: null
-            }
+            },
           }
         },
         methods: {
@@ -97,9 +94,9 @@
             console.log(event.target.files)
           },
           verifyName() {
-            console.log(this.peopleInfo.name)
+            console.log(this.peopleInfo.username)
             var people = this.peopleInfo;
-            if (people.name.replace(/(^\s*)|(\s*$)/g, "") == '') {
+            if (people.username.replace(/(^\s*)|(\s*$)/g, "") == '') {
               this.err.errflag = true;
               this.err.errinfo = "名字不能为空，请输入名字";
               this.clearfix = "weakpass";
@@ -112,7 +109,7 @@
           },
           verifyPhone() {
             var phonereg = /^1[3|4|5|7|8][0-9]{9}$/;
-            if (!phonereg.test(this.peopleInfo.phonenumber)) {
+            if (!phonereg.test(this.peopleInfo.mobile)) {
               this.err.errflag = true;
               this.err.errinfo = "输入正确的手机号码";
               this.clearfix = "weakpass";
@@ -131,15 +128,15 @@
             var MediumPass = /^(?=\S*?[a-z])(?=\S*?[0-9])\S{5,}$/;
             //Must contain at least one upper case letter, one lower case letter and one digit.
             var StrongPass = /^(?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9])\S{5,}$/;
-            if (!WeakPass.test(this.peopleInfo.pwd)) {
+            if (!WeakPass.test(this.peopleInfo.password)) {
               this.err.errflag = true;
               this.err.errinfo = "密码：Very Weak! (输入大于5个字符)";
               this.clearfix = "weakpass";
-            } else if (!MediumPass.test(this.peopleInfo.pwd)) {
+            } else if (!MediumPass.test(this.peopleInfo.password)) {
               this.err.errflag = true;
               this.err.errinfo = "密码：Still Weak! (输入数字组成更好的密码)";
               this.clearfix = "stillweakpass";
-            } else if (!StrongPass.test(this.peopleInfo.pwd)) {
+            } else if (!StrongPass.test(this.peopleInfo.password)) {
               this.err.errflag = true;
               this.err.errinfo = "密码：Good! (输入大写字母组成更强的密码)";
               this.clearfix = "goodpass";
@@ -151,7 +148,7 @@
 
           },
           verifyPwd2() {
-            if (this.peopleInfo.pwd != this.peopleInfo.pwd2) {
+            if (this.peopleInfo.pwd != this.peopleInfo.password2) {
               this.err.errflag = true;
               this.err.errinfo = "密码两次不相同";
               this.clearfix = "weakpass";
@@ -180,13 +177,25 @@
               }, 1000)}
           },
           getCode() {
-            if(this.peopleInfo.phonenumber!=="" && this.err.errflag){
+            if(this.peopleInfo.mobile!=="" && this.err.errflag){
               this.timing_60s();
             }
             else{
               alert("请输入正确的手机号后，再发送验证码！")
               this.btn_code.codeDisabled=true;
             }
+          },
+          user_register(){
+            alert("点击注册！");
+            this.$httpM.post(this.$api.User.user_register,this.test_user,false)
+              .then(function (response) {
+                  alert(response);
+                  console.log(response);
+              })
+              .catch(function (err) {
+                  alert(err);
+                  console.log(err);
+              })
           }
 
         }

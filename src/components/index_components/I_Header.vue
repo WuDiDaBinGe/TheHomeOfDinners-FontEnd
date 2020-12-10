@@ -26,16 +26,15 @@
 				</li>
 				<li><span><a href="#0">Reviews</a></span>
 					<ul>
-
 						<li><a href="{% url 'category-companies-listings-filterstop-guest' %}?name=">Reviews page</a></li>
 						<li><a href="{% url 'login' %}">Write a review</a></li>
 					</ul>
 				</li>
 				<li><span><a href="{% url 'login' %}">User Dashboard</a></span></li>
-                <li><span><a href="{% url 'login' %}">User Settings</a> </span></li>
+        <li><span><a href="{% url 'login' %}">User Settings</a> </span></li>
 				<li><span><a href="#0">About</a></span>
 					<ul>
-                        <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
 						<li><a href="{% url 'register' %}">Register</a></li>
 					</ul>
 				</li>
