@@ -9,6 +9,10 @@ const routes=[
     component:()=>import("./views/index.vue")
   },
   {
+    path:'/',
+    component:()=>import("./views/index.vue")
+  },
+  {
     path:'/login',
     component:()=>import("./views/Login.vue")
   },
@@ -31,6 +35,18 @@ const routes=[
   {
     path:"/userinfo",
     component:()=>import("./views/UserInfoSetting")
+  },
+  {
+    path:"/userdashboard",
+    component:()=>import("./views/UserDashBoard")
+  },
+  {
+    path:"/blog",
+    component:()=>import("./views/Blog")
+  },
+  {
+    path:"/blog_post",
+    component:()=>import("./views/Blog_Post")
   },
   {
     path:"/test_http",

@@ -1,15 +1,15 @@
 <template>
 <header class="header menu_fixed">
 		<div id="logo">
-			<a href="{% url 'index' %}">
+			<router-link to="/index">
 				<img src="/static/img/logo.svg" width="140" height="35" alt="" class="logo_normal">
 				<img src="/static/img/logo_sticky.svg" width="140" height="35" alt="" class="logo_sticky">
-			</a>
+			</router-link>
 		</div>
 		<ul id="top_menu">
-			<li><a href="{% url 'login' %}" class="btn_top">Write a Review</a></li>
-			<li><a href="{% url 'login' %}" class="btn_top company" >Create Restaurant</a></li>
-			<li><a href="{% url 'login' %}" id="sign-in" class="login" title="Sign In">Sign In</a></li>
+			<li><router-link to="/write_reviews" class="btn_top">Write a Review</router-link></li>
+			<li><router-link to="/new_res" class="btn_top company" >Create Restaurant</router-link></li>
+		
 		</ul>
 		<!-- /top_menu -->
 		<a href="#menu" class="btn_mobile">
@@ -22,20 +22,20 @@
 		<!-- /btn_mobile -->
 		<nav id="menu" class="main-menu">
 			<ul>
-				<li><span><a href="{% url 'index' %}">Home</a></span>
+				<li><span><router-link to="/index">主页</router-link></span>
 				</li>
 				<li><span><a href="#0">Reviews</a></span>
 					<ul>
-						<li><a href="{% url 'category-companies-listings-filterstop-guest' %}?name=">Reviews page</a></li>
-						<li><a href="{% url 'login' %}">Write a review</a></li>
+						<li><router-link to="">Reviews page</router-link></li>
+						<li><router-link to="/write_reviews">Write a review</router-link></li>
 					</ul>
 				</li>
 				<li><span><a href="{% url 'login' %}">User Dashboard</a></span></li>
-        <li><span><a href="{% url 'login' %}">User Settings</a> </span></li>
+        		<li><span><router-link to="/userinfo">User Settings</router-link></span></li>
 				<li><span><a href="#0">About</a></span>
 					<ul>
-            <li><a href="{% url 'login' %}">Login</a></li>
-						<li><a href="{% url 'register' %}">Register</a></li>
+            			<li><router-link to="/login">登录</router-link></li>
+						<li><router-link to="/register">注册</router-link></li>
 					</ul>
 				</li>
 

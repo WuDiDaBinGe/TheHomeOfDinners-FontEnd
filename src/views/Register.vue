@@ -45,7 +45,7 @@
 				<input type="submit" id="reg" class="btn_1 rounded full-width" value="现在注册!" @click="user_register">
 				<div class="text-center add_top_10">
           已有帐号?
-          <strong>登录</strong>
+          <strong><router-link to="/login">登录</router-link></strong>
         </div>
       </form>
       <CopyRight></CopyRight>
@@ -196,7 +196,7 @@
                   alert(err);
                   console.log(err);
               })
-          }
+          },
 
         }
     }
