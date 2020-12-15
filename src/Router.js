@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 const routes=[
+  //主页
   {
     path:'/index',
     component:()=>import("./views/index.vue")
@@ -12,41 +13,65 @@ const routes=[
     path:'/',
     component:()=>import("./views/index.vue")
   },
+  //登录
   {
     path:'/login',
     component:()=>import("./views/Login.vue")
   },
+  //注册
   {
     path: '/register',
     component:()=>import("./views/Register.vue")
   },
+  //创建餐馆
   {
     path:'/new_res',
     component:()=>import("./views/New_Restaurant")
   },
+  //写评论
   {
     path:'/write_reviews',
     component:()=>import("./views/WriteReviews")
   },
+  //所有餐馆列表
   {
     path:"/all_restaurant",
     component:()=>import("./views/RestaurantList")
   },
+  //用户信息
   {
     path:"/userinfo",
     component:()=>import("./views/UserInfoSetting")
   },
+  //用户某一条评论页面
   {
     path:"/userdashboard",
     component:()=>import("./views/UserDashBoard")
   },
+  //博客页面
   {
     path:"/blog",
     component:()=>import("./views/Blog")
   },
+  //博客某一篇内容
   {
     path:"/blog_post",
     component:()=>import("./views/Blog_Post")
+  },
+  //规则页面
+  {
+    path:"/faq",
+    component:()=>import("./views/Faq")
+  },
+  //确认页面
+  {
+    path:"/comfirm",
+    component:()=>import("./views/Confirm")
+  },
+  //404
+  {
+    path:"/404",
+    component:()=>import("./views/404")
   },
   {
     path:"/test_http",
