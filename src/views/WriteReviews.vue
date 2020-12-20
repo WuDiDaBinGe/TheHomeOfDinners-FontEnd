@@ -44,6 +44,14 @@
                 <div class="fileupload"><input type="file" name="fileupload" accept="image/*"></div>
               </div>
               <div class="form-group">
+                <label>喜欢的菜</label>
+                <Foldable_character_list></Foldable_character_list>
+              </div>
+              <div class="form-group">
+                <label>餐厅特色</label>
+                <Foldable_character_list></Foldable_character_list>
+              </div>
+              <div class="form-group">
                 <div class="checkboxes float-left add_bottom_15 add_top_15">
                   <label class="container_check">我保证这条点评的内容是我的亲身经历及真实想法，我与此产业不存在私人或业务关系、且没有接受过来自此产业的奖励或酬劳以撰写这条点评。我了解本网站绝不容忍虚假点评的政策。
                     <input type="checkbox">
@@ -74,17 +82,20 @@
     import Footer_com from "../components/Footer_com";
     import Header_WB from "../components/Header_WB";
     import LastView_Right from "../components/LastView_Right";
+    import Foldable_character_list from "../components/form_component/Foldable_character_list";
     export default {
         name: "WriteReviews",
-        components: {LastView_Right, Header_WB, Footer_com},
+        components: {Foldable_character_list, LastView_Right, Header_WB, Footer_com},
         data(){
           return{
             res_name:"601",
+
           }
         }
     }
 </script>
 
 <style scoped>
+
 
 </style>

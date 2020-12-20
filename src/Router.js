@@ -33,6 +33,11 @@ const routes=[
     path:'/write_reviews',
     component:()=>import("./views/WriteReviews")
   },
+  //评论
+  {
+    path:'/reviews',
+    component:()=>import("./views/ReviewsPage")
+  },
   //所有餐馆列表
   {
     path:"/all_restaurant",
