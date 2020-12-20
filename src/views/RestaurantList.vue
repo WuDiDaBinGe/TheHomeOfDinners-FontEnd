@@ -72,33 +72,33 @@
 			<!-- /container -->
 		</div>
 		<!-- /filters -->
-
+    <!-- Filter -->
 		<div class="collapse" id="filters">
 			<div class="container margin_30_5">
 				<div class="row">
 					<div class="col-md-4">
-						<h6>Rating</h6>
+						<h6>分类</h6>
 						<ul>
 							<li>
-								<label class="container_check">Superb 9+ <small>67</small>
+								<label class="container_check">湘菜 <small>67</small>
 								  <input type="checkbox">
 								  <span class="checkmark"></span>
 								</label>
 							</li>
 							<li>
-								<label class="container_check">Very Good 8+ <small>89</small>
+								<label class="container_check">小吃快餐 <small>89</small>
 								  <input type="checkbox">
 								  <span class="checkmark"></span>
 								</label>
 							</li>
 							<li>
-								<label class="container_check">Good 7+ <small>45</small>
+								<label class="container_check">面包甜点 <small>45</small>
 								  <input type="checkbox">
 								  <span class="checkmark"></span>
 								</label>
 							</li>
 							<li>
-								<label class="container_check">Pleasant 6+ <small>78</small>
+								<label class="container_check">自助餐 <small>78</small>
 								  <input type="checkbox">
 								  <span class="checkmark"></span>
 								</label>
@@ -106,22 +106,22 @@
 						</ul>
 					</div>
 					<div class="col-md-4">
-						<h6>Tags</h6>
+						<h6>特色</h6>
 						<ul>
 							<li>
-								<label class="container_check">Soluta mei <small>12</small>
+								<label class="container_check">环境氛围好 <small>12</small>
 								  <input type="checkbox">
 								  <span class="checkmark"></span>
 								</label>
 							</li>
 							<li>
-								<label class="container_check">Enim suscipit  <small>11</small>
+								<label class="container_check">分量大实惠 <small>11</small>
 								  <input type="checkbox">
 								  <span class="checkmark"></span>
 								</label>
 							</li>
 							<li>
-								<label class="container_check">Duis veri <small>23</small>
+								<label class="container_check">聚会Party <small>23</small>
 								  <input type="checkbox">
 								  <span class="checkmark"></span>
 								</label>
@@ -151,7 +151,7 @@
 
 			<div class="isotope-wrapper">
 
-				<div class="company_listing isotope-item high">
+				<div class="company_listing isotope-item high" v-for="item in [1,2,3,4,5]">
 					<div class="row">
 
 						<div class="col-md-9">
@@ -173,30 +173,12 @@
 				</div>
 				<!-- /company_listing -->
 
-				<div class="company_listing isotope-item high">
-					<div class="row">
-						<div class="col-md-9">
-							<div class="company_info">
-								<figure><a href="{% url 'reviews-page' %}"><img src="/static/img/brands/2.png" alt=""></a></figure>
-								<h3>Timberland</h3>
-								<p>Tale tollit vocent quo ut. Eu vix menandri persequeris accommodare, nam ei virtute dissentiet. Nec prima indoctum ei, vis eu justo dictas tamquam...</p>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="text-center float-lg-right">
-							<span class="rating"><strong>Based on 265 reviews</strong><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></span>
-							<a href="{% url 'reviews-page' %}" class="btn_1 small">Read more</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /company_listing -->
-
-
 			</div>
-			<!-- /isotope-wrapper -->
-
+			<!-- /isotope-wrapper
 			<p class="text-center"><a href="#0" class="btn_1 rounded add_top_15">Load more</a></p>
+			 -->
+      <Pagination></Pagination>
+
 
 		</div>
 		<!-- /container -->
@@ -210,16 +192,22 @@
 </template>
 
 <script>
+
     import Header_WB from "../components/Header_WB";
     import Footer_com from "../components/Footer_com";
+    import Pagination from "../components/List_Components/Pagination";
     export default {
         name: "RestaurantList",
         data(){
           return{
             categories_list:["All Categories","Lebanese","Cafe","Bar","Pizza","Seafood","Roast","Spaghetti","Dessert"],
+            restaurant_list:[
+                0,2,3,4,7,5
+            ],
+
           }
         },
-        components: {Footer_com, Header_WB}
+        components: {Footer_com, Header_WB,Pagination}
     }
 </script>
 

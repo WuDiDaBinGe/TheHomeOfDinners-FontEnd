@@ -4,8 +4,9 @@ import Vue from 'vue';
 import App from './App';
 import VueRouter from "vue-router";
 import router from "./Router.js";
+import "bootstrap";
 //引入全局样式
-import "../static/css/bootstrap.min.css";
+import "./assets/bootstrap-4.5.0-dist/css/bootstrap.min.css"
 import "../static/css/style.css";
 import "../static/css/custom.css";
 import "../static/css/vendors.css";
