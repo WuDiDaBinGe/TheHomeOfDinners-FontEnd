@@ -9,6 +9,11 @@ const routes=[
     path:'/index',
     component:()=>import("./views/index.vue")
   },
+  //主页 参数
+  {
+    path:'/index',
+    component:()=>import("./views/index.vue")
+  },
   {
     path:'/',
     component:()=>import("./views/index.vue")
@@ -35,7 +40,7 @@ const routes=[
   },
   //评论
   {
-    path:'/reviews',
+    path:'/restaurant_review',
     component:()=>import("./views/ReviewsPage")
   },
   //所有餐馆列表
@@ -73,15 +78,16 @@ const routes=[
     path:"/comfirm",
     component:()=>import("./views/Confirm")
   },
-  //404
-  {
-    path:"/404",
-    component:()=>import("./views/404")
-  },
+  
   {
     path:"/test_http",
     component:()=>import("./views/testHttp")
-  }
+  },
+  //404
+  {
+    path:"/*",
+    component:()=>import("./views/404")
+  },
 ];
 
 const router = new VueRouter({

@@ -1,6 +1,6 @@
 import axios from 'axios';
-//https://jsonplaceholder.typicode.com/
-axios.defaults.baseURL="https://jsonplaceholder.typicode.com/";
+//http://192.168.137.1:8000
+axios.defaults.baseURL="http://192.168.137.1:8000";
 
 // 请求拦截
 axios.interceptors.request.use(config => {
@@ -22,15 +22,17 @@ axios.interceptors.response.use(response => {
       if (error && error.response) {
             switch (error.response.status) {
                 case 400:
-                    // 对400错误您的处理
+                    console.log("404错误！");
+                    // 对400 错误您的处理
                 break;
                 case 401:
+                    console.log("401错误！");
                     // 对 401 错误进行处理
                 break;
                 default:
-                // 如果以上都不是的处理
+                  console.log("其他错误！");
+                  // 如果以上都不是的处理
                 return Promise.reject(error);
           }
     }
-
 });

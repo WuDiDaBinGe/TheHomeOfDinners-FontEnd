@@ -11,8 +11,12 @@ import "../static/css/style.css";
 import "../static/css/custom.css";
 import "../static/css/vendors.css";
 
-//引入全局JS
 
+//引入全局JS
+//localstorage
+import { setStore, getStore, removeStore } from './assets/storage/localstorage'
+// vuex store引入
+import store from './assets/storage/vuex_index'
 //接口
 import api from './http/api'
 //请求方法
@@ -26,6 +30,10 @@ Vue.prototype.$httpM=http;
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
+
+Vue.prototype.setStore = setStore
+Vue.prototype.getStore = getStore
+Vue.prototype.removeStore = removeStore
 
 
 //全局注册组件

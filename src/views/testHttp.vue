@@ -30,8 +30,8 @@
               })
           },
           Mineget(){
-            this.$httpM.get(this.$api.Test.test_get
-              ,{params:{id:1}},false)
+            this.$httpM.get(this.$api.User.user_register_mobilenumber
+              ,{params:{mobile:"18635151267"}},false)
             .then(function (response) {
                 console.log(response);
                 alert(response);

@@ -8,18 +8,18 @@
         <form action="/login" method="post">
           <div class="divider"><span>Login</span></div>
           <div class="form-group">
-            <input class="form-control" id="name" type="text" placeholder="Name" name="username">
+            <input class="form-control" id="name" type="text" placeholder="Name" name="username" v-model="peopleInfo.username">
             <i class="ti-user"></i>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password">
+            <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" v-model="peopleInfo.password">
             <i class="icon_lock_alt"></i>
           </div>
           <div class="form-group">
-            <select class="form-control" name="usertype" style="padding: 0 10%;">
-              <option value="User">用户</option>
-              <option value="Merchant">商家</option>
-              <option value="Admin">管理员</option>
+            <select class="form-control" name="usertype" style="padding: 0 10%;" v-model="peopleInfo.role">
+              <option value="1">用户</option>
+              <option value="2">商家</option>
+              <option value="3">管理员</option>
             </select>
             <i class="ti-user"></i>
           </div>
@@ -29,7 +29,7 @@
             </div>
           </div>
           <div id="pass-info" v-bind:class="classlo"></div>
-          <input type="submit" id="losu" class="btn_1 rounded full-width" value="登录食客之家">
+          <input type="button" id="losu" class="btn_1 rounded full-width" value="登录食客之家" @click="userLogin">
           <div class="text-center add_top_10">
             新用户/商家?
             <strong><router-link to="/register">注册!</router-link></strong>
@@ -49,8 +49,39 @@
       data(){
           return{
             classlo:"",
+            peopleInfo:{
+                username:"",
+                password:"",
+                role:'',
+            },
+            post_user:{
+              username:"",
+              password:"",
+            }
           }
+      },
+      methods:{
+        userLogin(){
+          var usrname=this.peopleInfo.username;
+          var password=this.peopleInfo.password;
+          var role=this.peopleInfo.role;
+
+          this.post_user.username=role+usrname;
+          this.post_user.password=password;
+          console.log(this.post_user);
+          this.$httpM.post(this.$api.User.login,this.post_user,false)
+          .then(response=>{
+            alert("登录成功！");
+            console.log(response);
+            //设置localstorage
+            this.$router.push({path:'/index'});
+            //设置vuex
+          })
+          .catch(err =>{
+            alert("出现错误！");
+          })
         }
+      }
     }
 </script>
 
