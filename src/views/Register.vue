@@ -34,7 +34,7 @@
 				</div>
         <div class="form-group row">
           <div class="col-7">
-            <input class="form-control" style="padding-left: 10px;" type="text" placeholder="Verification code" v-model="verifyCode">
+            <input class="form-control" style="padding-left: 10px;" type="text" placeholder="Verification code">
           </div>
           <div class="col-5">
             <button type="button" class="btn_vrify form-control" @click="getCode" v-bind:disabled="btn_code.codeDisabled">{{btn_code.codeMsg}}</button>
@@ -42,7 +42,7 @@
 				</div>
 
 				<div id="pass-info" v-bind:class="clearfix" v-show="err.errflag">{{err.errinfo}}</div>
-				<input type="submit" id="reg" class="btn_1 rounded full-width" value="现在注册!" @click="user_register">
+				<input type="button" id="reg" class="btn_1 rounded full-width" value="现在注册!" @click="user_register">
 				<div class="text-center add_top_10">
           已有帐号?
           <strong><router-link to="/login">登录</router-link></strong>
@@ -57,19 +57,21 @@
 
 
 <script>
+
     import CopyRight from "../components/CopyRight"
     export default {
       name: "register",
       components: {CopyRight},
       data(){
           return{
+
             peopleInfo:{
-              username:"yxbdsg",
-              mobile:"15180450364",
-              password:"987654321",
-              password2:"987654321",
-              role:1,
-              sms_code:"512698",
+              username:"",
+              mobile:"",
+              password:"",
+              password2:"",
+              role:'',
+              sms_code:"123456",
               allow:"true",
             },
             err:{
@@ -79,7 +81,7 @@
             clearfix:"",
             btn_code:{
               // 是否禁用按钮
-              codeDisabled: true,
+              codeDisabled: false,
               // 倒计时秒数
               countdown: 60,
               // 按钮上的文字
@@ -148,7 +150,7 @@
 
           },
           verifyPwd2() {
-            if (this.peopleInfo.pwd != this.peopleInfo.password2) {
+            if (this.peopleInfo.password != this.peopleInfo.password2) {
               this.err.errflag = true;
               this.err.errinfo = "密码两次不相同";
               this.clearfix = "weakpass";
@@ -187,13 +189,16 @@
           },
           user_register(){
             alert("点击注册！");
-            this.$httpM.post(this.$api.User.user_register,this.test_user,false)
-              .then(function (response) {
-                  alert(response);
+            console.log(this.peopleInfo);
+            //var temp_this=this;
+            this.$httpM.post(this.$api.User.register,this.peopleInfo,false)
+              .then(response=>  {
                   console.log(response);
+                  alert("注册成功！");
+                  this.$router.push({path:'/login'})
               })
-              .catch(function (err) {
-                  alert(err);
+              .catch(err => {
+                alert("出错！");
                   console.log(err);
               })
           },

@@ -1,48 +1,135 @@
 <template>
-  <div>
+  <div class="card">
     <ul id="myTab" class="nav nav-tabs">
       <li class="active">
-          <a href="#home" data-toggle="tab">
-              菜鸟教程
+          <a href="#recommend_food" data-toggle="tab" class="Jitem">
+              推荐菜
           </a>
       </li>
-      <li><a href="#ios" data-toggle="tab">iOS</a></li>
-      <li class="dropdown">
-          <a href="#" id="myTabDrop1" class="dropdown-toggle"
-             data-toggle="dropdown">Java
-              <b class="caret"></b>
+      <li>
+          <a href="#enviroment" data-toggle="tab" class="Jitem current_Jitem">
+              环境
           </a>
-          <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-              <li><a href="#jmeter" tabindex="-1" data-toggle="tab">jmeter</a></li>
-              <li><a href="#ejb" tabindex="-1" data-toggle="tab">ejb</a></li>
-          </ul>
+      </li>
+      <li>
+          <a href="#prices" data-toggle="tab" class="Jitem">
+              价目表
+          </a>
+      </li>
+      <li>
+          <a href="#safe_certificate" data-toggle="tab" class="Jitem">
+              食品安全档案
+          </a>
       </li>
     </ul>
     <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade in active" id="home">
-            <p>菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
-        </div>
-        <div class="tab-pane fade" id="ios">
-            <p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple
-                TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。</p>
-        </div>
-        <div class="tab-pane fade" id="jmeter">
-            <p>jMeter 是一款开源的测试软件。它是 100% 纯 Java 应用程序，用于负载和性能测试。</p>
-        </div>
-        <div class="tab-pane fade" id="ejb">
-            <p>Enterprise Java Beans（EJB）是一个创建高度可扩展性和强大企业级应用程序的开发架构，部署在兼容应用程序服务器（比如 JBOSS、Web Logic 等）的 J2EE 上。
-            </p>
-        </div>
+        <ul class="tab-pane  in active recommend-photo" id="recommend_food">
+            <li class="pictures_item">
+                <img data-src="http://p0.meituan.net/bbia/6e1cfbd0f5a35af24064aa6c57bfe556943616.jpg%40249w_249h_1e_1c_1l%7Cwatermark%3D1%26%26r%3D1%26p%3D9%26x%3D2%26y%3D2%26relative%3D1%26o%3D20" src="http://p0.meituan.net/bbia/6e1cfbd0f5a35af24064aa6c57bfe556943616.jpg%40249w_249h_1e_1c_1l%7Cwatermark%3D1%26%26r%3D1%26p%3D9%26x%3D2%26y%3D2%26relative%3D1%26o%3D20">
+                <p class="name">推荐食物</p>
+                <span class="price">¥138</span>                 
+            </li>
+            <li class="pictures_item ">
+                <img data-src="http://p0.meituan.net/bbia/6e1cfbd0f5a35af24064aa6c57bfe556943616.jpg%40249w_249h_1e_1c_1l%7Cwatermark%3D1%26%26r%3D1%26p%3D9%26x%3D2%26y%3D2%26relative%3D1%26o%3D20" src="http://p0.meituan.net/bbia/6e1cfbd0f5a35af24064aa6c57bfe556943616.jpg%40249w_249h_1e_1c_1l%7Cwatermark%3D1%26%26r%3D1%26p%3D9%26x%3D2%26y%3D2%26relative%3D1%26o%3D20">
+                <p class="name">口味虾</p>
+                <span class="price">¥138</span>                 
+            </li>
+        </ul>
+        <ul class="tab-pane fade recommend-photo" id="enviroment">
+            <li class="pictures_item">
+                <img data-src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg" src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg">
+                  2         
+            </li>
+        </ul>
+        <ul class="tab-pane fade recommend-photo" id="prices">
+            <li class="pictures_item">
+                <img data-src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg" src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg"> 
+                3
+            </li>
+        </ul>
+        <ul class="tab-pane fade recommend-photo" id="safe_certificate">
+            <li class="pictures_item">
+                <img data-src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg" src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg"> 
+                4
+            </li>
+        </ul>
     </div>
   </div>
 </template>
 
 <script>
     export default {
-        name: "Restaurant_Pictures_Tab"
+        name: "Restaurant_Pictures_Tab",
+        data(){
+            return{
+                pictures_navs:["推荐菜品","环境","价目表","食品安全档案袋"]
+            }
+        }
     }
 </script>
 
 <style scoped>
+.card{
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 25px 25px 0 25px;
+    margin-bottom: 30px;
+    -webkit-box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+    box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+}
+.Jitem{
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    margin-right: 15px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #333;
+    padding-bottom: 5px;
+    font-weight: 700;
+}
+.current_Jitem{
+    border-bottom: 4px solid #F63;
+}
+.pictures_item{
+    position: relative;
+    float: left;
+    width: 91px;
+    height: 96px;
+    margin: 0 29px 15px 0;
+    
+}
+.recommend-photo {
+    margin-right: -24px;
+    margin-top: 10px;
+    clear: both;
+    width: 860px;
+    position: relative;
+}
+.recommend-photo .pictures_item img{
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: 93px;
+    height: 69px;
+    background-color: #ddd;
+}
+.recommend-photo .name{
+    margin-top: 68px;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 5px;
+    white-space: nowrap;
+    width: 82px;
 
+}
+.price{
+    position: absolute;
+    top: 1px;
+    color: #fff;
+    right: 0;
+    padding: 0 5px;
+    text-shadow: 2px 2px 2px rgba(0,0,0,.65);
+}
 </style>

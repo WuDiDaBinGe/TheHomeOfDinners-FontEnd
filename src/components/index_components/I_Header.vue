@@ -6,40 +6,40 @@
 				<img src="/static/img/logo_sticky.svg" width="140" height="35" alt="" class="logo_sticky">
 			</router-link>
 		</div>
-		<ul id="top_menu">
-			<li><router-link to="/write_reviews" class="btn_top">Write a Review</router-link></li>
-			<li><router-link to="/new_res" class="btn_top company" >Create Restaurant</router-link></li>
-		
-		</ul>
-		<!-- /top_menu -->
-		<a href="#menu" class="btn_mobile">
-			<div class="hamburger hamburger--spin" id="hamburger">
-				<div class="hamburger-box">
-					<div class="hamburger-inner"></div>
-				</div>
-			</div>
-		</a>
 		<!-- /btn_mobile -->
 		<nav id="menu" class="main-menu">
 			<ul>
-				<li><span><router-link to="/index">主页</router-link></span>
+				<li><span><router-link to="/login" v-show="!is_login">登录账号</router-link> </span>
 				</li>
-				<li><span><a href="#0">Reviews</a></span>
+				<li><span><router-link to="/register" v-show="!is_login">注册账号</router-link> </span>
+				</li>
+				<li><span><a>{{username}}</a> </span>
 					<ul>
-						<li><router-link to="">Reviews page</router-link></li>
-						<li><router-link to="/write_reviews">Write a review</router-link></li>
+						<li><router-link to="">个人设置</router-link></li>
+						<li><router-link to="">退出</router-link></li>
 					</ul>
 				</li>
-				<li><span><a href="{% url 'login' %}">User Dashboard</a></span></li>
-        		<li><span><router-link to="/userinfo">User Settings</router-link></span></li>
-				<li><span><a href="#0">About</a></span>
+				<li><span><a href="#0">个人中心</a></span>
 					<ul>
-            			<li><router-link to="/login">登录</router-link></li>
+						<li><router-link to="">我的评价</router-link></li>
+						<li><router-link to="">我的收藏</router-link></li>
+						<li><router-link to="">我的设置</router-link></li>
+					</ul>
+				</li>
+        		<li><span><a href="#0">商户服务</a></span>
+					<ul>
+            			<li><router-link to="/new_res">创建餐馆</router-link></li>
+						<li><router-link to="">商户中心</router-link></li>
+					</ul>
+				</li>
+				<li><span><a href="#0">帮助中心</a></span>
+					<ul>
+            			<li><router-link to="/">平台规则</router-link></li>
+						<li><router-link to="/">联系客服</router-link></li>
 						<li><router-link to="/register">注册</router-link></li>
+						<li><router-link to="/login">登录</router-link></li>
 					</ul>
 				</li>
-
-				<li class="d-block d-sm-none"><span><a href="#0" class="btn_top">Write a review</a></span></li>
 			</ul>
 		</nav>
 	</header>
@@ -48,7 +48,12 @@
 
 <script>
     export default {
-        name: "I_Header"
+		name: "I_Header",
+		data(){
+			return{
+				is_login:false,
+			}
+		}
     }
 </script>
 
