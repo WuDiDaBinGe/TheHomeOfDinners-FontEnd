@@ -1,7 +1,7 @@
 <template>
   <div id="page">
 
-    <I_Header></I_Header>
+    <Header_WB></Header_WB>
 
 	<main>
     <search_part></search_part>
@@ -31,13 +31,13 @@
     import I_CallSection from "../components/index_components/I_CallSection";
     import I_LastReviews from "../components/index_components/I_LastReviews";
     import I_RegionList from "../components/index_components/I_RegionList";
+    import Header_WB from "../components/Header_WB";
 
     export default {
         name: "index",
-        components: {I_RegionList, I_LastReviews, I_CallSection, Search_part, I_Header,I_Cards},
+        components: {Header_WB, I_RegionList, I_LastReviews, I_CallSection, Search_part, I_Header,I_Cards},
         mounted:function(){
-            console.log("asdjlksam______!");
-            
+
         }
     }
 </script>
