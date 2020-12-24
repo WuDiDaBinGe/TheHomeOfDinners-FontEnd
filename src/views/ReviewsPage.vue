@@ -23,13 +23,13 @@
 								<div class="clearfix add_bottom_15">
 									<span class="rating"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star empty"></i><em>4.50/5.00</em></span>
 									<em>** Review.reviewtime *</em>
-                  <br>
-                  <em>** Review.mealtime *</em>
+                  				<br>
+                  					<em>** Review.mealtime *</em>
 								</div>
 								<h4>"** Review.title *"</h4>
-                <p>** Review.text|linebreaksbr *</p>
+                				<p>** Review.text|linebreaksbr *</p>
 								<input name="text" id="text" value="** Review.text *" style="display: none">
-                <input name="rname" id="rname" value="** Review.rest *" style="display: none">
+                				<input name="rname" id="rname" value="** Review.rest *" style="display: none">
 
 								<ul>
 									<li><a href="#0" value='** Review.text *' onclick="var i=this.getAttribute('value');u(i);"><i class="icon_like_alt"></i><span>Useful</span></a></li>

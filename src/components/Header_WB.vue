@@ -4,9 +4,9 @@
 			<div class="row">
 				<div class="col-lg-3 col-12">
 					<div id="logo">
-						<a href="{% url 'index-mer' %}">
+						<router-link to="/">
 							<img src="/static/img/logo_sticky.svg" width="140" height="35" alt="" class="logo_sticky">
-						</a>
+						</router-link>
 					</div>
 				</div>
 				<div class="col-lg-9 col-12">
@@ -34,9 +34,9 @@
 
               <li><span><a href="#0">个人中心</a></span>
                 <ul>
-                  <li><router-link to="">我的评价</router-link></li>
-                  <li><router-link to="">我的收藏</router-link></li>
-                  <li><router-link to="">我的设置</router-link></li>
+                  <li><router-link to="/userinfo/myreviews">我的评价</router-link></li>
+                  <li><router-link to="/userinfo/myrestaurants">我的收藏</router-link></li>
+                  <li><router-link to="/userinfo">我的设置</router-link></li>
                 </ul>
               </li>
                   <li><span><a href="#0">商户服务</a></span>

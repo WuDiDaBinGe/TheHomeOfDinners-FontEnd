@@ -51,7 +51,22 @@ const routes=[
   //用户信息
   {
     path:"/userinfo",
-    component:()=>import("./views/UserInfoSetting")
+    component:()=>import("./views/UserInfoSetting"),
+    //嵌套路由
+    children:[
+      {
+        path:"",
+        component:()=>import("./components/userInfo_components/userInfo_form.vue"),
+      },
+      {
+        path:"myreviews",
+        component:()=>import("./components/List_Components/Reviews_Cards.vue"),
+      },
+      {
+        path:"myrestaurants",
+        component:()=>import("./components/List_Components/restaurant_item.vue")
+      }
+    ],
   },
   //用户某一条评论页面
   {

@@ -1,26 +1,11 @@
 <template>
   <div class="card">
     <ul id="myTab" class="nav nav-tabs">
-      <li class="active">
-          <a href="#recommend_food" data-toggle="tab" class="Jitem">
-              推荐菜
+        <li  v-for="(item,index) in pictures_navs" :class="[{'active':index==0},{'current_Jitem':index==select_tabs || (index==0&&select_tabs==-1)}]" @click="setCurrentItem(index)">
+          <a  data-toggle="tab" class="Jitem" :href="item.target_dive">
+              {{item.navs_titile}}
           </a>
-      </li>
-      <li>
-          <a href="#enviroment" data-toggle="tab" class="Jitem current_Jitem">
-              环境
-          </a>
-      </li>
-      <li>
-          <a href="#prices" data-toggle="tab" class="Jitem">
-              价目表
-          </a>
-      </li>
-      <li>
-          <a href="#safe_certificate" data-toggle="tab" class="Jitem">
-              食品安全档案
-          </a>
-      </li>
+        </li>
     </ul>
     <div id="myTabContent" class="tab-content">
         <ul class="tab-pane  in active recommend-photo" id="recommend_food">
@@ -62,7 +47,29 @@
         name: "Restaurant_Pictures_Tab",
         data(){
             return{
-                pictures_navs:["推荐菜品","环境","价目表","食品安全档案袋"]
+                pictures_navs:[{
+                    navs_titile:"推荐菜品",
+                    target_dive:"#recommend_food"
+                },
+                {
+                    navs_titile:"环境",
+                    target_dive:"#enviroment"
+                },
+                {
+                    navs_titile:"价目表",
+                    target_dive:"#prices"
+                },
+                {
+                    navs_titile:"食品安全档案袋",
+                    target_dive:"#safe_certificate"
+                },
+                ],
+                select_tabs:-1,
+            }
+        },
+        methods:{
+            setCurrentItem(index){
+                this.select_tabs=index;
             }
         }
     }
