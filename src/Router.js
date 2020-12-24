@@ -38,20 +38,35 @@ const routes=[
     path:'/write_reviews',
     component:()=>import("./views/WriteReviews")
   },
-  //评论
+  //某个餐馆页面
   {
     path:'/restaurant_review',
     component:()=>import("./views/ReviewsPage")
   },
   //所有餐馆列表
   {
-    path:"/all_restaurant",
+    path:"/restaurant_list",
     component:()=>import("./views/RestaurantList")
   },
   //用户信息
   {
     path:"/userinfo",
-    component:()=>import("./views/UserInfoSetting")
+    component:()=>import("./views/UserInfoSetting"),
+    //嵌套路由
+    children:[
+      {
+        path:"",
+        component:()=>import("./components/userInfo_components/userInfo_form.vue"),
+      },
+      {
+        path:"myreviews",
+        component:()=>import("./components/List_Components/Reviews_Cards.vue"),
+      },
+      {
+        path:"myrestaurants",
+        component:()=>import("./components/List_Components/restaurant_item.vue")
+      }
+    ],
   },
   //用户某一条评论页面
   {
@@ -78,7 +93,7 @@ const routes=[
     path:"/comfirm",
     component:()=>import("./views/Confirm")
   },
-  
+
   {
     path:"/test_http",
     component:()=>import("./views/testHttp")

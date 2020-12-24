@@ -6,11 +6,11 @@ export default{
   //用户
   User:{
     /*
-            名称：用户注册
-            请求方式：Post
-            url：/users/
-            携带参数：['username', 'password', 'password2', 'mobile', 'sms_code', 'role', 'allow']
-            返回参数：['id', 'username', 'mobile', 'role', 'token']
+        名称：用户注册
+        请求方式：Post
+        url：/users/
+        携带参数：['username', 'password', 'password2', 'mobile', 'sms_code', 'role', 'allow']
+        返回参数：['id', 'username', 'mobile', 'role', 'token']
     */
     register:'/users/',  //注册
     /*

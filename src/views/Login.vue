@@ -43,6 +43,7 @@
 
 <script>
     import CopyRight from "../components/CopyRight";
+    import {setLocalStore} from "../assets/storage/localstorage";
     export default {
       name: "Login",
       components: {CopyRight},
@@ -69,16 +70,21 @@
           this.post_user.username=role+usrname;
           this.post_user.password=password;
           console.log(this.post_user);
-          this.$httpM.post(this.$api.User.login,this.post_user,false)
+          this.$httpM.post(this.$api.Test.test_post,this.post_user,false)
           .then(response=>{
-            alert("登录成功！");
-            console.log(response);
+            alert("成功！");
+            console.log(response.data);
             //设置localstorage
-            this.$router.push({path:'/index'});
+            setLocalStore("userLogin",response.data);
             //设置vuex
+            this.$store.commit('getUserInfo',response.data);
+            //跳转到首页
+            this.$router.push({path:'/index'});
+
           })
           .catch(err =>{
             alert("出现错误！");
+            console.log(err);
           })
         }
       }

@@ -14,7 +14,7 @@ import "../static/css/vendors.css";
 
 //引入全局JS
 //localstorage
-import { setStore, getStore, removeStore } from './assets/storage/localstorage'
+import { setLocalStore, getLocalStore, removeLocalStore } from './assets/storage/localstorage'
 // vuex store引入
 import store from './assets/storage/vuex_index'
 //接口
@@ -24,6 +24,7 @@ import http from './http/http'
 //axios拦截器
 import './http/axios'
 
+
 //全局注册
 Vue.prototype.$api=api;
 Vue.prototype.$httpM=http;
@@ -31,9 +32,9 @@ Vue.prototype.$httpM=http;
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 
-Vue.prototype.setStore = setStore
-Vue.prototype.getStore = getStore
-Vue.prototype.removeStore = removeStore
+Vue.prototype.setStore = setLocalStore
+Vue.prototype.getStore = getLocalStore
+Vue.prototype.removeStore = removeLocalStore
 
 
 //全局注册组件
@@ -44,7 +45,8 @@ new Vue({
   router,
   el: '#app',
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  store:store,
 });
 
 //index.html->main.js->app.Vue
