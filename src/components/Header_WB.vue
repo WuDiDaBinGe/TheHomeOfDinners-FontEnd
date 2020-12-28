@@ -83,7 +83,7 @@
           var user=this.$store.state.userInfo;
           console.log(user);
           //用户已经登录
-          if(user.id!=null){
+          if(user.token!=null){
             this.is_login=true;
             this.username=user.username;
           }

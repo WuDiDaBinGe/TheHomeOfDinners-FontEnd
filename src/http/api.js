@@ -30,6 +30,9 @@ export default{
   },
   //评论
   //餐馆
+  Restaurant:{
+    list:'/restaurant',
+  },
   //测试
   Test:{
     test_get:'/posts',
