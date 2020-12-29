@@ -38,19 +38,22 @@ const routes=[
     path:'/write_reviews',
     component:()=>import("./views/WriteReviews")
   },
-  //某个餐馆页面
-  {
-    path:'/restaurant_review',
-    component:()=>import("./views/ReviewsPage")
-  },
   //所有餐馆列表
   {
     path:"/restaurant_list",
+    name:"restaurant_list",
     component:()=>import("./views/RestaurantList")
+  },
+  //某个餐馆页面
+  {
+    path:'/restaurant/',
+    name:"restaurant",
+    component:()=>import("./views/SingleRestaurant")
   },
   //用户信息
   {
     path:"/userinfo",
+
     component:()=>import("./views/UserInfoSetting"),
     //嵌套路由
     children:[

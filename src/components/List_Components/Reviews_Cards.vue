@@ -15,7 +15,7 @@
         <ul>
           <li><a href="#0"><i class="icon_like_alt"></i><span>赞</span></a></li>
           <li><a href="#0"><i class="icon_dislike_alt"></i><span>踩</span></a></li>
-          <li><span>更多：</span> <a href="#0"><i class="icon-reply"></i>回复</a> <a href="#0"><i class="icon-edit"></i>追评</a> <a href="#0"><i class="icon-trash"></i>删除</a></li>
+          <li v-show="is_flag_"><span>更多：</span> <a href="#0"><i class="icon-reply"></i>回复</a> <a href="#0"><i class="icon-edit"></i>追评</a> <a href="#0"><i class="icon-trash"></i>删除</a></li>
         </ul>
       </div>
     </div>
@@ -39,7 +39,23 @@
 
 <script>
     export default {
-        name: "Reviews_Cards"
+      name: "Reviews_Cards",
+      data(){
+        return{
+          is_flag_:false,
+        }
+      },
+      beforeRouteEnter (to,from,next){
+        if (from.path==="/userinfo"){
+          next(vm=>{
+            vm.is_flag_=true;
+        })
+        } else{
+          next(vm=>{
+            vm.is_flag_=false;
+        })
+        }
+      },
     }
 </script>
 

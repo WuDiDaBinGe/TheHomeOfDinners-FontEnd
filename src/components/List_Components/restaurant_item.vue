@@ -16,7 +16,7 @@
                     <span class="rating"><strong>reviews:800+  rank:5  score：{{Restaurant.score}}</strong>
                         <i class="icon_star" v-for="(item,index) in [0,1,2,3,4]" :class="[{'empty':index>=Restaurant.score}]"></i>
                     </span>
-                    <a href="" class="btn_1 small">Read more</a>
+                    <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">Read more</button>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
             </ul>
         </div>
         <!-- /pagination -->
-    </div> 
+    </div>
 </template>
 
 <script>
@@ -45,7 +45,12 @@ export default {
     name:"restaurant_item",
     data(){
         return{
-            restaurant_list:[],
+            restaurant_list:[
+              {
+                res_name:"东北人家",
+                id:12,
+              }
+            ],
             total_count:0,
             next_page_api:"",
             previous_page_api:"",
@@ -55,6 +60,11 @@ export default {
         }
     },
     methods:{
+        //跳转到一个餐馆
+        showSingleRes(res_id){
+          //传参数时 不能用path传递参数
+          this.$router.push({name:'restaurant',params:{id:res_id}});
+        },
         previousPage(){
             this.current_page=(this.current_page-1);
             if(this.current_page==0){
@@ -63,7 +73,7 @@ export default {
             if(this.previous_page_api!=null){
                 this.getResList(this.previous_page_api);
             }
-            
+
         },
         nextPage(){
             this.current_page=(this.current_page+1);
@@ -73,13 +83,13 @@ export default {
             if(this.next_page_api!=null){
                 this.getResList(this.next_page_api);
             }
-            
+
         },
         //跳转到某一页
         toIndexPage(index){
-            
+
             this.current_page=index+1;
-            
+
             var url=this.$api.Restaurant.list+"?page="+this.current_page;
             console.log(this.current_page,url);
             this.getResList(url);
@@ -104,8 +114,8 @@ export default {
             })
         }
     },
-    mounted(){
-        this.getResList(this.$api.Restaurant.list);
+    created(){
+        //this.getResList(this.$api.Restaurant.list);
     }
 }
 </script>
