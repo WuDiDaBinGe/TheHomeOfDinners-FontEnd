@@ -64,7 +64,6 @@
       components: {CopyRight},
       data(){
           return{
-
             peopleInfo:{
               username:"",
               mobile:"",

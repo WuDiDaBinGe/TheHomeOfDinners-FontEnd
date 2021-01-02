@@ -105,8 +105,7 @@ export default {
                 tmp_this.previous_page_api=response.data.previous;
                 //判断有多少页
                 tmp_this.total_page=tmp_this.total_count%tmp_this.page_size_?tmp_this.total_count/tmp_this.page_size_+1:tmp_this.total_count/tmp_this.page_size_;
-                console.log(tmp_this.total_page);
-                console.log(response.data);
+            
             })
             .catch(function (err) {
                 alert(err);
@@ -115,7 +114,7 @@ export default {
         }
     },
     created(){
-        //this.getResList(this.$api.Restaurant.list);
+        this.getResList(this.$api.Restaurant.list);
     }
 }
 </script>

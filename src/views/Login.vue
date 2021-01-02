@@ -69,7 +69,6 @@
 
           this.post_user.username=role+usrname;
           this.post_user.password=password;
-          console.log(this.post_user);
           this.$httpM.post(this.$api.User.login,this.post_user,false)
           .then(response=>{
             alert("成功！");

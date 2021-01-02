@@ -32,6 +32,12 @@ export default{
   //餐馆
   Restaurant:{
     list:'/restaurant',
+    singleRestaurant:"/restaurant/"
+  },
+  Collection:{
+    collected:'/collection/collected/', //是否被收藏
+    collectRes:'/collection/',//收藏餐馆
+    collectDel:'/collection/',//删除收藏
   },
   //测试
   Test:{

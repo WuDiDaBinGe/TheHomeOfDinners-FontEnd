@@ -71,29 +71,34 @@
 </template>
 
 <script>
-    export default {
-        name: "Header_WB",
-        data(){
-          return{
-            is_login:false,
-            username:"",
-          }
-        },
-        mounted() {
-          var user=this.$store.state.userInfo;
-          console.log(user);
+  import {getLocalStore,removeLocalStore} from "../assets/storage/localstorage";
+  export default {
+      name: "Header_WB",
+      data(){
+        return{
+          is_login:false,
+          username:"",
+        }
+      },
+      created() {
+        var user=JSON.parse(getLocalStore("userLogin"));
+        if(user!=null){  
           //用户已经登录
           if(user.token!=null){
             this.is_login=true;
             this.username=user.username;
           }
-        },
-        methods:{
-          loginOut(){
-            this.is_login=false;
-          }
-        },
-    }
+        }
+        
+      },
+      methods:{
+        //删除localstorage中的值
+        loginOut(){
+          this.is_login=false;
+          removeLocalStore("userLogin");
+        }
+      },
+  }
 </script>
 
 <style scoped>
