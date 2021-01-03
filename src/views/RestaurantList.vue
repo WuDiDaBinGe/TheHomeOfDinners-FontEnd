@@ -8,7 +8,7 @@
 		   <div class="container">
 			   <div class="row justify-content-between">
 				   <div class="col-lg-3 col-md-4 col-10">
-					   <h1><strong>145</strong> result for "Category"</h1>
+					   
 				   </div>
 				   <div class="col-xl-5 col-md-6 col-2">
 					   <a href="#0" class="search_mob btn_search_mobile"></a> <!-- /open search panel -->
@@ -157,7 +157,7 @@
 			<!-- /isotope-wrapper
 			<p class="text-center"><a href="#0" class="btn_1 rounded add_top_15">Load more</a></p>
 			 -->
-      	<Pagination></Pagination>
+      		
 
 
 		</div>
@@ -181,13 +181,11 @@
         data(){
           return{
             categories_list:["All Categories","Lebanese","Cafe","Bar","Pizza","Seafood","Roast","Spaghetti","Dessert"],
-            restaurant_list:[
-                0,2,3,4,7,5
-            ],
-
+            restaurant_list:[],
           }
         },
-        components: {Footer_com, Header_WB,Pagination,restaurant_item}
+		components: {Footer_com, Header_WB,Pagination,restaurant_item},
+		
     }
 </script>
 

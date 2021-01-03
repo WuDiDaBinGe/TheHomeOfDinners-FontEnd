@@ -16,6 +16,7 @@ const store = new Vuex.Store({
       state.userInfo = user;
     }
   },
+  //一般异步方法定义在这里面
   actions:{
     getUserInfo(context, user){
         context.commit('getUserInfo', user)

@@ -3,7 +3,7 @@
 import Vue from 'vue';
 import App from './App';
 import VueRouter from "vue-router";
-import router from "./Router.js";
+import router from "./router/Router.js";
 import "bootstrap";
 //引入全局样式
 import "./assets/bootstrap-4.5.0-dist/css/bootstrap.min.css"
@@ -17,12 +17,15 @@ import "../static/css/vendors.css";
 import { setLocalStore, getLocalStore, removeLocalStore } from './assets/storage/localstorage'
 // vuex store引入
 import store from './assets/storage/vuex_index'
-//接口
+//服务器接口
 import api from './http/api'
 //请求方法
 import http from './http/http'
 //axios拦截器
 import './http/axios'
+
+//全局工具类
+import {Nrange} from './utils/utils';
 
 
 //全局注册

@@ -3,12 +3,12 @@
 			<div class="main_title_3">
 					<h2>Top Categories</h2>
 					<p>Choose the restaurant you want to know.</p>
-					<a href="{% url 'category-companies-listings-filterstop-guest' %}?name=">View all</a>
+					<router-link to="/restaurant_list">View all</router-link>
 				</div>
             <div class="row justify-content-center">
 
 				<div class="col-lg-3 col-6" v-for="item in card_lists">
-					<a href="{% url 'category-companies-listings-filterstop-guest' %}?name=Lebanese" class="box_cat_home">
+					<a  class="box_cat_home">
 						<img :src="item.img_path" width="65" height="65" alt="">
 						<h3>{{item.name}}</h3>
 						<ul class="clearfix">

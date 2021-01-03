@@ -5,11 +5,11 @@
 					<div class="row">
 						<div class="col-lg-8">
 							<figure>
-								<img src="/static/img/logo-company.png" alt="">
+								<img :src="this.resobj.picture"/>
 							</figure>
-							<small>Shop</small>
-							<h1>Good Electronics</h1>
-							<span class="rating"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star empty"></i><em>4.50/5.00 - based on 234 reviews</em></span>
+							<small><i class="ti-location-pin">{{this.resobj.res_address}}</i></small>
+							<h1 @click="collectRes">{{this.resobj.res_name}} <i class="icon_star_alt" :class="[{'iscollected':isCollected}]" ></i></h1>
+							<span class="rating"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star empty"></i><em>{{resobj.score}}/5.00 - based on {{resobj.collection_count}} reviews</em></span>
 						</div>
 						<div class="col-lg-4 review_detail">
 							<div class="row">
@@ -67,11 +67,92 @@
 </template>
 
 <script>
+	  import {getLocalStore} from "../../assets/storage/localstorage";
     export default {
-        name: "Restaurant_reviews_summary"
+      name: "Restaurant_reviews_summary",
+      props:['resobj'],
+      data(){
+        return{
+          collectInfo:{},
+          resObj:{},
+          isCollected:false,
+        }
+      },
+      computed:{
+        userID(){
+          return JSON.parse(getLocalStore("userLogin")).user_id;
+        },
+      },
+      watch:{
+        resobj:function (newVal,oldVal) {
+          this.resObj=newVal;
+          newVal && this.getIsCollect();
+        }
+      },
+      mounted() {
+        //this.getIsCollect();
+      },
+      methods:{
+        getIsCollect(){
+          var tmpThis=this;
+          var params_={
+            user:this.userID,
+            restaurant:this.resobj.id,
+          };
+          console.log("asdsa",params_);
+          this.$httpM.post(this.$api.Collection.collected,params_,false)
+          .then(function (response) {
+            console.log("是否收藏："+response.data);
+             tmpThis.isCollected = response.data === 1;
+          });
+        },
+        collectRes(){
+          var postParam={
+              user:this.userID,
+              restaurant:this.resobj.id,
+            };
+          var tmpThis=this;
+          if (!this.isCollected){
+            console.log("postCollect:",postParam);
+            this.$httpM.post(this.$api.Collection.collectRes,postParam,false)
+            .then(function (response) {
+              if(response.data.id){
+                alert("收藏成功");
+                tmpThis.collectInfo=response.data;
+                tmpThis.isCollected=true;
+                console.log("collectInfo",tmpThis.collectInfo)
+              }
+            })
+            .catch(function (err) {
+                alert("收藏出错");
+            })
+          }
+          else {
+            console.log("cancleCollect:",postParam);
+            this.$httpM.post(this.$api.Collection.collectDel,postParam,false)
+            .then(function (response) {
+              if (response.data==="删除成功!"){
+                alert("取消收藏");
+                tmpThis.isCollected=false;
+              }
+
+            })
+            .catch(function (err) {
+                alert("取消收藏出错");
+            })
+          }
+
+        }
+      },
+
     }
 </script>
 
 <style scoped>
-
+img{
+	object-fit: cover;
+}
+.iscollected{
+	color: #FF794D;
+}
 </style>
