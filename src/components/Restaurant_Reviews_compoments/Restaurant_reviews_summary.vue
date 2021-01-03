@@ -8,7 +8,7 @@
 								<img :src="this.resobj.picture"/>
 							</figure>
 							<small><i class="ti-location-pin">{{this.resobj.res_address}}</i></small>
-							<h1 @click="collectRes"><i class="icon_star_alt" :class="[{'iscollected':isCollected}]" ></i>{{this.resobj.res_name}} </h1>
+							<h1 @click="collectRes">{{this.resobj.res_name}} <i class="icon_star_alt" :class="[{'iscollected':isCollected}]" ></i></h1>
 							<span class="rating"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star empty"></i><em>{{resobj.score}}/5.00 - based on {{resobj.collection_count}} reviews</em></span>
 						</div>
 						<div class="col-lg-4 review_detail">
@@ -107,12 +107,12 @@
           });
         },
         collectRes(){
-          if (!this.isCollected){
-             var postParam={
+          var postParam={
               user:this.userID,
               restaurant:this.resobj.id,
             };
-            var tmpThis=this;
+          var tmpThis=this;
+          if (!this.isCollected){
             console.log("postCollect:",postParam);
             this.$httpM.post(this.$api.Collection.collectRes,postParam,false)
             .then(function (response) {
@@ -128,10 +128,14 @@
             })
           }
           else {
-            var collectId=this.collectInfo.id;
-            this.$httpM.del(this.$api.Collection.collectDel,{params: {id:collectId}},false)
+            console.log("cancleCollect:",postParam);
+            this.$httpM.post(this.$api.Collection.collectDel,postParam,false)
             .then(function (response) {
+              if (response.data==="删除成功!"){
                 alert("取消收藏");
+                tmpThis.isCollected=false;
+              }
+
             })
             .catch(function (err) {
                 alert("取消收藏出错");

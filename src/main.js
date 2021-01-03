@@ -3,7 +3,7 @@
 import Vue from 'vue';
 import App from './App';
 import VueRouter from "vue-router";
-import router from "./Router.js";
+import router from "./router/Router.js";
 import "bootstrap";
 //引入全局样式
 import "./assets/bootstrap-4.5.0-dist/css/bootstrap.min.css"
