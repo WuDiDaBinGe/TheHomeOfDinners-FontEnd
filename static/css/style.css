@@ -2427,8 +2427,8 @@ a.btn_filt:before {
   cursor: pointer;
 }
 .container_check input:checked ~ .checkmark {
-  background-color: #3578fa;
-  border: 1px solid transparent;
+    background-color: #3578fa;
+    border: 1px solid transparent;
 }
 .container_check .checkmark {
   position: absolute;
@@ -2465,7 +2465,6 @@ a.btn_filt:before {
 .container_check input:checked ~ .checkmark:after {
   display: block;
 }
-
 /* Radio buttons */
 .container_radio {
   display: block;

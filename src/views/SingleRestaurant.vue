@@ -91,8 +91,8 @@
         Pagination, Header_WB,Reviews_Cards},
       data(){
         return{
-		  res_id:this.$route.params.id,
-		  res:{},
+          res_id:this.$route.query.id,
+          res:{},
         }
 	  },
 	  created() {

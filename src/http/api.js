@@ -15,6 +15,16 @@ export default{
     list:'/restaurant',
     singleRestaurant:"/restaurant/"
   },
+
+  //标签
+  Tag:{
+    lists:'/tags/',                     //获取标签列表
+  },
+  //餐馆标签关系表
+  Tag_Res:{
+    list:'/tag_restaurant/'             //返回对应标签下的餐馆列表
+  },
+  //用户收藏餐馆
   Collection:{
     collected:'/collection/collected/', //是否被收藏
     collectRes:'/collection/',          //收藏餐馆

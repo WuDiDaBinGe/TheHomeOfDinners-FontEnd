@@ -53,7 +53,6 @@ const routes=[
   //用户信息
   {
     path:"/userinfo",
-
     component:()=>import("../views/UserInfoSetting"),
     //嵌套路由
     children:[

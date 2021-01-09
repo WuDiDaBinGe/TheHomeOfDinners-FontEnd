@@ -35,9 +35,9 @@ Vue.prototype.$httpM=http;
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 
-Vue.prototype.setStore = setLocalStore
-Vue.prototype.getStore = getLocalStore
-Vue.prototype.removeStore = removeLocalStore
+Vue.prototype.setStore = setLocalStore;
+Vue.prototype.getStore = getLocalStore;
+Vue.prototype.removeStore = removeLocalStore;
 
 
 //全局注册组件
