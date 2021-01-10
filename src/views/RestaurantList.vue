@@ -8,7 +8,7 @@
 		   <div class="container">
 			   <div class="row justify-content-between">
 				   <div class="col-lg-3 col-md-4 col-10">
-					   
+
 				   </div>
 				   <div class="col-xl-5 col-md-6 col-2">
 					   <a href="#0" class="search_mob btn_search_mobile"></a> <!-- /open search panel -->
@@ -79,57 +79,23 @@
 					<div class="col-md-4">
 						<h6>分类</h6>
 						<ul>
-							<li>
-								<label class="container_check">湘菜 <small>67</small>
-								  <input type="checkbox">
-								  <span class="checkmark"></span>
+							<li v-for="cate in categories_list">
+								  <label class="container_check">{{cate}} <small>67</small>
+								  <input type="radio" name="category" v-model="selectedCategory" :value="cate" @change="getKey">
+								  <span class="checkmark" ></span>
 								</label>
 							</li>
-							<li>
-								<label class="container_check">小吃快餐 <small>89</small>
-								  <input type="checkbox">
-								  <span class="checkmark"></span>
-								</label>
-							</li>
-							<li>
-								<label class="container_check">面包甜点 <small>45</small>
-								  <input type="checkbox">
-								  <span class="checkmark"></span>
-								</label>
-							</li>
-							<li>
-								<label class="container_check">自助餐 <small>78</small>
-								  <input type="checkbox">
-								  <span class="checkmark"></span>
-								</label>
-							</li>
+
 						</ul>
 					</div>
+
 					<div class="col-md-4">
-						<h6>特色</h6>
+						<h6>地区</h6>
 						<ul>
-							<li>
-								<label class="container_check">环境氛围好 <small>12</small>
-								  <input type="checkbox">
-								  <span class="checkmark"></span>
-								</label>
-							</li>
-							<li>
-								<label class="container_check">分量大实惠 <small>11</small>
-								  <input type="checkbox">
-								  <span class="checkmark"></span>
-								</label>
-							</li>
-							<li>
-								<label class="container_check">聚会Party <small>23</small>
-								  <input type="checkbox">
-								  <span class="checkmark"></span>
-								</label>
-							</li>
-							<li>
-								<label class="container_check">Dicunt nam <small>56</small>
-								  <input type="checkbox">
-								  <span class="checkmark"></span>
+							<li v-for="region in region_list" >
+								<label class="container_check">{{region}} <small>12</small>
+								  <input type="radio" name="location" v-model="selectedRegion" :value="region" @change="getKey">
+								  <span class="checkmark" ></span>
 								</label>
 							</li>
 						</ul>
@@ -151,13 +117,13 @@
 
 			<div class="isotope-wrapper">
 
-				<restaurant_item></restaurant_item>
+				<restaurant_item :key="selectKey" :selectTag="selectKey"></restaurant_item>
 
 			</div>
 			<!-- /isotope-wrapper
 			<p class="text-center"><a href="#0" class="btn_1 rounded add_top_15">Load more</a></p>
 			 -->
-      		
+
 
 
 		</div>
@@ -172,20 +138,48 @@
 </template>
 
 <script>
-	import restaurant_item from "../components/List_Components/restaurant_item"
+	  import restaurant_item from "../components/List_Components/restaurant_item"
     import Header_WB from "../components/Header_WB";
     import Footer_com from "../components/Footer_com";
     import Pagination from "../components/List_Components/Pagination";
+    import {getLocalStore} from "../assets/storage/localstorage";
     export default {
         name: "RestaurantList",
         data(){
           return{
-            categories_list:["All Categories","Lebanese","Cafe","Bar","Pizza","Seafood","Roast","Spaghetti","Dessert"],
-            restaurant_list:[],
+            categories_list:[],
+            region_list:[],
+            selectedCategory:"",
+            selectedRegion:"",
+            selectKey:"",
           }
         },
-		components: {Footer_com, Header_WB,Pagination,restaurant_item},
-		
+        components: {Footer_com, Header_WB,Pagination,restaurant_item},
+
+        created() {
+          this.getTagsList();
+        },
+        methods:{
+          getTagsList(){
+            var tagsList=JSON.parse(getLocalStore("tagsList"));
+            this.categories_list=tagsList['种类'];
+            this.region_list=tagsList['地区'];
+          },
+          getKey(){
+
+            if (this.selectedCategory===""&&this.selectedRegion===""){
+              this.selectKey="";
+            }
+            else if (this.selectedCategory===""&&this.selectedRegion!=="") {
+              this.selectKey="l"+this.selectedRegion;
+            }
+            else {
+              this.selectKey="c"+this.selectedCategory+"l"+this.selectedRegion;
+            }
+            console.log(this.selectKey);
+          }
+        }
+
     }
 </script>
 

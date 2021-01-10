@@ -80,7 +80,7 @@
             clearfix:"",
             btn_code:{
               // 是否禁用按钮
-              codeDisabled: false,
+              codeDisabled: true,
               // 倒计时秒数
               countdown: 60,
               // 按钮上的文字
@@ -95,31 +95,63 @@
             console.log(event.target.files)
           },
           verifyName() {
-            console.log(this.peopleInfo.username)
             var people = this.peopleInfo;
-            if (people.username.replace(/(^\s*)|(\s*$)/g, "") == '') {
+            if (people.username.replace(/(^\s*)|(\s*$)/g, "") === '') {
               this.err.errflag = true;
               this.err.errinfo = "名字不能为空，请输入名字";
-              this.clearfix = "weakpass";
-
+              this.clearfix = "weakPass";
+              return false;
             } else {
-              this.err.errflag = false;
-              this.err.errinfo = "";
-              this.clearfix = "";
+              var tmpThis=this;
+              this.$httpM.get(this.$api.User.userNameCount,{params:{'username':this.peopleInfo.username}})
+              .then(function (response) {
+                if (response.data['count']!==0){
+                  tmpThis.err.errflag = true;
+                  tmpThis.err.errinfo = "已有名字重复！";
+                  tmpThis.clearfix = "weakPass";
+                  return false;
+                }
+                else {
+                  tmpThis.err.errflag = false;
+                  tmpThis.err.errinfo = "";
+                  tmpThis.clearfix = "";
+                  return true;
+                }
+              })
+              .catch(function (err) {
+
+              });
+
             }
+
           },
           verifyPhone() {
             var phonereg = /^1[3|4|5|7|8][0-9]{9}$/;
             if (!phonereg.test(this.peopleInfo.mobile)) {
               this.err.errflag = true;
               this.err.errinfo = "输入正确的手机号码";
-              this.clearfix = "weakpass";
+              this.clearfix = "weakPass";
+              return false;
             } else {
-              this.err.errflag = true;
-              this.err.errinfo = "";
-              this.clearfix = "";
-              //修改验证码按钮
-              this.btn_code.codeDisabled=false;
+              var tmpThis=this;
+              this.$httpM.get(this.$api.User.userMobileCount,{params: {'mobile':this.peopleInfo.mobile}})
+              .then(function (response) {
+                  if (response.data['count']!==0){
+                  tmpThis.err.errflag = true;
+                  tmpThis.err.errinfo = "该手机号已被注册！";
+                  tmpThis.clearfix = "weakPass";
+                  return false;
+                }
+                else {
+                  tmpThis.err.errflag = false;
+                  tmpThis.err.errinfo = "";
+                  tmpThis.clearfix = "";
+                  //修改验证码按钮
+                  tmpThis.btn_code.codeDisabled=false;
+                  return true;
+                }
+              })
+              .catch();
             }
           },
           verifyPwd() {
@@ -132,31 +164,37 @@
             if (!WeakPass.test(this.peopleInfo.password)) {
               this.err.errflag = true;
               this.err.errinfo = "密码：Very Weak! (输入大于5个字符)";
-              this.clearfix = "weakpass";
+              this.clearfix = "weakPass";
+              return false;
             } else if (!MediumPass.test(this.peopleInfo.password)) {
               this.err.errflag = true;
               this.err.errinfo = "密码：Still Weak! (输入数字组成更好的密码)";
-              this.clearfix = "stillweakpass";
+              this.clearfix = "stillWeakPass";
+              return false;
             } else if (!StrongPass.test(this.peopleInfo.password)) {
               this.err.errflag = true;
               this.err.errinfo = "密码：Good! (输入大写字母组成更强的密码)";
-              this.clearfix = "goodpass";
+              this.clearfix = "goodPass";
+              return false;
             } else {
               this.err.errflag = false;
               this.err.errinfo = "";
               this.clearfix = "";
+              return true;
             }
 
           },
           verifyPwd2() {
-            if (this.peopleInfo.password != this.peopleInfo.password2) {
+            if (this.peopleInfo.password !== this.peopleInfo.password2) {
               this.err.errflag = true;
               this.err.errinfo = "密码两次不相同";
-              this.clearfix = "weakpass";
+              this.clearfix = "weakPass";
+              return false;
             } else {
               this.err.errflag = true;
               this.err.errinfo = "密码相同";
-              this.clearfix = "goodpass";
+              this.clearfix = "goodPass";
+              return true;
             }
           },
           timing_60s() {
@@ -187,19 +225,22 @@
             }
           },
           user_register(){
-            alert("点击注册！");
-            console.log(this.peopleInfo);
-            //var temp_this=this;
-            this.$httpM.post(this.$api.User.register,this.peopleInfo,false)
-              .then(response=>  {
-                  console.log(response);
-                  alert("注册成功！");
-                  this.$router.push({path:'/login'})
-              })
-              .catch(err => {
-                alert("出错！");
-                console.log(err);
-              })
+            var registerFlag=this.verifyName()&&this.verifyPhone()&&this.verifyPwd()&&this.verifyPwd2();
+            if (registerFlag){
+              console.log(this.peopleInfo);
+              //var temp_this=this;
+              this.$httpM.post(this.$api.User.register,this.peopleInfo,false)
+                .then(response=>  {
+                    console.log(response);
+                    alert("注册成功！");
+                    this.$router.push({path:'/login'})
+                })
+                .catch(err => {
+                  alert("出错！");
+                  console.log(err);
+                })
+            }
+
           },
 
         }

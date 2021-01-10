@@ -5,8 +5,7 @@
 
 	<main class="margin_main_container">
 		<div class="container margin_60_35">
-      <form autocomplete="off" action="/writerest" method="post" enctype="multipart/form-data">
-
+      <form>
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="box_general write_review">
@@ -18,25 +17,27 @@
 						</div>
 						<!-- /rating_submit -->
 						<div class="form-group">
-							<label>Name of your restaurant</label>
-							<input class="form-control" type="text"  id="name" v-model="new_restaurant.name">
-						</div>
-						<div class="form-group">
-							<label>Menu</label>
-							<textarea class="form-control" style="height: 180px;"  id="food" placeholder="Write your menu to introduce your business"></textarea>
+              <label>Name of your restaurant</label><span class="text-danger">*</span>
+							<input class="form-control" type="text"  v-model="new_restaurant.res_name">
 						</div>
             <div class="form-group">
-							<label>Address</label>
-							<input class="form-control" type="text"  id="address" placeholder="Where is your restaurant?" v-model="new_restaurant.address">
+							<label>Address</label><span class="text-danger">*</span>
+							<input class="form-control" type="text"  placeholder="Where is your restaurant?" v-model="new_restaurant.res_address">
 						</div>
-						<div class="form-group">
+            <div class="form-group">
 							<label>Add your photo (optional)</label>
-							<div class="fileupload"><input type="file"  id="photo" accept="image/*" @change="triggerFile($event)"></div>
+							<div class="fileupload"><input type="file"  name="imgLocal" accept="image/*" @change="triggerFile($event)"></div>
 						</div>
+            <div class="form-group">
+              <label>营业时间</label>
+              <input class="form-control" type="text" v-model="new_restaurant.business_time"/>
+            </div>
 						<div class="form-group">
+              <label>联系电话：</label><span class="text-danger">*</span>
+              <input class="form-control"  type="phone" v-model="new_restaurant.mobile">
 						</div>
             <div id="pass-info" class="clearfix"></div>
-						<a><input type="submit" class="btn_1" id="subrest" value="Submit restaurant"></a>
+						<a><input type="button" class="btn_1" @click="submitRes" value="Submit restaurant"></a>
 					</div>
 				</div>
 				<!-- /col -->
@@ -60,21 +61,42 @@
     import Header_WB from "../components/Header_WB";
     import LastView_Right from "../components/LastView_Right";
     import Footer_com from "../components/Footer_com";
+    import {getLocalStore} from "../assets/storage/localstorage";
     export default {
         name: "New_Restaurant",
         data(){
           return{
             new_restaurant:{
-              name:"",
-              address:"",
-              menu:"",
-              res_photo:"",
+              res_name:"",
+              res_address:"",
+              picture:null,
+              business_time:null,
+              mobile:"",
+              owner:"",
             }
         }},
         methods: {
           triggerFile(event) {
-            console.log(event.target.files)
+            this.new_restaurant.picture=event.target.files[0];
           },
+          submitRes(){
+            this.new_restaurant.owner=JSON.parse(getLocalStore("userLogin"))['user_id'];
+            let param=new FormData();
+            param.append("res_name",this.new_restaurant.res_name);           //向对象中添加数据
+            param.append("res_address",this.new_restaurant.res_address);
+            param.append("picture",this.new_restaurant.picture,this.new_restaurant.picture.name);
+            param.append("business_time",this.new_restaurant.business_time);
+            param.append("mobile",this.new_restaurant.mobile);
+            param.append("owner",this.new_restaurant.owner);
+            this.$httpM.post(this.$api.Restaurant.create,param,false)
+            .then(function (response) {
+              console.log("response:",response);
+            })
+            .catch(function (err) {
+              console.log("err:",err);
+            })
+          }
+
         },
         components: {Footer_com, LastView_Right, Header_WB}
     }

@@ -43,6 +43,7 @@ import Nrange from '../../utils/utils'
 export default {
     components: { Pagination },
     name:"restaurant_item",
+    props:['selectTag'],
     data(){
         return{
             restaurant_list:[
@@ -63,11 +64,11 @@ export default {
         //跳转到一个餐馆
         showSingleRes(res_id){
           //传参数时 不能用path传递参数
-          this.$router.push({name:'restaurant',params:{id:res_id}});
+          this.$router.push({name:'restaurant',query:{id:res_id}});
         },
         previousPage(){
             this.current_page=(this.current_page-1);
-            if(this.current_page==0){
+            if(this.current_page===0){
                 this.current_page=1;
             }
             if(this.previous_page_api!=null){
@@ -87,25 +88,29 @@ export default {
         },
         //跳转到某一页
         toIndexPage(index){
-
             this.current_page=index+1;
-
-            var url=this.$api.Restaurant.list+"?page="+this.current_page;
+            //没有筛选条件
+            if (this.selectTag===""){
+              var url=this.$api.Restaurant.list+"?page="+this.current_page;
+            }
+            else {
+              var url=this.$api.Tag_Res.list+this.selectTag+"?page="+this.current_page;
+            }
             console.log(this.current_page,url);
             this.getResList(url);
         },
         //根据url 获取餐馆列表
-        getResList(url){
+        getResList(url,params=false){
             var tmp_this=this;
-            this.$httpM.get(url,false)
+            this.$httpM.get(url,params)
             .then(function (response) {
                 tmp_this.restaurant_list=response.data.results;
                 tmp_this.total_count=response.data.count;
                 tmp_this.next_page_api=response.data.next;
                 tmp_this.previous_page_api=response.data.previous;
-                //判断有多少页
-                tmp_this.total_page=tmp_this.total_count%tmp_this.page_size_?tmp_this.total_count/tmp_this.page_size_+1:tmp_this.total_count/tmp_this.page_size_;
-            
+                //判断有多少页 (向上整除)
+                tmp_this.total_page=Math.ceil(tmp_this.total_count / tmp_this.page_size_);
+                console.log("多少页："+tmp_this.total_page);
             })
             .catch(function (err) {
                 alert(err);
@@ -114,7 +119,16 @@ export default {
         }
     },
     created(){
+
+      //没有筛选条件返回全部列表
+      if (this.selectTag===""){
         this.getResList(this.$api.Restaurant.list);
+      }
+      else {
+        console.log(this.selectTag);
+        this.getResList(this.$api.Tag_Res.list+this.selectTag);
+      }
+
     }
 }
 </script>
