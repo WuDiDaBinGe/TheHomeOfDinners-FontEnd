@@ -5,14 +5,16 @@ export default{
   },
   //用户
   User:{
-    register:'/users/',  //注册
-    login:'/login/',
-    user_register_mobilenumber:'/mobiles/count', //手机号判断
+    register:'/users/',               //注册
+    login:'/login/',                  //登录
+    userMobileCount:'/mobile/count',  //手机号判断
+    userNameCount:'/username/count'   //用户名判断是否重复
   },
   //评论
   //餐馆
   Restaurant:{
     list:'/restaurant',
+    create:'/restaurant/',              //创建餐馆
     singleRestaurant:"/restaurant/"
   },
 
@@ -28,7 +30,11 @@ export default{
   Collection:{
     collected:'/collection/collected/', //是否被收藏
     collectRes:'/collection/',          //收藏餐馆
-    collectDel:'/collection/del_by_user_restaurant/',          //删除收藏
+    collectDel:'/collection/del_by_user_restaurant/',        //删除收藏
+  },
+  //评论
+  Review:{
+    RestaurantReview:'/review/{id}/restaurant_review',       //查询餐馆的评论
   },
   //测试
   Test:{
