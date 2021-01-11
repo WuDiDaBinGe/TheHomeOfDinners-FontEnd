@@ -8,16 +8,24 @@ export default{
     register:'/users/',               //注册
     login:'/login/',                  //登录
     userMobileCount:'/mobile/count',  //手机号判断
+<<<<<<< HEAD
     userNameCount:'/username/count',  //用户名判断是否重复
     read:'/user/{id}/'                //根据用户ID读取信息
+=======
+    userNameCount:'/username/count'   //用户名判断是否重复
+>>>>>>> upstream/develop
   },
   //评论
   //餐馆
   Restaurant:{
     list:'/restaurant',
     create:'/restaurant/',              //创建餐馆
+<<<<<<< HEAD
     singleRestaurant:"/restaurant/",    //查询餐馆
     scoreCount:"/restaurant/{id}/reviews_count/", //查询餐馆下各个评分的个数
+=======
+    singleRestaurant:"/restaurant/"
+>>>>>>> upstream/develop
   },
 
   //标签
