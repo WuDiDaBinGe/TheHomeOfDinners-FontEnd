@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-2 user_info">
         <figure><img src="** review.photo *" alt=""></figure>
-        <h5>** user.name *</h5>
+        <h5>{{reviewUser.username}}</h5>
       </div>
       <div class="col-md-10 review_content">
         <div class="clearfix add_bottom_15">
@@ -16,7 +16,7 @@
         <input name="rname" id="rname" value="** review.rest *" style="display: none">
 
         <ul>
-          <li><a href="#0" value='** review.text *' onclick="var i=this.getAttribute('value');u(i);"><i class="icon_like_alt"></i><span>Useful</span></a></li>
+          <li><a href="#0" value='**review.text*' onclick="var i=this.getAttribute('value');u(i);"><i class="icon_like_alt"></i><span>Useful</span></a></li>
           <li><a href="#0"><i class="icon_dislike_alt"></i><span>Not useful</span></a></li>
           <li><span>Share</span> <a href="#0"><i class="ti-facebook"></i></a> <a href="#0"><i class="ti-twitter-alt"></i></a> <a href="#0"><i class="ti-google"></i></a></li>
         </ul>
@@ -42,18 +42,29 @@
 </template>
 
 <script>
+    import {getLocalStore} from "../../assets/storage/localstorage";
+
     export default {
       name: "Reviews_Cards",
       props:['review'],
       data(){
         return{
           is_flag_:false,
-          userName:null,
+          reviewUser:{
+            id: null,
+            mobile: "",
+            role: "",
+            username: "",
+          },
         }
       },
       created() {
-        this.userName="";
-        //this.$httpM.get()
+        let tmpThis=this;
+        let userId=this.review.user;
+        this.$httpM.get(this.$api.User.read.replace('{id}',userId))
+        .then(function (response) {
+          tmpThis.reviewUser=response.data;
+        })
       },
       beforeRouteEnter (to,from,next){
         if (from.path==="/userinfo"){
