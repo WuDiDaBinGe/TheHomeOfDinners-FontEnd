@@ -3,11 +3,7 @@
     <div class="row">
       <div class="col-md-2 user_info">
         <figure><img src="** review.photo *" alt=""></figure>
-<<<<<<< HEAD
         <h5>{{reviewUser.username}}</h5>
-=======
-        <h5>** user.name *</h5>
->>>>>>> upstream/develop
       </div>
       <div class="col-md-10 review_content">
         <div class="clearfix add_bottom_15">
@@ -20,11 +16,7 @@
         <input name="rname" id="rname" value="** review.rest *" style="display: none">
 
         <ul>
-<<<<<<< HEAD
           <li><a href="#0" value='**review.text*' onclick="var i=this.getAttribute('value');u(i);"><i class="icon_like_alt"></i><span>Useful</span></a></li>
-=======
-          <li><a href="#0" value='** review.text *' onclick="var i=this.getAttribute('value');u(i);"><i class="icon_like_alt"></i><span>Useful</span></a></li>
->>>>>>> upstream/develop
           <li><a href="#0"><i class="icon_dislike_alt"></i><span>Not useful</span></a></li>
           <li><span>Share</span> <a href="#0"><i class="ti-facebook"></i></a> <a href="#0"><i class="ti-twitter-alt"></i></a> <a href="#0"><i class="ti-google"></i></a></li>
         </ul>
@@ -58,7 +50,6 @@
       data(){
         return{
           is_flag_:false,
-<<<<<<< HEAD
           reviewUser:{
             id: null,
             mobile: "",
@@ -74,14 +65,6 @@
         .then(function (response) {
           tmpThis.reviewUser=response.data;
         })
-=======
-          userName:null,
-        }
-      },
-      created() {
-        this.userName="";
-        //this.$httpM.get()
->>>>>>> upstream/develop
       },
       beforeRouteEnter (to,from,next){
         if (from.path==="/userinfo"){

@@ -11,20 +11,11 @@
 
 			<div class="col-lg-8">
 					<Restaurant_Pictures_Tab></Restaurant_Pictures_Tab>
-<<<<<<< HEAD
 					<!-- /review_card -->
 					<Reviews_Cards v-for="review in resReviews" :review="review"></Reviews_Cards>
 
           <a-pagination :default-current="0" :total="total_count" :defaultPageSize="page_size_" class="pagination__wrapper add_bottom_30" @change="pageChange"/>
 
-=======
-					{{res_id}}
-					<!-- /review_card -->
-					<Reviews_Cards v-for="review in resReviews" :review="review"></Reviews_Cards>
-
-          <a-pagination :default-current="0" :total="15" :defaultPageSize="page_size_" class="pagination__wrapper add_bottom_30" @change="pageChange"/>
-					<Pagination></Pagination>
->>>>>>> upstream/develop
 				</div>
 				<!-- /col -->
         		<Restaurant_Info_Card :resobj="res"></Restaurant_Info_Card>
@@ -70,13 +61,9 @@
       },
       methods:{
         pageChange(pageNumber){
-<<<<<<< HEAD
           let url=this.$api.Review.RestaurantReview.replace('{id}',this.res_id);
           url=url+"?page="+pageNumber;
           this.getResReviews(url);
-=======
-
->>>>>>> upstream/develop
         },
         getResInfo(){
           let tmpThis=this;
@@ -85,7 +72,6 @@
           this.$httpM.get(this.$api.Restaurant.singleRestaurant+res_id,false)
           .then(response=>{
             tmpThis.res=response.data;
-<<<<<<< HEAD
 
           })
           .catch(err=>{
@@ -105,27 +91,6 @@
           .catch(function (err) {
 
           })
-=======
-
-          })
-          .catch(err=>{
-            alert("出错！");
-          })
-        },
-        getResReviews(url){
-          let tmpThis=this;
-          //查询餐馆评论
-          this.$httpM.get(url,false)
-          .then(function (response) {
-            tmpThis.resReviews=response.data.results;
-            tmpThis.page_size_=response.data.count;
-            tmpThis.next_page_api=response.data.next;
-            tmpThis.previous_page_api=response.data.previous;
-          })
-          .catch(function (err) {
-
-          })
->>>>>>> upstream/develop
         }
       },
       created() {
