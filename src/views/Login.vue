@@ -72,7 +72,7 @@
           this.$httpM.post(this.$api.User.login,this.post_user,false)
           .then(response=>{
             alert("成功！");
-            console.log(response.data);
+            console.log(response);
             //设置localstorage
             setLocalStore("userLogin",response.data);
             //设置vuex

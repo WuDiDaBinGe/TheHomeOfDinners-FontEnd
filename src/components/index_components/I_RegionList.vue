@@ -21,11 +21,24 @@
 </template>
 
 <script>
+    import {getLocalStore} from "../../assets/storage/localstorage";
+
     export default {
+
         name: "I_RegionList",
         data(){
           return{
             region_ranked_list:["Lebanese","Indian","Mediterranean","Asia","Europe"],
+          }
+        },
+        created() {
+          this.getRegionList();
+        },
+        methods:{
+          getRegionList(){
+            var tagsList=JSON.parse(getLocalStore("tagsList"));
+            console.log(tagsList);
+            this.region_ranked_list=tagsList['地区'];
           }
         }
     }

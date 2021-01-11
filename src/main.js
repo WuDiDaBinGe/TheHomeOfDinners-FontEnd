@@ -5,6 +5,8 @@ import App from './App';
 import VueRouter from "vue-router";
 import router from "./router/Router.js";
 import "bootstrap";
+import Antd from "ant-design-vue";
+import 'ant-design-vue/dist/antd.css'
 //引入全局样式
 import "./assets/bootstrap-4.5.0-dist/css/bootstrap.min.css"
 import "../static/css/style.css";
@@ -32,12 +34,14 @@ import {Nrange} from './utils/utils';
 Vue.prototype.$api=api;
 Vue.prototype.$httpM=http;
 
+Vue.use(Antd);
+
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 
-Vue.prototype.setStore = setLocalStore
-Vue.prototype.getStore = getLocalStore
-Vue.prototype.removeStore = removeLocalStore
+Vue.prototype.setStore = setLocalStore;
+Vue.prototype.getStore = getLocalStore;
+Vue.prototype.removeStore = removeLocalStore;
 
 
 //全局注册组件

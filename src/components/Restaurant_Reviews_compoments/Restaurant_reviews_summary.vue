@@ -9,13 +9,13 @@
 							</figure>
 							<small><i class="ti-location-pin">{{this.resobj.res_address}}</i></small>
 							<h1 @click="collectRes">{{this.resobj.res_name}} <i class="icon_star_alt" :class="[{'iscollected':isCollected}]" ></i></h1>
-							<span class="rating"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star empty"></i><em>{{resobj.score}}/5.00 - based on {{resobj.collection_count}} reviews</em></span>
+							<span class="rating"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star empty"></i><em>{{resobj.score}}/5.00 - based on {{reviewSumNum}} reviews</em></span>
 						</div>
 						<div class="col-lg-4 review_detail">
 							<div class="row">
 								<div class="col-lg-9 col-9">
 									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar" role="progressbar" :style="{width: width5Star+'%'}" :aria-valuenow="width5Star" aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
 								</div>
 								<div class="col-lg-3 col-3 text-right"><strong>5 stars</strong></div>
@@ -24,7 +24,7 @@
 							<div class="row">
 								<div class="col-lg-9 col-9">
 									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar" role="progressbar" :style="{width: width4Star+'%'}" :aria-valuenow="width4Star" aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
 								</div>
 								<div class="col-lg-3 col-3 text-right"><strong>4 stars</strong></div>
@@ -33,7 +33,7 @@
 							<div class="row">
 								<div class="col-lg-9 col-9">
 									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar" role="progressbar" :style="{width: width3Star+'%'}" :aria-valuenow="width3Star" aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
 								</div>
 								<div class="col-lg-3 col-3 text-right"><strong>3 stars</strong></div>
@@ -42,7 +42,7 @@
 							<div class="row">
 								<div class="col-lg-9 col-9">
 									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar" role="progressbar" :style="{width: width2Star+'%'}" :aria-valuenow="width2Star" aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
 								</div>
 								<div class="col-lg-3 col-3 text-right"><strong>2 stars</strong></div>
@@ -51,7 +51,7 @@
 							<div class="row">
 								<div class="col-lg-9 col-9">
 									<div class="progress last">
-										<div class="progress-bar" role="progressbar" style="width: 0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar" role="progressbar" :style="{width:width1Star+'%' }" :aria-valuenow="width1Star" aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
 								</div>
 								<div class="col-lg-3 col-3 text-right"><strong>1 stars</strong></div>
@@ -76,36 +76,92 @@
           collectInfo:{},
           resObj:{},
           isCollected:false,
+          scoreNum:{
+            "1":null,
+            "2":null,
+            "3":null,
+            "4":null,
+            "5":null,
+          },
         }
       },
       computed:{
         userID(){
           return JSON.parse(getLocalStore("userLogin")).user_id;
         },
+        reviewSumNum(){
+          return this.scoreNum['1']+this.scoreNum['2']+this.scoreNum['3']+this.scoreNum['4']+this.scoreNum['5'];
+        },
+        width1Star(){
+          let tmp1Star=(this.scoreNum['1']/this.reviewSumNum)*100;
+          console.log(tmp1Star);
+          return tmp1Star;
+        },
+        width2Star(){
+          let tmp2Star=(this.scoreNum['2']/this.reviewSumNum)*100;
+          console.log(tmp2Star);
+          return tmp2Star;
+        },
+        width3Star(){
+          let tmp3Star=(this.scoreNum['3']/this.reviewSumNum)*100;
+          console.log(tmp3Star);
+          return tmp3Star;
+        },
+        width4Star(){
+          let tmp4Star=(this.scoreNum['4']/this.reviewSumNum)*100;
+          console.log(tmp4Star);
+          return tmp4Star;
+        },
+        width5Star(){
+          let tmp5Star=(this.scoreNum['5']/this.reviewSumNum)*100;
+          console.log(tmp5Star);
+          return tmp5Star;
+        },
       },
       watch:{
         resobj:function (newVal,oldVal) {
           this.resObj=newVal;
+          this.getScoreNum();
           newVal && this.getIsCollect();
         }
       },
+      created() {
+
+      },
       mounted() {
         //this.getIsCollect();
+        //this.getScoreNum();
       },
       methods:{
+        //获取餐馆的各个评分的数量
+        getScoreNum(){
+          let tmpThis=this;
+          let resId=this.resobj.id;
+          console.log("ID:",resId);
+          this.$httpM.get(this.$api.Restaurant.scoreCount.replace("{id}",resId),false)
+          .then(function (response) {
+            console.log(response.data);
+            tmpThis.scoreNum=response.data;
+          })
+          .catch(function (err) {
+
+          })
+        },
+        //用户是否收藏了该餐馆
         getIsCollect(){
           var tmpThis=this;
           var params_={
             user:this.userID,
             restaurant:this.resobj.id,
           };
-          console.log("asdsa",params_);
+
           this.$httpM.post(this.$api.Collection.collected,params_,false)
           .then(function (response) {
             console.log("是否收藏："+response.data);
              tmpThis.isCollected = response.data === 1;
           });
         },
+        //收藏与取消收藏
         collectRes(){
           var postParam={
               user:this.userID,
