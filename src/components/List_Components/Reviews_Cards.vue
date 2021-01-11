@@ -43,7 +43,6 @@
 
 <script>
     import {getLocalStore} from "../../assets/storage/localstorage";
-
     export default {
       name: "Reviews_Cards",
       props:['review'],

@@ -10,24 +10,24 @@
 					<div class="row">
 						<div class="col-md-6">
 							<figure>
-								<img :src=user.pic_src alt="">
+								<img :src="user.pic_src">
 							</figure>
-							<h1>{{user.name}}</h1>
-							<span>{{user.city}}</span>
+							<h1>{{user.username}}</h1>
+							<span>角色：{{user.role}}</span>
 						</div>
 						<div class="col-md-6">
 							<ul>
-								<li @click="getMyReviews">
-									<strong>3</strong>
+								<li @click="getMyinfo">
+									<strong>{{myReviewListInfo.count}}</strong>
 									<a><i class="icon_star"></i> Reviews</a>
 								</li>
-								<li @click="getMyinfo">
+								<li @click="getMyReviews">
 									<strong>12</strong>
 									<a><i class="icon-user-1"></i> Reads</a>
 								</li>
 								<li @click="getMyRes">
-									<strong>36</strong>
-									<a><i class="icon_like_alt"></i> Useful</a>
+									<strong>{{myCollection.count}}</strong>
+									<a><i class="icon_like_alt"></i> 收藏</a>
 								</li>
 							</ul>
 						</div>
@@ -37,12 +37,17 @@
 			</div>
 		</div>
 		<!-- /user_summary -->
-		<form autocomplete="off" action="/changeuser" method="post" id="changeuser" enctype="multipart/form-data">
+
 
 		<div class="container margin_60_35">
 			<div class="row">
 				<div class="col-lg-8">
-					<router-view></router-view>
+          <UserInfo_form v-show="myInfoFlag"></UserInfo_form>
+          <div v-show="myReviewFlag">
+            <Reviews_Cards v-for="review in myReviewListInfo.results" :review="review" ></Reviews_Cards>
+            <a-pagination :default-current="0" :total="reviewTotalCount" :defaultPageSize="pageSize" class="pagination__wrapper add_bottom_30" @change="pageChange"/>
+          </div>
+          <restaurant_item v-show="myCollectionFlag" :parentName="this.MyName"></restaurant_item>
 				</div>
 				<!-- /col -->
 				<div class="col-lg-4" id="sidebar">
@@ -55,10 +60,10 @@
 			</div>
 			<!-- /row -->
 		</div>
-        </form>
+
 		<!-- /container -->
-		
-		
+
+
 	</main>
 	<!--/main-->
 
@@ -71,40 +76,95 @@
 <script>
     import Footer_com from "../components/Footer_com";
     import Header_WB from "../components/Header_WB";
+    import {getLocalStore} from "../assets/storage/localstorage";
+    import Reviews_Cards from "../components/List_Components/Reviews_Cards";
+    import UserInfo_form from "../components/userInfo_components/UserInfo_form";
+    import Restaurant_item from "../components/List_Components/restaurant_item";
     export default {
-        name: "UserInfoSetting",
-		components: {Header_WB, Footer_com},
+    name: "UserInfoSetting",
+		components: {Restaurant_item, Reviews_Cards, Header_WB, Footer_com,UserInfo_form},
 		data(){
 			return{
 				user:{
-					name:"yuxiubin",
+					username:"yuxiubin",
 					pic_src:"https://bkimg.cdn.bcebos.com/pic/5243fbf2b21193134c87adbe67380cd790238dfc?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2U4MA==,g_7,xp_5,yp_5",
-					profile:"",
-					email:"1151680016@qq.com",
-					city:"湖南长沙",
-					country:"",
-					password:"",
-					new_password:"",
-					comfir_password:"",
-					reviews_num:"",
-					reads_num:"",
-					userfule_num:"",
-				}
-
+					mobile:"",
+					id:"1151680016@qq.com",
+					role:"湖南长沙",
+				},
+        myInfoFlag:true,
+        myReviewFlag:false,
+        myCollectionFlag:false,
+        myReviewListInfo:{},
+        myCollection:{},
+        MyName:"UserInfo",
 			}
 		},
-		methods:{
-			getMyReviews(){
-				this.$router.push("/userinfo/myreviews");
-			},
-			getMyRes(){
-				this.$router.push("/userinfo/myrestaurants");
-			},
-			getMyinfo(){
-				this.$router.push("/userinfo");
-			}
+    computed:{
+      userId(){
+        return JSON.parse(getLocalStore("userLogin"))['user_id'];
+      }
+    },
+    created() {
+      //查询用户信息
+      this.getMyInfo();
+      //查询用户的评论
+      this.getMyReviewList();
+      //查询用户收藏的餐馆
+      this.getMyCollectRes();
+    },
+    methods:{
+      //查询用户信息
+      getMyInfo(){
+        let tmpThis=this;
+        this.$httpM.get(this.$api.User.read.replace("{id}",this.userId),false)
+        .then(function (response) {
+          tmpThis.user=response.data;
+        })
+        .catch(function (err) {
+
+        })
+      },
+      //查询用户收藏
+      getMyCollectRes(){
+        let tmpThis=this;
+        this.$httpM.get(this.$api.User.userCollectionRes.replace("{id}",this.userId),false)
+        .then(function (response) {
+          tmpThis.myCollection=response.data;
+        })
+        .catch(function (err) {
+
+        })
+      },
+      //查询用户评论
+      getMyReviewList(){
+        let tmpThis=this;
+        this.$httpM.get(this.$api.User.userReview.replace("{id}",this.userId),false)
+        .then(function (response) {
+          tmpThis.myReviewListInfo=response.data;
+        })
+        .catch(function (err) {
+
+        })
+      },
+      getMyinfo(){
+        this.myInfoFlag=true;
+        this.myReviewFlag=false;
+        this.myCollectionFlag=false;
+      },
+      getMyReviews(){
+        this.myInfoFlag=false;
+        this.myReviewFlag=true;
+        this.myCollectionFlag=false;
+      },
+      getMyRes(){
+        this.myInfoFlag=false;
+        this.myReviewFlag=false;
+        this.myCollectionFlag=true;
+      },
+
 		}
-        
+
     }
 </script>
 

@@ -1,5 +1,6 @@
 <template>
     <div>
+      <form>
         <div class="settings_panel">
             <h3>Personal settings</h3>
             <hr>
@@ -56,10 +57,11 @@
             <p class="text-right"><a class="btn_1 small" href="#0" onclick="document.getElementById('cho').value='1';document.getElementById('changeuser').submit();">Save password</a></p>
         </div>
         <!-- /settings_panel -->
+      </form>
     </div>
-            
+
 </template>
-    
+
 <script>
 export default {
     name:"userInfo_form",

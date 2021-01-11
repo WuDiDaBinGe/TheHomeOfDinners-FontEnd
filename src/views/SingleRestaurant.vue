@@ -10,9 +10,9 @@
 			<div class="row">
 
 			<div class="col-lg-8">
-					<Restaurant_Pictures_Tab></Restaurant_Pictures_Tab>
+					<Restaurant_Pictures_Tab :resObj="res"></Restaurant_Pictures_Tab>
 					<!-- /review_card -->
-					<Reviews_Cards v-for="review in resReviews" :review="review"></Reviews_Cards>
+					<Reviews_Cards v-for="review in resReviews" :review="review" :key="review.id"></Reviews_Cards>
 
           <a-pagination :default-current="0" :total="total_count" :defaultPageSize="page_size_" class="pagination__wrapper add_bottom_30" @change="pageChange"/>
 

@@ -13,8 +13,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="text-center float-lg-right">
-                    <span class="rating"><strong>reviews:800+  rank:5  score：{{Restaurant.score}}</strong>
-                        <i class="icon_star" v-for="(item,index) in [0,1,2,3,4]" :class="[{'empty':index>=Restaurant.score}]"></i>
+                    <span class="rating"><strong>reviews:800+  rank:5  score：{{Math.round(Restaurant.score)}}</strong>
+                        <i class="icon_star" v-for="(item,index) in 5" :class="[{'empty':(index-Math.round(Restaurant.score))>=0}]"></i>
                     </span>
                     <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">Read more</button>
                     </div>
@@ -40,10 +40,11 @@
 <script>
 import Pagination from './Pagination.vue';
 import Nrange from '../../utils/utils'
+import {getLocalStore} from "../../assets/storage/localstorage";
 export default {
     components: { Pagination },
     name:"restaurant_item",
-    props:['selectTag'],
+    props:['selectTag','parentName'],
     data(){
         return{
             restaurant_list:[
@@ -119,15 +120,24 @@ export default {
         }
     },
     created(){
+      console.log("父组件名称：",this.parentName);
+      //如果父组件为餐馆列表
+      if (this.parentName==='RestaurantList'){
+        //没有筛选条件返回全部列表
+        if (this.selectTag===""){
+          this.getResList(this.$api.Restaurant.list);
+        }
+        else {
+          console.log(this.selectTag);
+          this.getResList(this.$api.Tag_Res.list+this.selectTag);
+        }
+      }
+      //如果父组件为用户信息页面
+      else if (this.parentName==='UserInfo'){
+          let uerId=JSON.parse(getLocalStore("userLogin"))['user_id'];
+          this.getResList(this.$api.User.userCollectionRes.replace("{id}",uerId));
+      }
 
-      //没有筛选条件返回全部列表
-      if (this.selectTag===""){
-        this.getResList(this.$api.Restaurant.list);
-      }
-      else {
-        console.log(this.selectTag);
-        this.getResList(this.$api.Tag_Res.list+this.selectTag);
-      }
 
     }
 }

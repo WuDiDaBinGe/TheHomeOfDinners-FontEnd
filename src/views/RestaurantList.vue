@@ -117,7 +117,7 @@
 
 			<div class="isotope-wrapper">
 
-				<restaurant_item :key="selectKey" :selectTag="selectKey"></restaurant_item>
+				<restaurant_item :key="selectKey" :selectTag="selectKey" :parentName="this.myName"></restaurant_item>
 
 			</div>
 			<!-- /isotope-wrapper
@@ -152,12 +152,14 @@
             selectedCategory:"",
             selectedRegion:"",
             selectKey:"",
+            myName:"RestaurantList"
           }
         },
         components: {Footer_com, Header_WB,Pagination,restaurant_item},
 
         created() {
           this.getTagsList();
+
         },
         methods:{
           getTagsList(){

@@ -20,7 +20,7 @@
         props:['resobj'],
         methods:{
           writeReview(){
-            this.$router.push('/write_reviews');
+            this.$router.push({name:'write_reviews',query:{resId:this.resobj.id}});
           }
         }
     }
