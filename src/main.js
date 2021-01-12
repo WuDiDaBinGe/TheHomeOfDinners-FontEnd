@@ -53,8 +53,6 @@ message.config({
 
 
 //全局注册组件
-
-
 /* eslint-disable no-new */
 new Vue({
   router,

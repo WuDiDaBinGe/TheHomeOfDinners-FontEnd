@@ -1,68 +1,39 @@
 <template>
   <div>
     <a-button class="editable-add-btn" @click="handleAdd">
-      Add
+      添加菜品
     </a-button>
     <a-table bordered :data-source="dataSource" :columns="columns">
-      <template slot="name" slot-scope="text, record">
-        <editable-cell :text="text" @change="onCellChange(record.key, 'name', $event)" />
+      <template slot="name" slot-scope="text,record">
+        <EditTableCell :text="text" @change="onCellChange(record.key, 'name', $event)"></EditTableCell>
+      </template>
+
+      <template slot="price" slot-scope="text,record">
+        <EditTableCell :text="text" @change="onCellChange(record.key, 'price', $event)"></EditTableCell>
+      </template>
+      <template slot="picture" slot-scope="text,record">
+        <ImageUpload :text="text" @change="onPictureChange"></ImageUpload>
       </template>
       <template slot="operation" slot-scope="text, record">
         <a-popconfirm
           v-if="dataSource.length"
-          title="Sure to delete?"
+          title="确定删除该菜品吗？"
           @confirm="() => onDelete(record.key)"
         >
-          <a href="javascript:;">Delete</a>
+          <a ><i class="ti-trash text-danger">删除</i></a>
         </a-popconfirm>
       </template>
+
     </a-table>
   </div>
 </template>
 
 <script>
-  const EditableCell = {
-  template: `
-      <div class="editable-cell">
-        <div v-if="editable" class="editable-cell-input-wrapper">
-          <a-input :value="value" @change="handleChange" @pressEnter="check" /><a-icon
-            type="check"
-            class="editable-cell-icon-check"
-            @click="check"
-          />
-        </div>
-        <div v-else class="editable-cell-text-wrapper">
-          {{ value || ' ' }}
-          <a-icon type="edit" class="editable-cell-icon" @click="edit" />
-        </div>
-      </div>
-    `,
-  props: {
-    text: String,
-  },
-  data() {
-    return {
-      value: this.text,
-      editable: false,
-    };
-  },
-  methods: {
-    handleChange(e) {
-      const value = e.target.value;
-      this.value = value;
-    },
-    check() {
-      this.editable = false;
-      this.$emit('change', this.value);
-    },
-    edit() {
-      this.editable = true;
-    },
-  },
-};
+import EditTableCell from "./EditTableCell";
 export default {
+  name:"TableComponent",
   components: {
-    EditableCell,
+    EditTableCell,
   },
   data() {
     return {
@@ -70,42 +41,56 @@ export default {
         {
           key: '0',
           name: 'Edward King 0',
-          age: '32',
-          address: 'London, Park Lane no. 0',
+          price: '32',
+          recommendations: '2',
+          picture:'http://39.96.37.82:8888/pictures/menu/%E7%89%9B%E8%82%89%E7%B2%89.jpg',
         },
         {
           key: '1',
           name: 'Edward King 1',
-          age: '32',
-          address: 'London, Park Lane no. 1',
+          price: '32',
+          recommendations: '3',
+          picture: 'http://39.96.37.82:8888/pictures/menu/%E7%89%9B%E8%82%89%E7%B2%89.jpg',
         },
       ],
       count: 2,
       columns: [
         {
-          title: 'name',
+          title: '菜品名称',
           dataIndex: 'name',
           width: '30%',
           scopedSlots: { customRender: 'name' },
         },
         {
-          title: 'age',
-          dataIndex: 'age',
+          title: '价格',
+          dataIndex: 'price',
+          width: '25%',
+          scopedSlots: { customRender: 'price' },
         },
         {
-          title: 'address',
-          dataIndex: 'address',
+          title: '推荐次数',
+          dataIndex: 'recommendations',
         },
         {
-          title: 'operation',
+          title: '菜品图片',
+          dataIndex: 'picture',
+          scopedSlots: { customRender: 'picture' },
+        },
+        {
+          title: '操作',
           dataIndex: 'operation',
           scopedSlots: { customRender: 'operation' },
         },
+
       ],
     };
   },
   methods: {
+    onPictureChange(){
+      //待添加
+    },
     onCellChange(key, dataIndex, value) {
+      console.log(value);
       const dataSource = [...this.dataSource];
       const target = dataSource.find(item => item.key === key);
       if (target) {
@@ -122,8 +107,9 @@ export default {
       const newData = {
         key: count,
         name: `Edward King ${count}`,
-        age: 32,
-        address: `London, Park Lane no. ${count}`,
+        price: 32,
+        recommendations: `London, Park Lane no. ${count}`,
+        picture: "http://39.96.37.82:8888/pictures/menu/%E7%89%9B%E8%82%89%E7%B2%89.jpg",
       };
       this.dataSource = [...dataSource, newData];
       this.count = count + 1;
@@ -133,44 +119,6 @@ export default {
 </script>
 
 <style scoped>
-.editable-cell {
-  position: relative;
-}
-
-.editable-cell-input-wrapper,
-.editable-cell-text-wrapper {
-  padding-right: 24px;
-}
-
-.editable-cell-text-wrapper {
-  padding: 5px 24px 5px 5px;
-}
-
-.editable-cell-icon,
-.editable-cell-icon-check {
-  position: absolute;
-  right: 0;
-  width: 20px;
-  cursor: pointer;
-}
-
-.editable-cell-icon {
-  line-height: 18px;
-  display: none;
-}
-
-.editable-cell-icon-check {
-  line-height: 28px;
-}
-
-.editable-cell:hover .editable-cell-icon {
-  display: inline-block;
-}
-
-.editable-cell-icon:hover,
-.editable-cell-icon-check:hover {
-  color: #108ee9;
-}
 
 .editable-add-btn {
   margin-bottom: 8px;
