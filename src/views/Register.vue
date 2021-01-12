@@ -227,7 +227,7 @@
           user_register(){
             var registerFlag=this.verifyName()&&this.verifyPhone()&&this.verifyPwd()&&this.verifyPwd2();
             if (registerFlag){
-              console.log(this.peopleInfo);
+              //console.log(this.peopleInfo);
               //var temp_this=this;
               this.$httpM.post(this.$api.User.register,this.peopleInfo,false)
                 .then(response=>  {

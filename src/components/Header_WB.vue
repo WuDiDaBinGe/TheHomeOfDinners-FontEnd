@@ -34,8 +34,8 @@
 
               <li><span><a href="#0">个人中心</a></span>
                 <ul>
-                  <li><router-link to="/userinfo/myreviews">我的评价</router-link></li>
-                  <li><router-link to="/userinfo/myrestaurants">我的收藏</router-link></li>
+                  <li><router-link to="/userinfo">我的评价</router-link></li>
+                  <li><router-link to="/userinfo">我的收藏</router-link></li>
                   <li><router-link to="/userinfo">我的设置</router-link></li>
                 </ul>
               </li>
@@ -55,7 +55,7 @@
               </li>
               <li v-show="is_login"><span><a>欢迎：{{username}}</a> </span>
                 <ul>
-                  <li><router-link to="">个人设置</router-link></li>
+                  <li><router-link to="/userinfo">个人设置</router-link></li>
                   <li @click="loginOut"><a>退出</a></li>
                 </ul>
               </li>
@@ -82,14 +82,14 @@
       },
       created() {
         var user=JSON.parse(getLocalStore("userLogin"));
-        if(user!=null){  
+        if(user!=null){
           //用户已经登录
           if(user.token!=null){
             this.is_login=true;
             this.username=user.username;
           }
         }
-        
+
       },
       methods:{
         //删除localstorage中的值

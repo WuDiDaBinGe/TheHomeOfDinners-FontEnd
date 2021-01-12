@@ -1,38 +1,24 @@
 <template>
     <div>
+      <form>
         <div class="settings_panel">
             <h3>Personal settings</h3>
             <hr>
             <input name="id" id="id" value="User_data.4" style="display: none">
             <input name="cho" id="cho" value="0" style="display: none">
 
-            <div class="form-group">
-                <label>Edit Profile text</label>
-                <textarea class="form-control"  style="height: 180px;" placeholder="">{{user.name}}</textarea>
-            </div>
+
             <div class="form-group">
                 <label>Edit Photo</label>
                 <div class="fileupload"><input type="file"  accept="image/*"></div>
             </div>
             <div class="form-group">
-                <label>Edit Email</label>
-                <input class="form-control" type="email"  :value="user.email">
+                <label>Edit mobile</label>
+                <input class="form-control" type="text"  :value="user.name">
             </div>
             <div class="form-group">
                 <label>Edit name</label>
                 <input class="form-control" type="text"  :value="user.name">
-            </div>
-            <div class="form-group">
-                <label>Edit Full name</label>
-                <input class="form-control" type="text"  :value="user.name">
-            </div>
-            <div class="form-group">
-                <label>Edit City</label>
-                <input class="form-control" type="text"  :value="user.city">
-            </div>
-            <div class="form-group">
-                <label>Edit Country</label>
-                <input class="form-control" type="text"  :value="user.country">
             </div>
             <p class="text-right"><a class="btn_1 small add_top_15" href="#0" onclick="document.getElementById('cho').value='0';document.getElementById('changeuser').submit();">Save personal info</a></p>
         </div>
@@ -56,10 +42,11 @@
             <p class="text-right"><a class="btn_1 small" href="#0" onclick="document.getElementById('cho').value='1';document.getElementById('changeuser').submit();">Save password</a></p>
         </div>
         <!-- /settings_panel -->
+      </form>
     </div>
-            
+
 </template>
-    
+
 <script>
 export default {
     name:"userInfo_form",

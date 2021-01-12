@@ -36,6 +36,7 @@ const routes=[
   //写评论
   {
     path:'/write_reviews',
+    name:"write_reviews",
     component:()=>import("../views/WriteReviews")
   },
   //所有餐馆列表
@@ -58,7 +59,7 @@ const routes=[
     children:[
       {
         path:"",
-        component:()=>import("../components/userInfo_components/userInfo_form.vue"),
+        component:()=>import("../components/userInfo_components/UserInfo_form.vue"),
       },
       {
         path:"myreviews",

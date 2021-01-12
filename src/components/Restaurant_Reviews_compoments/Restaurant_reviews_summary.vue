@@ -9,13 +9,13 @@
 							</figure>
 							<small><i class="ti-location-pin">{{this.resobj.res_address}}</i></small>
 							<h1 @click="collectRes">{{this.resobj.res_name}} <i class="icon_star_alt" :class="[{'iscollected':isCollected}]" ></i></h1>
-							<span class="rating"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star empty"></i><em>{{resobj.score}}/5.00 - based on {{reviewSumNum}} reviews</em></span>
+							<span class="rating"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star empty"></i><em>{{resobj.score}}/5.00 - based on {{reviewSumScore.totalSum}} reviews</em></span>
 						</div>
 						<div class="col-lg-4 review_detail">
 							<div class="row">
 								<div class="col-lg-9 col-9">
 									<div class="progress">
-										<div class="progress-bar" role="progressbar" :style="{width: width5Star+'%'}" :aria-valuenow="width5Star" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar" role="progressbar" :style="{width: reviewSumScore['5']+'%'}" :aria-valuenow="reviewSumScore['5']" aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
 								</div>
 								<div class="col-lg-3 col-3 text-right"><strong>5 stars</strong></div>
@@ -24,7 +24,7 @@
 							<div class="row">
 								<div class="col-lg-9 col-9">
 									<div class="progress">
-										<div class="progress-bar" role="progressbar" :style="{width: width4Star+'%'}" :aria-valuenow="width4Star" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar" role="progressbar" :style="{width: reviewSumScore['4']+'%'}" :aria-valuenow="reviewSumScore['4']" aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
 								</div>
 								<div class="col-lg-3 col-3 text-right"><strong>4 stars</strong></div>
@@ -33,7 +33,7 @@
 							<div class="row">
 								<div class="col-lg-9 col-9">
 									<div class="progress">
-										<div class="progress-bar" role="progressbar" :style="{width: width3Star+'%'}" :aria-valuenow="width3Star" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar" role="progressbar" :style="{width: reviewSumScore['3']+'%'}" :aria-valuenow="reviewSumScore['3']" aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
 								</div>
 								<div class="col-lg-3 col-3 text-right"><strong>3 stars</strong></div>
@@ -42,7 +42,7 @@
 							<div class="row">
 								<div class="col-lg-9 col-9">
 									<div class="progress">
-										<div class="progress-bar" role="progressbar" :style="{width: width2Star+'%'}" :aria-valuenow="width2Star" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar" role="progressbar" :style="{width: reviewSumScore['2']+'%'}" :aria-valuenow="reviewSumScore['2']" aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
 								</div>
 								<div class="col-lg-3 col-3 text-right"><strong>2 stars</strong></div>
@@ -51,7 +51,7 @@
 							<div class="row">
 								<div class="col-lg-9 col-9">
 									<div class="progress last">
-										<div class="progress-bar" role="progressbar" :style="{width:width1Star+'%' }" :aria-valuenow="width1Star" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar" role="progressbar" :style="{width:reviewSumScore['1']+'%' }" :aria-valuenow="reviewSumScore['1']" aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
 								</div>
 								<div class="col-lg-3 col-3 text-right"><strong>1 stars</strong></div>
@@ -89,33 +89,28 @@
         userID(){
           return JSON.parse(getLocalStore("userLogin")).user_id;
         },
-        reviewSumNum(){
-          return this.scoreNum['1']+this.scoreNum['2']+this.scoreNum['3']+this.scoreNum['4']+this.scoreNum['5'];
-        },
-        width1Star(){
-          let tmp1Star=(this.scoreNum['1']/this.reviewSumNum)*100;
-          console.log(tmp1Star);
-          return tmp1Star;
-        },
-        width2Star(){
-          let tmp2Star=(this.scoreNum['2']/this.reviewSumNum)*100;
-          console.log(tmp2Star);
-          return tmp2Star;
-        },
-        width3Star(){
-          let tmp3Star=(this.scoreNum['3']/this.reviewSumNum)*100;
-          console.log(tmp3Star);
-          return tmp3Star;
-        },
-        width4Star(){
-          let tmp4Star=(this.scoreNum['4']/this.reviewSumNum)*100;
-          console.log(tmp4Star);
-          return tmp4Star;
-        },
-        width5Star(){
-          let tmp5Star=(this.scoreNum['5']/this.reviewSumNum)*100;
-          console.log(tmp5Star);
-          return tmp5Star;
+        reviewSumScore(){
+          var sum=0;
+          for (var index in this.scoreNum){
+            //console.log('key=',index,'value=',this.scoreNum[index]);
+            sum=sum+this.scoreNum[index];
+          }
+          var scoreParams={
+            'totalSum':0,
+            "1":0,
+            '2':0,
+            '3':0,
+            '4':0,
+            '5':0,
+          };
+          scoreParams['totalSum']=sum;
+          var keylist=['1','2','3','4','5'];
+          for (var i=0;i<keylist.length;i++){
+            var key=keylist[i];
+            scoreParams[key]=this.scoreNum.hasOwnProperty(key)?(this.scoreNum[key]/sum)*100:0;
+          }
+          //console.log(scoreParams);
+          return scoreParams;
         },
       },
       watch:{
@@ -137,14 +132,13 @@
         getScoreNum(){
           let tmpThis=this;
           let resId=this.resobj.id;
-          console.log("ID:",resId);
+          //console.log("ID:",resId);
           this.$httpM.get(this.$api.Restaurant.scoreCount.replace("{id}",resId),false)
           .then(function (response) {
             console.log(response.data);
             tmpThis.scoreNum=response.data;
           })
           .catch(function (err) {
-
           })
         },
         //用户是否收藏了该餐馆
@@ -169,14 +163,14 @@
             };
           var tmpThis=this;
           if (!this.isCollected){
-            console.log("postCollect:",postParam);
+            //console.log("postCollect:",postParam);
             this.$httpM.post(this.$api.Collection.collectRes,postParam,false)
             .then(function (response) {
               if(response.data.id){
                 alert("收藏成功");
                 tmpThis.collectInfo=response.data;
                 tmpThis.isCollected=true;
-                console.log("collectInfo",tmpThis.collectInfo)
+                //console.log("collectInfo",tmpThis.collectInfo)
               }
             })
             .catch(function (err) {
@@ -184,7 +178,7 @@
             })
           }
           else {
-            console.log("cancleCollect:",postParam);
+            //console.log("cancleCollect:",postParam);
             this.$httpM.post(this.$api.Collection.collectDel,postParam,false)
             .then(function (response) {
               if (response.data==="删除成功!"){

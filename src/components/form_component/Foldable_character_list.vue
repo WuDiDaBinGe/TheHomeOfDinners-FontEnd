@@ -1,9 +1,9 @@
 <template>
     <div class="form-block">
-      <div class="chara-con col-8">
-          <div class="chara-label" :class="[{'text-success':select_index.indexOf(index)>-1},{'border-success':select_index.indexOf(index)>-1}]"  v-for="(item,index) in res_food.slice(0,display_num)" @click="changeSelect(index)">{{item}}</div>
+      <div class="chara-con col-9">
+          <div class="chara-label" :class="[{'text-success':select_index.indexOf(index)>-1},{'border-success':select_index.indexOf(index)>-1}]"  v-for="(item,index) in resMenu.slice(0,display_num)" @click="changeSelect(index)">{{item.name}}</div>
       </div>
-      <div class="for-btn col-4">
+      <div class="for-btn col-3">
         <a @click="open_close"><b>{{folder_text}}</b><i v-bind:class="arrow_drection"></i></a>
       </div>
     </div>
@@ -12,6 +12,7 @@
 <script>
     export default {
         name: "Foldable_character_list",
+        props:['resMenu'],
         data(){
           return{
             res_food:["臭豆腐","小龙虾","大香肠","茶颜悦色","茶颜悦色","茶颜悦色","茶颜悦色","茶颜悦色","茶颜悦色","茶颜悦色"],
@@ -30,7 +31,7 @@
             if (this.open_flag){
               this.arrow_drection="ti-arrow-circle-up";
               this.folder_text="隐藏";
-              this.display_num=this.res_food.length;
+              this.display_num=this.resMenu.length;
             }
             //标签折叠
             else {
@@ -39,14 +40,26 @@
               this.display_num=5;
             }
           },
-          changeSelect(index){
-            var select_index=this.select_index.indexOf(index);
-            if (select_index>-1){
-              this.select_index.splice(select_index,1);
+          changeSelect: function (index) {
+            //console.log("点击",index);
+            var select_index = this.select_index.indexOf(index);
+            //如果选中的标签
+            if (select_index > -1) {
+              this.select_index.splice(select_index, 1);
             }
-            else{
+            //如果该标签未选中
+            else {
               this.select_index.push(index);
             }
+            //console.log("selectIndex:",this.select_index.toString());
+            //console.log("resMenu:"+this.resMenu[0].name);
+            //生成选中的菜品名称列表
+            let recomMenuList = [];
+            for (var i=0;i<this.select_index.length;i++) {
+              recomMenuList.push(this.resMenu[this.select_index[i]].id);
+            }
+            //console.log(recomMenuList.toString());
+            this.$emit('selectMenuEvent', recomMenuList)
           }
         }
     }
