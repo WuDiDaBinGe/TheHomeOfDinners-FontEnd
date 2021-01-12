@@ -43,6 +43,7 @@ export default{
   Review:{
     create: '/review/',                                    //创建餐馆
     RestaurantReview:'/review/{id}/restaurant_review',     //查询餐馆的评论
+    del:'/review/{id}/',                                   //删除评论
   },
   //测试
   Test:{

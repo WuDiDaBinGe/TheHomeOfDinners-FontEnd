@@ -10,7 +10,7 @@
 					<div class="row">
 						<div class="col-md-6">
 							<figure>
-								<img :src="user.pic_src">
+								<img src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2531206692,1963771943&fm=26&gp=0.jpg">
 							</figure>
 							<h1>{{user.username}}</h1>
 							<span>角色：{{user.role}}</span>
@@ -18,16 +18,16 @@
 						<div class="col-md-6">
 							<ul>
 								<li @click="getMyinfo">
-									<strong>{{myReviewListInfo.count}}</strong>
-									<a><i class="icon_star"></i> Reviews</a>
+									<strong>1</strong>
+                  <a><i class="icon-user-1"></i> 个人信息</a>
 								</li>
 								<li @click="getMyReviews">
-									<strong>12</strong>
-									<a><i class="icon-user-1"></i> Reads</a>
+									<strong>{{myReviewListInfo.count}}</strong>
+                  <a><i class="icon-menu"></i> 评论</a>
 								</li>
 								<li @click="getMyRes">
 									<strong>{{myCollection.count}}</strong>
-									<a><i class="icon_like_alt"></i> 收藏</a>
+                  <a><i class="icon_star"></i> 收藏</a>
 								</li>
 							</ul>
 						</div>
@@ -45,7 +45,7 @@
           <UserInfo_form v-show="myInfoFlag"></UserInfo_form>
           <div v-show="myReviewFlag">
             <Reviews_Cards v-for="review in myReviewListInfo.results" :review="review" ></Reviews_Cards>
-            <a-pagination :default-current="0" :total="reviewTotalCount" :defaultPageSize="pageSize" class="pagination__wrapper add_bottom_30" @change="pageChange"/>
+            <a-pagination :default-current="0" :total="myReviewListInfo.count" :defaultPageSize="8" class="pagination__wrapper add_bottom_30" @change="pageChange"/>
           </div>
           <restaurant_item v-show="myCollectionFlag" :parentName="this.MyName"></restaurant_item>
 				</div>
@@ -86,11 +86,11 @@
 		data(){
 			return{
 				user:{
-					username:"yuxiubin",
-					pic_src:"https://bkimg.cdn.bcebos.com/pic/5243fbf2b21193134c87adbe67380cd790238dfc?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2U4MA==,g_7,xp_5,yp_5",
+					username:"",
+					pic_src:"",
 					mobile:"",
-					id:"1151680016@qq.com",
-					role:"湖南长沙",
+					id:"",
+					role:"",
 				},
         myInfoFlag:true,
         myReviewFlag:false,
@@ -109,7 +109,7 @@
       //查询用户信息
       this.getMyInfo();
       //查询用户的评论
-      this.getMyReviewList();
+      this.getMyReviewList(this.$api.User.userReview.replace("{id}",this.userId));
       //查询用户收藏的餐馆
       this.getMyCollectRes();
     },
@@ -137,15 +137,21 @@
         })
       },
       //查询用户评论
-      getMyReviewList(){
+      getMyReviewList(url){
         let tmpThis=this;
-        this.$httpM.get(this.$api.User.userReview.replace("{id}",this.userId),false)
+        this.$httpM.get(url,false)
         .then(function (response) {
           tmpThis.myReviewListInfo=response.data;
         })
         .catch(function (err) {
 
         })
+      },
+      //改变页数
+      pageChange(pageNumber){
+        let url=this.$api.User.userReview.replace("{id}",this.userId);
+        url=url+'?page='+pageNumber;
+        this.getMyReviewList(url);
       },
       getMyinfo(){
         this.myInfoFlag=true;

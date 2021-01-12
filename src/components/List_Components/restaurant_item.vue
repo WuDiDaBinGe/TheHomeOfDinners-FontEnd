@@ -7,8 +7,8 @@
                     <div class="company_info">
                         <figure><img :src="Restaurant.picture"  width="25%" ></figure>
                         <h3> {{Restaurant.res_name}} </h3>
-                        <p> 推荐菜：yuxiubin </p>
                         <p> {{Restaurant.res_address}} </p>
+                        <p><i class="ti-star ant-tag-orange">收藏数：</i>{{Restaurant.collection_count}}</p>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -22,18 +22,7 @@
             </div>
         </div>
         <!-- /company_listing -->
-
-        <!-- /pagination -->
-        <div class="pagination__wrapper add_bottom_30">
-            <ul class="pagination">
-                <li @click="previousPage"><a href="#0" class="prev" title="previous page">&#10094;</a></li>
-                <li @click="toIndexPage(index)" v-for="(item,index) in new Array(total_page).fill(0)">
-                    <a  :class="[{'active':current_page==index+1}]">{{index+1}}</a>
-                </li>
-                <li @click="nextPage"><a href="#0" class="next" title="next page">&#10095;</a></li>
-            </ul>
-        </div>
-        <!-- /pagination -->
+        <a-pagination  :default-current="1" :total="total_count" :defaultPageSize="8" class="pagination__wrapper add_bottom_30" @change="pageChange"/>
     </div>
 </template>
 
@@ -41,8 +30,9 @@
 import Pagination from './Pagination.vue';
 import Nrange from '../../utils/utils'
 import {getLocalStore} from "../../assets/storage/localstorage";
+import I_CallSection from "../index_components/I_CallSection";
 export default {
-    components: { Pagination },
+    components: {I_CallSection, Pagination },
     name:"restaurant_item",
     props:['selectTag','parentName'],
     data(){
@@ -67,38 +57,17 @@ export default {
           //传参数时 不能用path传递参数
           this.$router.push({name:'restaurant',query:{id:res_id}});
         },
-        previousPage(){
-            this.current_page=(this.current_page-1);
-            if(this.current_page===0){
-                this.current_page=1;
-            }
-            if(this.previous_page_api!=null){
-                this.getResList(this.previous_page_api);
-            }
-
-        },
-        nextPage(){
-            this.current_page=(this.current_page+1);
-            if(this.current_page>this.total_page){
-                this.current_page=this.total_page;
-            }
-            if(this.next_page_api!=null){
-                this.getResList(this.next_page_api);
-            }
-
-        },
-        //跳转到某一页
-        toIndexPage(index){
-            this.current_page=index+1;
-            //没有筛选条件
-            if (this.selectTag===""){
-              var url=this.$api.Restaurant.list+"?page="+this.current_page;
-            }
-            else {
-              var url=this.$api.Tag_Res.list+this.selectTag+"?page="+this.current_page;
-            }
-            console.log(this.current_page,url);
-            this.getResList(url);
+        pageChange(pageNumber){
+          if (this.parentName==='RestaurantList'){
+            var urlList=this.$api.Restaurant.list+"?page="+pageNumber;
+            this.getResList(urlList);
+          }
+          else if(this.parentName==='UserInfo'){
+            var urlCollect=this.$api.User.userCollectionRes.replace("{id}",this.uerId);
+            urlCollect=urlCollect+"?page="+pageNumber;
+            console.log(urlCollect);
+            this.getResList(urlCollect);
+          }
         },
         //根据url 获取餐馆列表
         getResList(url,params=false){
@@ -134,11 +103,14 @@ export default {
       }
       //如果父组件为用户信息页面
       else if (this.parentName==='UserInfo'){
-          let uerId=JSON.parse(getLocalStore("userLogin"))['user_id'];
-          this.getResList(this.$api.User.userCollectionRes.replace("{id}",uerId));
+
+          this.getResList(this.$api.User.userCollectionRes.replace("{id}",this.uerId));
       }
-
-
+    },
+    computed:{
+      uerId(){
+        return JSON.parse(getLocalStore("userLogin"))['user_id'];
+      }
     }
 }
 </script>
