@@ -16,9 +16,9 @@
 
           <a-pagination :default-current="0" :total="total_count" :defaultPageSize="page_size_" class="pagination__wrapper add_bottom_30" @change="pageChange"/>
 
-				</div>
+      </div>
 				<!-- /col -->
-        		<Restaurant_Info_Card :resobj="res"></Restaurant_Info_Card>
+          <Restaurant_Info_Card :resobj="res"></Restaurant_Info_Card>
 
 			</div>
 			<!-- /row -->

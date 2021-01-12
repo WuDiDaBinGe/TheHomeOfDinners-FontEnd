@@ -51,6 +51,12 @@ const routes=[
     name:"restaurant",
     component:()=>import("../views/SingleRestaurant")
   },
+  //餐馆页面
+  {
+    path:'/menu',
+    name: "menu",
+    component:()=>import("../views/ManageResMenu")
+  },
   //用户信息
   {
     path:"/userinfo",

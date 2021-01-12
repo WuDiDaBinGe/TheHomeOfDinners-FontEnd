@@ -44,7 +44,7 @@
 				<div class="col-lg-8">
           <UserInfo_form v-show="myInfoFlag"></UserInfo_form>
           <div v-show="myReviewFlag">
-            <Reviews_Cards v-for="review in myReviewListInfo.results" :review="review" ></Reviews_Cards>
+            <Reviews_Cards v-for="review in myReviewListInfo.results" :review="review" :key="review.id"></Reviews_Cards>
             <a-pagination :default-current="0" :total="myReviewListInfo.count" :defaultPageSize="8" class="pagination__wrapper add_bottom_30" @change="pageChange"/>
           </div>
           <restaurant_item v-show="myCollectionFlag" :parentName="this.MyName"></restaurant_item>
