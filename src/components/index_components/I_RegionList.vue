@@ -2,8 +2,8 @@
     <div class="bg_color_1">
 			<div class="container margin_60_35">
 				<div class="main_title_3 text-center">
-					<h2>ABSA Platform companies categories</h2>
-					<p>Main restaurant categories of different country.</p>
+					<h2>食客之家</h2>
+					<p>其他城市的干饭地点</p>
 				</div>
 				<div class="row justify-content-center">
 					<div class="col-xl-10 col-lg-12">

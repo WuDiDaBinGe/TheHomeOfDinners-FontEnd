@@ -9,7 +9,7 @@
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="box_general write_review">
-						<h1>Create your restaurant!</h1>
+						<h1>餐馆的创建</h1>
 						<div class="rating_submit">
 							<div class="form-group">
 
@@ -17,27 +17,27 @@
 						</div>
 						<!-- /rating_submit -->
 						<div class="form-group">
-              <label>Name of your restaurant</label><span class="text-danger">*</span>
+              <label>餐馆名称：</label><span class="text-danger">*</span>
 							<input class="form-control" type="text"  v-model="new_restaurant.res_name">
 						</div>
             <div class="form-group">
-							<label>Address</label><span class="text-danger">*</span>
-							<input class="form-control" type="text"  placeholder="Where is your restaurant?" v-model="new_restaurant.res_address">
+							<label>地址：</label><span class="text-danger">*</span>
+							<input class="form-control" type="text"  placeholder="餐馆的地点" v-model="new_restaurant.res_address">
 						</div>
             <div class="form-group">
-							<label>Add your photo (optional)</label>
+							<label>加一点餐馆和菜品的图片(可选)</label>
 							<div class="fileupload"><input type="file"  name="imgLocal" accept="image/*" @change="triggerFile($event)"></div>
 						</div>
             <div class="form-group">
-              <label>营业时间</label>
+              <label>营业时间：</label>
               <input class="form-control" type="text" v-model="new_restaurant.business_time"/>
             </div>
 						<div class="form-group">
               <label>联系电话：</label><span class="text-danger">*</span>
               <input class="form-control"  type="phone" v-model="new_restaurant.mobile">
 						</div>
-            <div id="pass-info" class="clearfix"></div>
-						<a><input type="button" class="btn_1" @click="submitRes" value="Submit restaurant"></a>
+            <div id="pass-info" class="cle  arfix"></div>
+						<a><input type="button" class="btn_1" @click="submitRes" value="注册餐馆"></a>
 					</div>
 				</div>
 				<!-- /col -->

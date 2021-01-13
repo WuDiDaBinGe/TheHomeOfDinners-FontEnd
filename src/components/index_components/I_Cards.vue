@@ -1,9 +1,9 @@
 <template>
     <div class="container margin_60_35">
 			<div class="main_title_3">
-					<h2>Top Categories</h2>
-					<p>Choose the restaurant you want to know.</p>
-					<router-link to="/restaurant_list">View all</router-link>
+					<h2>热点菜品</h2>
+					<p>想一想今天要吃啥？</p>
+					<router-link to="/restaurant_list">更多</router-link>
 				</div>
             <div class="row justify-content-center">
 

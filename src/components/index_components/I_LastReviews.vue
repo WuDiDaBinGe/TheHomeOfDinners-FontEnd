@@ -2,9 +2,9 @@
     <div class="bg_color_1">
 		<div class="container margin_60">
 			<div class="main_title_3">
-				<h2>Latest Reviews</h2>
-				<p>Join to read more.</p>
-				<a href="">View all</a>
+				<h2>最新评论</h2>
+				<p>快分享你的吃货经历吧！</p>
+				<a href="">更多吃货评论</a>
 			</div>
 
 			<div id="reccomended" class="owl-carousel owl-theme" style="display: inline-block">
