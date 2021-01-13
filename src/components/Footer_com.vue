@@ -4,7 +4,7 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<a data-toggle="collapse" data-target="#collapse_ft_1" aria-expanded="false" aria-controls="collapse_ft_1" class="collapse_bt_mobile">
-						<h3>Quick Links</h3>
+						<h3>快速链接</h3>
 						<div class="circle-plus closed">
 							<div class="horizontal"></div>
 							<div class="vertical"></div>
@@ -42,7 +42,7 @@
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<a data-toggle="collapse" data-target="#collapse_ft_3" aria-expanded="false" aria-controls="collapse_ft_3" class="collapse_bt_mobile">
-						<h3>Contacts</h3>
+						<h3>欢迎您的意见</h3>
 						<div class="circle-plus closed">
 							<div class="horizontal"></div>
 							<div class="vertical"></div>
@@ -75,7 +75,7 @@
 							</form>
 						</div>
 						<div class="follow_us">
-							<h5>Follow Us</h5>
+							<h5>这里也可以找到我们！</h5>
 							<ul>
 								<li><a href="#0"><i class="ti-facebook"></i></a></li>
 								<li><a href="#0"><i class="ti-twitter-alt"></i></a></li>
@@ -95,10 +95,11 @@
 						<li>
 							<div class="styled-select" id="lang-selector">
 								<select>
-									<option value="English" selected>English</option>
-									<option value="French">French</option>
-									<option value="Spanish">Spanish</option>
-									<option value="Russian">Russian</option>
+                  <option value="Chinese" selected>中文</option>
+									<option value="English">English</option>
+									<option value="French">francés</option>
+									<option value="Spanish">Español</option>
+									<option value="Russian">русский</option>
 								</select>
 							</div>
 						</li>
@@ -106,9 +107,9 @@
 				</div>
 				<div class="col-lg-6">
 					<ul id="additional_links">
-						<li><a href="#0">Terms and conditions</a></li>
-						<li><a href="#0">Privacy</a></li>
-						<li><span>© 2018 ABSA Platform</span></li>
+						<li><a href="#0">条款</a></li>
+						<li><a href="#0">隐私</a></li>
+						<li><span>© 2020 食客之家</span></li>
 					</ul>
 				</div>
 			</div>

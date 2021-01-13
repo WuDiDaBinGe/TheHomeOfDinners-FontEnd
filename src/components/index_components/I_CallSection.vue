@@ -3,8 +3,8 @@
     <div class="wrapper">
       <div class="container clearfix">
         <div class="col-lg-5 col-md-7 float-right">
-          <h3>Let's Help You</h3>
-          <p>ABSA Platform is a review platform open to everyone. Share your experiences to help others make better choices, and help companies up their game. Our mission is to bring people and companies together to create experiences for everyone.</p>
+          <h3>提示：</h3>
+          <p>此平台是为每个吃货提供了一个评论平台，分享自己的经历来帮助其他吃货选择更好的商家，并帮助商家适应吃货们的需求。我们的目标是：”干饭人，干饭魂，干饭都是人上人“</p>
           <p><a class="btn_1 add_top_10 wow bounceIn" href="{% url 'category-companies-listings-filterstop-guest' %}?name=" data-wow-delay="0.5s">Join ABSA Platform Now!</a></p>
         </div>
       </div>

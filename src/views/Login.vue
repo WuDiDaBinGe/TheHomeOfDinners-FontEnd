@@ -6,13 +6,13 @@
           <router-link to="/index"><img src="../../static/img/logo_sticky.svg" width="140" height="35" alt="" class="logo_sticky"></router-link>
         </figure>
         <form action="/login" method="post">
-          <div class="divider"><span>Login</span></div>
+          <div class="divider"><span>登录</span></div>
           <div class="form-group">
-            <input class="form-control" id="name" type="text" placeholder="Name" name="username" v-model="peopleInfo.username">
+            <input class="form-control" id="name" type="text" placeholder="吃货的用户名" name="username" v-model="peopleInfo.username">
             <i class="ti-user"></i>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" v-model="peopleInfo.password">
+            <input type="password" class="form-control" name="password" id="password" value="" placeholder="偷偷地输入密码" v-model="peopleInfo.password">
             <i class="icon_lock_alt"></i>
           </div>
           <div class="form-group">
@@ -31,8 +31,8 @@
           <div id="pass-info" v-bind:class="classlo"></div>
           <input type="button" id="losu" class="btn_1 rounded full-width" value="登录食客之家" @click="userLogin">
           <div class="text-center add_top_10">
-            新用户/商家?
-            <strong><router-link to="/register">注册!</router-link></strong>
+            新吃货/商家?
+            <strong><router-link to="/register">快加入大家庭吧!</router-link></strong>
           </div>
         </form>
         <CopyRight></CopyRight>
