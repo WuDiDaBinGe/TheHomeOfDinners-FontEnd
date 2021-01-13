@@ -6,22 +6,22 @@
 				<a href="{% url 'index' %}"><img src="../../static/img/logo_sticky.svg" width="140" height="35" alt="" class="logo_sticky"></a>
 			</figure>
 
-      <div class="divider"><span>Register</span></div>
+      <div class="divider"><span>注册</span></div>
 			<form>
 				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Name" v-model="peopleInfo.username" @blur="verifyName">
+					<input class="form-control" type="text" placeholder="吃货的用户名" v-model="peopleInfo.username" @blur="verifyName">
 					<i class="ti-user"></i>
 				</div>
 				<div class="form-group">
-					<input class="form-control"  type="phone" placeholder="Phonenumber" v-model="peopleInfo.mobile" @blur="verifyPhone">
+					<input class="form-control"  type="phone" placeholder="可以联系吃货的手机号" v-model="peopleInfo.mobile" @blur="verifyPhone">
 					<i class="icon-phone"></i>
 				</div>
 				<div class="form-group">
-					<input class="form-control" type="password"  placeholder="Password" v-model="peopleInfo.password" @blur="verifyPwd">
+					<input class="form-control" type="password"  placeholder="别把密码忘了啊" v-model="peopleInfo.password" @blur="verifyPwd">
 					<i class="icon_lock_alt"></i>
 				</div>
 				<div class="form-group">
-					<input class="form-control" type="password"  placeholder="Confirm Password" v-model="peopleInfo.password2" @blur="verifyPwd2">
+					<input class="form-control" type="password"  placeholder="再输一遍密码加深下印象" v-model="peopleInfo.password2" @blur="verifyPwd2">
 					<i class="icon_lock_alt"></i>
 				</div>
 
@@ -44,8 +44,8 @@
 				<div id="pass-info" v-bind:class="clearfix" v-show="err.errflag">{{err.errinfo}}</div>
 				<input type="button" id="reg" class="btn_1 rounded full-width" value="现在注册!" @click="user_register">
 				<div class="text-center add_top_10">
-          已有帐号?
-          <strong><router-link to="/login">登录</router-link></strong>
+          有帐号?
+          <strong><router-link to="/login">还不快开始干饭</router-link></strong>
         </div>
       </form>
       <CopyRight></CopyRight>
@@ -230,9 +230,9 @@
             }
           },
           user_register(){
+
             if (this.err.errflag){
-              //console.log(this.peopleInfo);
-              //var temp_this=this;
+
               this.$httpM.post(this.$api.User.register,this.peopleInfo,false)
                 .then(response=>  {
                     console.log(response);

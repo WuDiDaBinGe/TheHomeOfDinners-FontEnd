@@ -52,9 +52,9 @@
 				<!-- /col -->
 				<div class="col-lg-4" id="sidebar">
 					<div class="box_general">
-						<h5>Delete account</h5>
-						<p>delete and exit system</p>
-						<a href="#" class="btn_1 small" onclick="document.getElementById('cho').value='2';document.getElementById('changeuser').submit();">Delete account</a>
+						<h5>删除账户</h5>
+						<p>删除之后，您的一切信息将被清空</p>
+						<a href="#" class="btn_1 small" onclick="document.getElementById('cho').value='2';document.getElementById('changeuser').submit();">删除账户</a>
 					</div>
 				</div>
 			</div>

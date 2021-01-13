@@ -2,8 +2,8 @@
   <section class="hero_single version_3">
 			<div class="wrapper">
 				<div class="container">
-					<h3>Every Review is an Experience!</h3>
-					<p>Check Ratings of Businesses, Read Reviews &amp; Buy</p>
+					<h3>每次评论都是段难忘的回忆</h3>
+					<p>确定想吃的、找评分高的、读评论、填肚子</p>
 					<div class="row justify-content-center">
 						<div class="col-lg-9">
 
@@ -12,7 +12,7 @@
 
 								<div class="col-lg-7">
 									<div class="form-group">
-										<input class="form-control" type="text" name="find1" placeholder="What are you looking for...">
+										<input class="form-control" type="text" name="find1" placeholder="今天要吃啥呢">
 										<i class="icon_search"></i>
 									</div>
 								</div>
@@ -25,7 +25,7 @@
 
 
                 <div class="col-lg-2">
-									<input type="submit" value="Search">
+									<input type="submit" value="搜一搜">
 								</div>
 
 

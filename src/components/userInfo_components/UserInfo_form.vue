@@ -2,44 +2,44 @@
     <div>
       <form>
         <div class="settings_panel">
-            <h3>Personal settings</h3>
+            <h3>个人设置</h3>
             <hr>
             <input name="id" id="id" value="User_data.4" style="display: none">
             <input name="cho" id="cho" value="0" style="display: none">
 
 
             <div class="form-group">
-                <label>Edit Photo</label>
+                <label>编辑头像</label>
                 <div class="fileupload"><input type="file"  accept="image/*"></div>
             </div>
             <div class="form-group">
-                <label>Edit mobile</label>
+                <label>编辑手机号</label>
                 <input class="form-control" type="text"  :value="user.name">
             </div>
             <div class="form-group">
-                <label>Edit name</label>
+                <label>编辑姓名</label>
                 <input class="form-control" type="text"  :value="user.name">
             </div>
-            <p class="text-right"><a class="btn_1 small add_top_15" href="#0" onclick="document.getElementById('cho').value='0';document.getElementById('changeuser').submit();">Save personal info</a></p>
+            <p class="text-right"><a class="btn_1 small add_top_15" href="#0" onclick="document.getElementById('cho').value='0';document.getElementById('changeuser').submit();">保存个人信息</a></p>
         </div>
         <!-- /settings_panel -->
         <div class="settings_panel">
-            <h3>Change password</h3>
+            <h3>更改密码</h3>
             <hr>
             <div class="form-group">
                 <label>Current Password</label>
                 <input class="form-control" type="password" id="password" name="password">
             </div>
             <div class="form-group">
-                <label>New Password</label>
+                <label>新密码</label>
                 <input class="form-control" type="password" id="password1" name="password1">
             </div>
             <div class="form-group">
-                <label>Confirm Password</label>
+                <label>再输一次密码</label>
                 <input class="form-control" type="password" id="password2" name="password2">
             </div>
             <div id="pass-info" class="clearfix"></div>
-            <p class="text-right"><a class="btn_1 small" href="#0" onclick="document.getElementById('cho').value='1';document.getElementById('changeuser').submit();">Save password</a></p>
+            <p class="text-right"><a class="btn_1 small" href="#0" onclick="document.getElementById('cho').value='1';document.getElementById('changeuser').submit();">保存密码</a></p>
         </div>
         <!-- /settings_panel -->
       </form>

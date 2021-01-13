@@ -1,6 +1,6 @@
 <template>
     <div class="latest_review">
-        <h4>Recent reviews for {{res_name}}</h4>
+        <h4>{{res_name}}的最新评论</h4>
 
         <div class="review_listing" v-for="review in review_list">
           <div class="clearfix add_bottom_10">
