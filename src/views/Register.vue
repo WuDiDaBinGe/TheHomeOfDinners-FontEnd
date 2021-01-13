@@ -76,6 +76,8 @@
             err:{
               errflag:false,
               errinfo:"",
+              errNameFlag:"",
+              errPhoneFlag:"",
             },
             clearfix:"",
             btn_code:{
@@ -94,9 +96,10 @@
           triggerFile(event) {
             console.log(event.target.files)
           },
-          verifyName() {
+          verifyName:function () {
             var people = this.peopleInfo;
             if (people.username.replace(/(^\s*)|(\s*$)/g, "") === '') {
+              console.log("进入了错误");
               this.err.errflag = true;
               this.err.errinfo = "名字不能为空，请输入名字";
               this.clearfix = "weakPass";
@@ -106,12 +109,14 @@
               this.$httpM.get(this.$api.User.userNameCount,{params:{'username':this.peopleInfo.username}})
               .then(function (response) {
                 if (response.data['count']!==0){
+                  console.log("名字重复");
                   tmpThis.err.errflag = true;
                   tmpThis.err.errinfo = "已有名字重复！";
                   tmpThis.clearfix = "weakPass";
                   return false;
                 }
                 else {
+                  console.log("名字正确");
                   tmpThis.err.errflag = false;
                   tmpThis.err.errinfo = "";
                   tmpThis.clearfix = "";
@@ -125,7 +130,7 @@
             }
 
           },
-          verifyPhone() {
+          verifyPhone:function () {
             var phonereg = /^1[3|4|5|7|8][0-9]{9}$/;
             if (!phonereg.test(this.peopleInfo.mobile)) {
               this.err.errflag = true;
@@ -154,7 +159,7 @@
               .catch();
             }
           },
-          verifyPwd() {
+          verifyPwd:function () {
             //Must contain 5 characters or more
             var WeakPass = /(?=.{5,}).*/;
             //Must contain lower case letters and at least one digit.
@@ -184,7 +189,7 @@
             }
 
           },
-          verifyPwd2() {
+          verifyPwd2:function () {
             if (this.peopleInfo.password !== this.peopleInfo.password2) {
               this.err.errflag = true;
               this.err.errinfo = "密码两次不相同";
@@ -225,18 +230,17 @@
             }
           },
           user_register(){
-            var registerFlag=this.verifyName()&&this.verifyPhone()&&this.verifyPwd()&&this.verifyPwd2();
-            if (true){
-              //console.log(this.peopleInfo);
-              //var temp_this=this;
+
+            if (this.err.errflag){
+
               this.$httpM.post(this.$api.User.register,this.peopleInfo,false)
                 .then(response=>  {
                     console.log(response);
-                    alert("注册成功！");
+                    this.$message.success("注册成功！");
                     this.$router.push({path:'/login'})
                 })
                 .catch(err => {
-                  alert("出错！");
+                  this.$message.error("出错出错",err);
                   console.log(err);
                 })
             }
