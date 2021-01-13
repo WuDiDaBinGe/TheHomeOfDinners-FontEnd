@@ -18,9 +18,7 @@
 <script>
 export default {
   name: "EditTableCell",
-  props: {
-    text: String,
-  },
+  props: ['text'],
   data() {
     return {
       value: this.text,
