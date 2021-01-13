@@ -4,6 +4,8 @@
       action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
       list-type="picture-card"
       :file-list="fileList"
+      accept="image/jpeg,image/jpg,image/png"
+      :customRequest="uploadImage"
       @preview="handlePreview"
       @change="handleChange"
     >
@@ -30,9 +32,7 @@ function getBase64(file) {
 }
 export default {
   name:"ImageUpload",
-  props:{
-    text:String,
-  },
+  props:['text','resId','menuId'],
   data() {
     return {
       previewVisible: false,
@@ -45,9 +45,26 @@ export default {
           url: this.text,
         },
       ],
+      resposeUrl:"",
     };
   },
   methods: {
+    //上传图片
+    uploadImage(file){
+      var tmpThis=this;
+      var formData=new FormData();
+      formData.append('picture', file.file,file.file.name);
+      console.log("上传图片！");
+      console.log(formData);
+      this.$httpM.patch(this.$api.Menu.update.replace("{id}",this.menuId),formData,false)
+      .then(function (response){
+        tmpThis.resposeUrl=response.data.picture;
+      })
+      .catch(function (err){
+
+      })
+      this.$emit('change', this.resposeUrl);
+    },
     handleCancel() {
       this.previewVisible = false;
     },
@@ -60,9 +77,10 @@ export default {
     },
     handleChange({ fileList }) {
       this.fileList = fileList;
-      var responseUrl="";
+      console.log(this.fileList[0]);
+      var responseUrl="hhas";
       //这里添加上传图片的方法
-      this.$emit('change', responseUrl);
+
     },
   },
 };

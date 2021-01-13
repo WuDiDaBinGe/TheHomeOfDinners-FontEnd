@@ -30,6 +30,9 @@ export default{
   Menu:{
     resMenu:'/menu/{id}/restaurant_menu/',        //查看餐馆的菜单
     recommendMenu:'/menu/recommended/' ,          //菜单推荐
+    delMenu:'/menu/{id}/',                        //菜单删除
+    update:'/menu/{id}/',                         //菜品更新
+    create:'/menu/',                               //菜品创建
   },
   //标签
   Tag:{

@@ -75,4 +75,12 @@ export default {
             return axios.post(url, param)
         }
     },
+
+  patch(url, data, auth = false){
+      if (auth) {
+            return axios.patch(url, data, {headers: {Authorization: 'Your back-end user authenticates information'}});
+        } else {
+            return axios.patch(url, data);
+        }
+  }
 }

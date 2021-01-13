@@ -3,7 +3,7 @@
     <a-button class="editable-add-btn" @click="handleAdd">
       添加菜品
     </a-button>
-    <a-table bordered :data-source="dataSource" :columns="columns">
+    <a-table class="bg-light" :data-source="dataSource" :columns="columns" :rowKey="record => record.id">
       <template slot="name" slot-scope="text,record">
         <EditTableCell :text="text" @change="onCellChange(record.id, 'name', $event)"></EditTableCell>
       </template>
@@ -13,7 +13,7 @@
       </template>
 
       <template slot="picture" slot-scope="text,record">
-        <ImageUpload :text="text"></ImageUpload>
+        <ImageUpload :text="text" :resId="resId" :menuId="record.id" @change="onCellChangeImage(record.id, 'picture', $event)"></ImageUpload>
       </template>
 
       <template slot="operation" slot-scope="text, record">
@@ -56,7 +56,7 @@ export default {
         {
           title: '菜品名称(可编辑)',
           dataIndex: 'name',
-          width: '30%',
+          width: '25%',
           scopedSlots: { customRender: 'name' },
         },
         {
@@ -94,17 +94,13 @@ export default {
       this.$httpM.get(this.$api.Menu.resMenu.replace("{id}",resid))
       .then(function (response){
         tmpThis.dataSource=response.data;
+        console.log(this.dataSource);
 
       })
       .catch(function (err){
 
       })
-      //转化成字符串
-      for (var i=0;i<this.dataSource.length;i++){
-        this.dataSource[i].recommendations=this.dataSource[i].recommendations.toString();
-        this.dataSource[i].price=this.dataSource[i].price.toString();
-        console.log(typeof (this.dataSource[i].price));
-      }
+
     },
     onCellChange(key, dataIndex, value) {
       console.log(key,dataIndex,value);
@@ -114,22 +110,58 @@ export default {
         target[dataIndex] = value;
         this.dataSource = dataSource;
       }
+      let params={
+        [dataIndex]:value,
+      };
+      this.$httpM.patch(this.$api.Menu.update.replace("{id}",key), params,false)
+      .then(response=>{
+        this.$message.success("修改成功！");
+      })
+      .catch(err=>{
+
+      })
+
     },
+    //改变图片
+    onCellChangeImage(key, dataIndex, value){
+      console.log("改变图片：",key, dataIndex, value);
+      const dataSource=[...this.dataSource];
+      const target = dataSource.find(item => item.id === key);
+      if (target) {
+        target[dataIndex] = value;
+        this.dataSource = dataSource;
+      }
+
+    },
+    //删除
     onDelete(key) {
-      console.log("recordKey:"+key);
       const dataSource = [...this.dataSource];
       this.dataSource = dataSource.filter(item => item.id !== key);
+      console.log("recordKey:"+this.dataSource[0].toString());
+      this.$httpM.del(this.$api.Menu.delMenu.replace("{id}",key),false)
+      .then(response=>{
+        this.$message.success("删除成功！");
+      })
     },
     handleAdd() {
       const { count, dataSource } = this;
-      const newData = {
-        key: count,
-        name: `Edward King ${count}`,
-        price: 32,
+      let newData = {
+        name: `修改菜品名称${count}`,
+        price: 1,
         recommendations: 0,
-        picture: "http://39.96.37.82:8888/pictures/menu/%E7%89%9B%E8%82%89%E7%B2%89.jpg",
+        picture: null,
+        restaurant:this.resId,
       };
-      this.dataSource = [...dataSource, newData];
+      //首先向后端创建一个菜品
+      this.$httpM.post(this.$api.Menu.create,newData,false)
+      .then(response=>{
+        newData=response.data;
+        this.dataSource = [...dataSource, newData];
+      })
+      .catch(function (err){
+
+      })
+
       this.count = count + 1;
     },
   },
