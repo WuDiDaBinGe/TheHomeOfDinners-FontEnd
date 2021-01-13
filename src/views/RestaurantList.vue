@@ -15,7 +15,7 @@
 						<div class="row no-gutters custom-search-input-2 inner">
 							<div class="col-lg-7">
 								<div class="form-group">
-									<input class="form-control" type="text" placeholder="Search reviews for a company">
+									<input class="form-control" type="text" placeholder="今天要吃啥呢">
 									<i class="icon_search"></i>
 								</div>
 							</div>
@@ -59,14 +59,14 @@
 					<li>
 						<div class="switch-field">
 							<input type="radio" id="all" name="listing_filter" value="all" checked data-filter="*" class="selected">
-							<label for="all">All</label>
+							<label for="all">所有</label>
 							<input type="radio" id="high" name="listing_filter" value="high" data-filter=".high">
-							<label for="high">High rated</label>
+							<label for="high">评分由高到低</label>
 							<input type="radio" id="low" name="listing_filter" value="low" data-filter=".low">
-							<label for="low">Low rated</label>
+							<label for="low">评分由低到高</label>
 						</div>
 					</li>
-					<li><a class="btn_filt" data-toggle="collapse" href="#filters" aria-expanded="false" aria-controls="filters" data-text-swap="Less filters" data-text-original="More filters">More filters</a></li>
+					<li><a class="btn_filt" data-toggle="collapse" href="#filters" aria-expanded="false" aria-controls="filters" data-text-swap="Less filters" data-text-original="More filters">筛选</a></li>
 				</ul>
 			</div>
 			<!-- /container -->
@@ -102,8 +102,8 @@
 					</div>
 					<div class="col-md-4">
 						<div class="add_bottom_30">
-						<h6>Distance</h6>
-							<div class="distance"> Radius around selected destination <span></span> km</div>
+						<h6>距离</h6>
+							<div class="distance"> 距离选中地点的长度单位为 <span></span> km</div>
 							<input type="range" min="10" max="100" step="10" value="30" data-orientation="horizontal">
 						</div>
 					</div>

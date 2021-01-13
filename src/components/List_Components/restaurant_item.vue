@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h4><strong>{{total_count}}</strong> result for "Category"</h4>
+        <h4><strong>{{total_count}}</strong> 种搜索结果</h4>
         <div class="company_listing isotope-item high" v-for="Restaurant in restaurant_list">
             <div class="row">
                 <div class="col-md-9">
@@ -13,10 +13,10 @@
                 </div>
                 <div class="col-md-3">
                     <div class="text-center float-lg-right">
-                    <span class="rating"><strong>reviews:800+  rank:5  score：{{Math.round(Restaurant.score)}}</strong>
+                    <span class="rating"><strong>吃货的评论数:800+  排名:5  分数：{{Math.round(Restaurant.score)}}</strong>
                         <i class="icon_star" v-for="(item,index) in 5" :class="[{'empty':(index-Math.round(Restaurant.score))>=0}]"></i>
                     </span>
-                    <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">Read more</button>
+                    <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">了解更多</button>
                     </div>
                 </div>
             </div>

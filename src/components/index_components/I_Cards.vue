@@ -12,8 +12,8 @@
 						<img :src="item.img_path" width="65" height="65" alt="">
 						<h3>{{item.name}}</h3>
 						<ul class="clearfix">
-							<li><s>{{item.result}}</s> Results</li>
-							<li><i class="icon-comment"></i><strong>{{item.review_num}}</strong>Reviews</li>
+							<li><s>{{item.result}}</s> 家餐馆</li>
+							<li><i class="icon-comment"></i><strong>{{item.review_num}}</strong>条评论</li>
 						</ul>
 					</a>
 				</div>
