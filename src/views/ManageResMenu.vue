@@ -4,7 +4,7 @@
     <div class="container margin_60_35">
 			<div class="row">
 				<div class="col-lg-8">
-          <ImageUpload></ImageUpload>
+          <TableComponent :resId="resId"></TableComponent>
         </div>
 
       </div>
@@ -14,15 +14,25 @@
 </template>
 
 <script>
-    import Header_WB from "../components/Header_WB";
-    import Footer_com from "../components/Footer_com";
-    import TableComponent from "../components/table_component/TableComponent";
-    import Restaurant_Info_Card from "../components/Restaurant_Reviews_compoments/Restaurant_Info_Card";
-    import ImageUpload from "../components/table_component/ImageUpload";
-    export default {
-        name: "ManageResMenu",
-      components: {ImageUpload, Restaurant_Info_Card, TableComponent, Footer_com, Header_WB}
-    }
+  import Header_WB from "../components/Header_WB";
+  import Footer_com from "../components/Footer_com";
+  import TableComponent from "../components/table_component/TableComponent";
+  export default {
+      name: "ManageResMenu",
+      components: {TableComponent, Footer_com, Header_WB},
+      data(){
+        return{
+          resId:this.$route.query.id,
+        }
+      },
+      created() {
+        //
+
+      },
+      methods:{
+
+      }
+  }
 </script>
 
 <style scoped>

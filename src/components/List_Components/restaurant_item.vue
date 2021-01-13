@@ -9,6 +9,7 @@
                         <h3> {{Restaurant.res_name}} </h3>
                         <p> {{Restaurant.res_address}} </p>
                         <p><i class="ti-star ant-tag-orange">收藏数：</i>{{Restaurant.collection_count}}</p>
+
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -16,7 +17,14 @@
                     <span class="rating"><strong>reviews:800+  rank:5  score：{{Math.round(Restaurant.score)}}</strong>
                         <i class="icon_star" v-for="(item,index) in 5" :class="[{'empty':(index-Math.round(Restaurant.score))>=0}]"></i>
                     </span>
-                    <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">Read more</button>
+                    <div class="row">
+                      <a-space size="small">
+                        <button class="btn_1 small" @click="showResMenu(Restaurant.id)"><i class="ti-write"/>菜单</button>
+                        <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">Read more</button>
+                      </a-space>
+
+                    </div>
+
                     </div>
                 </div>
             </div>
@@ -56,6 +64,11 @@ export default {
         showSingleRes(res_id){
           //传参数时 不能用path传递参数
           this.$router.push({name:'restaurant',query:{id:res_id}});
+        },
+        //跳转到菜单的编辑页面
+        showResMenu(res_id){
+          //传参使用name
+          this.$router.push({name:'menu',query:{id:res_id}});
         },
         pageChange(pageNumber){
           if (this.parentName==='RestaurantList'){
