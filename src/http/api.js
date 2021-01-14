@@ -48,6 +48,10 @@ export default{
     RestaurantReview:'/review/{id}/restaurant_review',     //查询餐馆的评论
     del:'/review/{id}/',                                   //删除评论
   },
+  //手机验证码
+  SmsCode:{
+    read: '/smscode/{mobile}/'                    //向手机发送验证码
+  },
   //测试
   Test:{
     test_get:'/posts',
