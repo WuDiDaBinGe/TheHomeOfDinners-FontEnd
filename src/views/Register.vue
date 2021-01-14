@@ -26,7 +26,8 @@
 				</div>
 
         <div class="form-group">
-					<select class="form-control"  style="padding: 0 10%;" v-model="peopleInfo.role">
+					<select class="form-control"  style="padding: 0 10%;" v-model="peopleInfo.role" @blur="checkRole">
+            <option value="0">请选择角色</option>
             <option value="1">用户</option>
             <option value="2">商家</option>
           </select>
@@ -34,14 +35,14 @@
 				</div>
         <div class="form-group row">
           <div class="col-7">
-            <input class="form-control" style="padding-left: 10px;" type="text" placeholder="Verification code">
+            <input class="form-control" style="padding-left: 10px;" type="text" placeholder="手机验证码" @blur="checkSmsCode" v-model="peopleInfo.sms_code">
           </div>
           <div class="col-5">
             <button type="button" class="btn_vrify form-control" @click="getCode" v-bind:disabled="btn_code.codeDisabled">{{btn_code.codeMsg}}</button>
           </div>
 				</div>
 
-				<div id="pass-info" v-bind:class="clearfix" v-show="err.errflag">{{err.errinfo}}</div>
+				<div id="pass-info" v-bind:class="clearfix" v-show="!canRegister">{{errInfo}}</div>
 				<input type="button" id="reg" class="btn_1 rounded full-width" value="现在注册!" @click="user_register">
 				<div class="text-center add_top_10">
           有帐号?
@@ -69,15 +70,18 @@
               mobile:"",
               password:"",
               password2:"",
-              role:'',
-              sms_code:"123456",
+              role:0,
+              sms_code:"",
               allow:"true",
             },
-            err:{
-              errflag:false,
-              errinfo:"",
-              errNameFlag:"",
-              errPhoneFlag:"",
+            errInfo:"",
+            formFlag:{
+              NameFlag:false,
+              PhoneFlag:false,
+              PwdFlag:false,
+              Pwd2Flag:false,
+              RoleFlag:false,
+              smsFlag:false,
             },
             clearfix:"",
             btn_code:{
@@ -92,35 +96,35 @@
             },
           }
         },
-        methods: {
-          triggerFile(event) {
-            console.log(event.target.files)
+        computed:{
+          canRegister(){
+            let flag=true;
+            const flagTmp=this.formFlag;
+            //遍历form标志
+            Object.keys(flagTmp).forEach(function (key) {
+                flag=flag && flagTmp[key];
+            });
+            return flag;
           },
+        },
+        methods: {
           verifyName:function () {
-            var people = this.peopleInfo;
-            if (people.username.replace(/(^\s*)|(\s*$)/g, "") === '') {
-              console.log("进入了错误");
-              this.err.errflag = true;
-              this.err.errinfo = "名字不能为空，请输入名字";
+            var name = this.peopleInfo.username;
+            if (name.replace(/(^\s*)|(\s*$)/g, "") === ''||name.length<5||name.length>20) {
+              this.errInfo = "名字应为5-20个字符！";
               this.clearfix = "weakPass";
-              return false;
             } else {
               var tmpThis=this;
               this.$httpM.get(this.$api.User.userNameCount,{params:{'username':this.peopleInfo.username}})
               .then(function (response) {
                 if (response.data['count']!==0){
-                  console.log("名字重复");
-                  tmpThis.err.errflag = true;
-                  tmpThis.err.errinfo = "已有名字重复！";
+                  tmpThis.errInfo = "已有名字重复！";
                   tmpThis.clearfix = "weakPass";
-                  return false;
                 }
                 else {
-                  console.log("名字正确");
-                  tmpThis.err.errflag = false;
-                  tmpThis.err.errinfo = "";
+                  tmpThis.errInfo = "";
                   tmpThis.clearfix = "";
-                  return true;
+                  this.formFlag.NameFlag=true;
                 }
               })
               .catch(function (err) {
@@ -133,27 +137,22 @@
           verifyPhone:function () {
             var phonereg = /^1[3|4|5|7|8][0-9]{9}$/;
             if (!phonereg.test(this.peopleInfo.mobile)) {
-              this.err.errflag = true;
-              this.err.errinfo = "输入正确的手机号码";
+              this.errInfo = "输入正确的手机号码";
               this.clearfix = "weakPass";
-              return false;
             } else {
               var tmpThis=this;
               this.$httpM.get(this.$api.User.userMobileCount,{params: {'mobile':this.peopleInfo.mobile}})
               .then(function (response) {
                   if (response.data['count']!==0){
-                  tmpThis.err.errflag = true;
-                  tmpThis.err.errinfo = "该手机号已被注册！";
+                  tmpThis.errInfo = "该手机号已被注册！";
                   tmpThis.clearfix = "weakPass";
-                  return false;
                 }
                 else {
-                  tmpThis.err.errflag = false;
-                  tmpThis.err.errinfo = "";
+                  tmpThis.errInfo = "";
                   tmpThis.clearfix = "";
                   //修改验证码按钮
                   tmpThis.btn_code.codeDisabled=false;
-                  return true;
+                  tmpThis.formFlag.PhoneFlag=true;
                 }
               })
               .catch();
@@ -161,48 +160,60 @@
           },
           verifyPwd:function () {
             //Must contain 5 characters or more
-            var WeakPass = /(?=.{5,}).*/;
+            var WeakPass = /^(?=.{5,20}).$/;
             //Must contain lower case letters and at least one digit.
-            var MediumPass = /^(?=\S*?[a-z])(?=\S*?[0-9])\S{5,}$/;
+            var MediumPass = /^(?=\S*?[a-z])(?=\S*?[0-9])\S{5,20}$/;
             //Must contain at least one upper case letter, one lower case letter and one digit.
-            var StrongPass = /^(?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9])\S{5,}$/;
+            var StrongPass = /^(?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9])\S{5,20}$/;
             if (!WeakPass.test(this.peopleInfo.password)) {
-              this.err.errflag = true;
-              this.err.errinfo = "密码：Very Weak! (输入大于5个字符)";
+              this.errInfo = "密码：Very Weak! (输入大于5个字符小于20个字符)";
               this.clearfix = "weakPass";
-              return true;
             } else if (!MediumPass.test(this.peopleInfo.password)) {
-              this.err.errflag = true;
-              this.err.errinfo = "密码：Still Weak! (输入数字组成更好的密码)";
+              this.errInfo = "密码：Still Weak! (输入数字组成更好的密码)";
               this.clearfix = "stillWeakPass";
-              return true;
+              this.formFlag.PwdFlag=true;
             } else if (!StrongPass.test(this.peopleInfo.password)) {
-              this.err.errflag = true;
-              this.err.errinfo = "密码：Good! (输入大写字母组成更强的密码)";
+              this.errInfo = "密码：Good! (输入大写字母组成更强的密码)";
               this.clearfix = "goodPass";
-              return true;
+              this.formFlag.PwdFlag=true;
             } else {
-              this.err.errflag = false;
-              this.err.errinfo = "";
+              this.errInfo = "";
               this.clearfix = "";
-              return true;
+              this.formFlag.PwdFlag=true;
             }
 
           },
           verifyPwd2:function () {
             if (this.peopleInfo.password !== this.peopleInfo.password2) {
-              this.err.errflag = true;
-              this.err.errinfo = "密码两次不相同";
+              this.errInfo = "密码两次不相同";
               this.clearfix = "weakPass";
-              return false;
+
             } else {
-              this.err.errflag = true;
-              this.err.errinfo = "密码相同";
-              this.clearfix = "goodPass";
-              return true;
+              this.errInfo = "";
+              this.clearfix = "";
+              this.formFlag.Pwd2Flag=true;
+            }
+          },
+          checkRole(){
+            if (this.peopleInfo.role===0){
+              this.errInfo = "请选择角色";
+              this.clearfix = "weakPass";
+            }
+            else {
+              this.errInfo = "";
+              this.clearfix = "";
+              this.formFlag.RoleFlag=true;
             }
           },
           timing_60s() {
+            //发送手机验证码
+            this.$httpM.get(this.$api.SmsCode.read.replace("{mobile}",this.peopleInfo.mobile),false)
+            .then(response=>{
+                this.$message.success("验证码已发送");
+            })
+            .catch(function (err) {
+
+            });
             // 验证码60秒倒计时
             if (!this.btn_code.timer) {
               this.btn_code.timer = setInterval(() => {
@@ -220,19 +231,27 @@
                 }
               }, 1000)}
           },
+          checkSmsCode(){
+            if (this.peopleInfo.sms_code.length===0) {
+              this.errInfo = "请填写验证码";
+              this.clearfix = "weakPass";
+            } else {
+              this.errInfo = "";
+              this.clearfix = "";
+              this.formFlag.smsFlag=true;
+            }
+          },
           getCode() {
-            if(this.peopleInfo.mobile!=="" && this.err.errflag){
+            if(this.peopleInfo.mobile!=="" && this.formFlag.PhoneFlag){
               this.timing_60s();
             }
             else{
-              alert("请输入正确的手机号后，再发送验证码！")
+              this.$message.info("请输入正确的手机号后，再发送验证码！");
               this.btn_code.codeDisabled=true;
             }
           },
           user_register(){
-
-            if (this.err.errflag){
-
+            if (this.canRegister){
               this.$httpM.post(this.$api.User.register,this.peopleInfo,false)
                 .then(response=>  {
                     console.log(response);
