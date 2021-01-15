@@ -18,8 +18,12 @@
 
       </div>
 				<!-- /col -->
-          <Restaurant_Info_Card :resobj="res"></Restaurant_Info_Card>
 
+             <div class="col-lg-4">
+               <Restaurant_Info_Card :resobj="res"></Restaurant_Info_Card>
+        <Restaurant_reviews_pie_graph :pie_data="pie_data"></Restaurant_reviews_pie_graph>
+<!--        <Restaurant_reviews_wordcloud :wordcloud_data="wordcloud_data"></Restaurant_reviews_wordcloud>-->
+           </div>
 			</div>
 			<!-- /row -->
 		</div>
@@ -41,11 +45,12 @@
     import Restaurant_Info_Card from "../components/Restaurant_Reviews_compoments/Restaurant_Info_Card";
     import Restaurant_reviews_summary from "../components/Restaurant_Reviews_compoments/Restaurant_reviews_summary";
     import Restaurant_Pictures_Tab from "../components/Restaurant_Reviews_compoments/Restaurant_Pictures_Tab";
+    import Restaurant_reviews_pie_graph from "../components/Restaurant_Reviews_compoments/Restaurant_reviews_pie_graph";
     export default {
       name: "ReviewsPage",
       components: {
         Restaurant_Pictures_Tab, Restaurant_Info_Card, Footer_com, Restaurant_reviews_summary,
-        Pagination, Header_WB,Reviews_Cards},
+        Pagination, Header_WB,Reviews_Cards, Restaurant_reviews_pie_graph},
         data(){
           return{
             res_id:this.$route.query.id,
@@ -57,6 +62,12 @@
             page_size_:8,
             current_page:1,
             total_page:0,
+            pie_data: {
+            res_name: "",
+            pie_a: 0,
+            pie_b: 0,
+          },
+          wordcloud_data: {},
           }
       },
       methods:{
@@ -72,7 +83,11 @@
           this.$httpM.get(this.$api.Restaurant.singleRestaurant+res_id,false)
           .then(response=>{
             tmpThis.res=response.data;
-
+        tmpThis.pie_data = {
+                res_name: tmpThis.res.res_name,
+                pie_a: 0,
+                pie_b: 0,
+              };
           })
           .catch(err=>{
             alert("出错！");
@@ -93,6 +108,25 @@
           })
         }
       },
+      getPieData() {
+          let tmpThis = this;
+          let res_id = this.res_id;
+          this.$httpM.get(this.$api.Restaurant.singleRestaurant + res_id, false).then(response => {
+            tmpThis.pie_data = response.data;
+
+          }).catch(function (err) {
+
+          })
+        },
+        getWordCloud() {
+          let tmpThis = this;
+          let res_id = this.res_id;
+          this.$httpM.get(this.$api.Restaurant.singleRestaurant + res_id, false).then(response => {
+            tmpThis.wordcloud_data = response.data;
+          }).catch(function (err) {
+          })
+
+        },
       created() {
         let res_id=this.res_id;
         let url=this.$api.Review.RestaurantReview.replace('{id}',res_id);
