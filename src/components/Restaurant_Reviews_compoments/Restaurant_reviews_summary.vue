@@ -132,7 +132,7 @@
         getScoreNum(){
           let tmpThis=this;
           let resId=this.resobj.id;
-          //console.log("ID:",resId);
+          console.log("ID:",resId);
           this.$httpM.get(this.$api.Restaurant.scoreCount.replace("{id}",resId),false)
           .then(function (response) {
             console.log(response.data);

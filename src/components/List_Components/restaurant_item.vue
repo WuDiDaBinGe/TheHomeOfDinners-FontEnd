@@ -90,13 +90,25 @@ export default {
             var tmp_this=this;
             this.$httpM.get(url,params)
             .then(function (response) {
+              console.log(tmp_this.rankBy);
                 tmp_this.restaurant_list=response.data.results;
+                //进行排序
+                if(tmp_this.rankBy===1){
+
+                }
+                else if (tmp_this.rankBy===2){
+                    //从高到低
+                    tmp_this.restaurant_list.sort((a,b)=>b['score']-a['score']);
+                }
+                else if (tmp_this.rankBy===3){
+                    //从低到高
+                    tmp_this.restaurant_list.sort((a,b)=>a['score']-b['score']);
+                }
                 tmp_this.total_count=response.data.count;
                 tmp_this.next_page_api=response.data.next;
                 tmp_this.previous_page_api=response.data.previous;
                 //判断有多少页 (向上整除)
                 tmp_this.total_page=Math.ceil(tmp_this.total_count / tmp_this.page_size_);
-                console.log("多少页："+tmp_this.total_page);
             })
             .catch(function (err) {
                 alert(err);
@@ -105,7 +117,6 @@ export default {
         }
     },
     created(){
-      console.log("父组件名称：",this.parentName);
       //如果父组件为餐馆列表
       if (this.parentName==='RestaurantList'){
         //没有筛选条件返回全部列表
@@ -113,7 +124,6 @@ export default {
           this.getResList(this.$api.Restaurant.list);
         }
         else {
-          console.log(this.selectTag);
           this.getResList(this.$api.Tag_Res.list+this.selectTag);
         }
       }

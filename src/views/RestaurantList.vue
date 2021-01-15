@@ -83,7 +83,7 @@
 						<ul>
 							<li v-for="cate in categories_list">
 								  <label class="container_check">{{cate}} <small>67</small>
-								  <input type="radio" name="category" v-model="selectedCategory" :value="cate" @change="getKey">
+								  <input type="radio" name="category" id="category" v-model="selectedCategory" :value="cate" @change="getKey" @click="controlSingel($event)">
 								  <span class="checkmark" ></span>
 								</label>
 							</li>
@@ -96,7 +96,7 @@
 						<ul>
 							<li v-for="region in region_list" >
 								<label class="container_check">{{region}} <small>12</small>
-								  <input type="radio" name="location" v-model="selectedRegion" :value="region" @change="getKey">
+								  <input type="radio" name="location" id="region" v-model="selectedRegion" :value="region" @change="getKey" @click="controlSingel($event)">
 								  <span class="checkmark" ></span>
 								</label>
 							</li>
@@ -114,7 +114,7 @@
 
 			<div class="isotope-wrapper">
 
-				<restaurant_item :key="selectKey" :selectTag="selectKey" :parentName="this.myName" :rankBy="rankBy"></restaurant_item>
+				<restaurant_item :key="selectKey+rankBy" :selectTag="selectKey" :parentName="this.myName" :rankBy="rankBy"></restaurant_item>
 
 			</div>
 			<!-- /isotope-wrapper
@@ -148,39 +148,64 @@
             region_list:[],
             selectedCategory:"",
             selectedRegion:"",
-            selectKey:"",
             myName:"RestaurantList",
             rankBy:1,
+            changed:false,
           }
         },
         components: {Footer_com, Header_WB,Pagination,restaurant_item},
-
+        computed:{
+          selectKey(){
+            var selectKey="";
+            if (this.selectedCategory===""&&this.selectedRegion===""){
+              selectKey="";
+            }
+            else if (this.selectedCategory===""&&this.selectedRegion!=="") {
+              selectKey="l"+this.selectedRegion;
+            }
+            else {
+              selectKey="c"+this.selectedCategory+"l"+this.selectedRegion;
+            }
+            return selectKey;
+          }
+        },
         created() {
           this.getTagsList();
-
         },
         methods:{
-          //
           rankBy_(flag){
             this.rankBy=flag;
+            //全部
+            if (flag===1){
+              this.selectedRegion="";
+              this.selectedCategory="";
+            }
           },
           getTagsList(){
             var tagsList=JSON.parse(getLocalStore("tagsList"));
             this.categories_list=tagsList['种类'];
             this.region_list=tagsList['地区'];
           },
-          getKey(){
+          //实现单选按钮取消功能
+          controlSingel($event) {
+              let _this = this;
+              window.setTimeout(() => {
+                if (!this.changed) {
+                  $event.target.checked = false
+                   // 单选框没有选中的代码处理
+                  if ($event.target.id==='region'){
+                      _this.selectedRegion="";
+                  }
+                  else if ($event.target.id==='category'){
+                      _this.selectedCategory="";
+                  }
 
-            if (this.selectedCategory===""&&this.selectedRegion===""){
-              this.selectKey="";
-            }
-            else if (this.selectedCategory===""&&this.selectedRegion!=="") {
-              this.selectKey="l"+this.selectedRegion;
-            }
-            else {
-              this.selectKey="c"+this.selectedCategory+"l"+this.selectedRegion;
-            }
-            console.log(this.selectKey);
+                }
+                _this.changed = false;
+              }, 0);
+           },
+          getKey(){
+            this.changed = true;
           }
         }
 
