@@ -12,7 +12,7 @@
 
 								<div class="col-lg-7">
 									<div class="form-group">
-										<input class="form-control" type="text" name="find1" placeholder="今天要吃啥呢">
+										<input class="form-control" type="text" v-model="searchName" placeholder="今天要吃啥呢">
 										<i class="icon_search"></i>
 									</div>
 								</div>
@@ -47,7 +47,7 @@
         data(){
           return{
             searchName:"",
-            tag:"",
+            tag:"全部",
             tags_list:["All Categories","Lebanese","Cafe","Bar","Pizza","Seafood","Roast","Spaghetti","Dessert"]
           }
         },
@@ -56,7 +56,12 @@
       },
       methods:{
           search(){
-
+            if(this.searchName.length<1){
+              this.$message.error("请输入搜索名称！");
+            }
+            else {
+              this.$router.push({name:'searchResults',query:{tag:this.tag,searchName:this.searchName}});
+            }
           },
           getTagsList(){
             var tmpThis=this;
