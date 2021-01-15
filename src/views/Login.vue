@@ -8,15 +8,16 @@
         <form action="/login" method="post">
           <div class="divider"><span>登录</span></div>
           <div class="form-group">
-            <input class="form-control" id="name" type="text" placeholder="吃货的用户名" name="username" v-model="peopleInfo.username">
+            <input class="form-control" id="name" type="text" placeholder="吃货的用户名" name="username" v-model="peopleInfo.username" @blur="checkUsername">
             <i class="ti-user"></i>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" name="password" id="password" value="" placeholder="偷偷地输入密码" v-model="peopleInfo.password">
+            <input type="password" class="form-control" name="password" id="password" value="" placeholder="偷偷地输入密码" v-model="peopleInfo.password" @blur="checkPassWord">
             <i class="icon_lock_alt"></i>
           </div>
           <div class="form-group">
-            <select class="form-control" name="usertype" style="padding: 0 10%;" v-model="peopleInfo.role">
+            <select class="form-control" name="usertype" style="padding: 0 10%;" v-model="peopleInfo.role" @change="checkRole">
+              <option value="0">请选择角色</option>
               <option value="1">用户</option>
               <option value="2">商家</option>
               <option value="3">管理员</option>
@@ -28,7 +29,7 @@
 
             </div>
           </div>
-          <div id="pass-info" v-bind:class="classlo"></div>
+          <div id="pass-info" v-bind:class="classlo" v-show="!canLoginFlag">{{errinfo}}</div>
           <input type="button" id="losu" class="btn_1 rounded full-width" value="登录食客之家" @click="userLogin">
           <div class="text-center add_top_10">
             新吃货/商家?
@@ -50,41 +51,115 @@
       data(){
           return{
             classlo:"",
+            errinfo:"",
             peopleInfo:{
                 username:"",
                 password:"",
-                role:'',
+                role:0,
             },
-            post_user:{
-              username:"",
-              password:"",
-            }
+            nameFlag:false,
+            passFlag:false,
+            roleFlag:false,
+          }
+      },
+      computed:{
+          canLoginFlag(){
+            return this.nameFlag&&this.passFlag&&this.roleFlag;
           }
       },
       methods:{
+        //检查用户名
+        checkUsername(){
+          let name=this.peopleInfo.username;
+          let tmpThis=this;
+          if (name.length<5||name.length>20){
+            this.errinfo="用户名应为5-20字符之间";
+            this.classlo="weakPass";
+          }
+          else {
+            this.$httpM.get(this.$api.User.userNameCount,{params:{'username':this.peopleInfo.username}})
+            .then(function (response) {
+              if (response.data['count']===0){
+                tmpThis.errinfo="用户名不存在！";
+                tmpThis.classlo="weakPass";
+              }
+              else {
+                tmpThis.errinfo="";
+                tmpThis.classlo="";
+                tmpThis.nameFlag=true;
+              }
+            })
+            .catch(function (err) {
+
+            })
+          }
+        },
+        //检查密码
+        checkPassWord(){
+          let pwd=this.peopleInfo.password;
+          if(pwd.length<5||pwd.length>20){
+              this.errinfo="密码应为5-20字符之间";
+              this.classlo="weakPass";
+          }else {
+            this.errinfo="";
+            this.classlo="";
+            this.passFlag=true;
+          }
+        },
+        //检查角色
+        checkRole(){
+          console.log(this.peopleInfo.role);
+          if (this.peopleInfo.role==='0'){
+            console.log("sadsa");
+              this.errinfo="请输入用户角色";
+              this.classlo="weakPass";
+          }
+          else if (this.peopleInfo.role in [1,2,3]){
+              this.errinfo="";
+              this.classlo="";
+              this.roleFlag=true;
+          }
+        },
         userLogin(){
-          var usrname=this.peopleInfo.username;
-          var password=this.peopleInfo.password;
-          var role=this.peopleInfo.role;
-
-          this.post_user.username=role+usrname;
-          this.post_user.password=password;
-          this.$httpM.post(this.$api.User.login,this.post_user,false)
-          .then(response=>{
-            alert("成功！");
-            console.log(response);
-            //设置localstorage
-            setLocalStore("userLogin",response.data);
-            //设置vuex
-            this.$store.commit('getUserInfo',response.data);
-            //跳转到首页
-            this.$router.push({path:'/index'});
-
+          //表单验证不通过
+          if (!this.canLoginFlag){
+              this.errinfo="请正确填写登录信息";
+              this.classlo="weakPass";
+              return ;
+          }
+          var tmpThis=this;
+          this.$httpM.post(this.$api.User.login,this.peopleInfo,false)
+          .then(function (response){
+            if (response.status===200){
+              tmpThis.$message.success("成功！");
+              console.log("成功response:");
+              console.log(response);
+              //设置localstorage
+              setLocalStore("userLogin",response.data);
+              //设置vuex
+              tmpThis.$store.commit('getUserInfo',response.data);
+              //跳转到首页
+              tmpThis.$router.push({path:'/index'});
+            }
           })
-          .catch(err =>{
-            alert("出现错误！");
-            console.log(err);
+          .catch(function (err) {
+            if (err.response){
+              if (err.response.status===510){
+                tmpThis.errinfo=err.response.data;
+                tmpThis.classlo="weakPass";
+              }
+              else if (err.response.status===509){
+                tmpThis.errinfo="密码错误！";
+                tmpThis.classlo="weakPass";
+              }
+            }else if (err.request){
+              console.log(err.request);
+            } else {
+              console.log('Error',err.message);
+            }
+            console.log(err.config);
           })
+
         }
       }
     }

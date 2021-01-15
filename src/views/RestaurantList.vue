@@ -59,11 +59,13 @@
 					<li>
 						<div class="switch-field">
 							<input type="radio" id="all" name="listing_filter" value="all" checked data-filter="*" class="selected">
-							<label for="all">所有</label>
+
+							<label for="all" @click="rankBy_(1)">全部</label>
 							<input type="radio" id="high" name="listing_filter" value="high" data-filter=".high">
-							<label for="high">评分由高到低</label>
+							<label for="high" @click="rankBy_(2)">评分由高到低</label>
 							<input type="radio" id="low" name="listing_filter" value="low" data-filter=".low">
-							<label for="low">评分由低到高</label>
+							<label for="low" @click="rankBy_(3)">评分由低到高</label>
+
 						</div>
 					</li>
 					<li><a class="btn_filt" data-toggle="collapse" href="#filters" aria-expanded="false" aria-controls="filters" data-text-swap="Less filters" data-text-original="More filters">筛选</a></li>
@@ -100,13 +102,8 @@
 							</li>
 						</ul>
 					</div>
-					<div class="col-md-4">
-						<div class="add_bottom_30">
-						<h6>距离</h6>
-							<div class="distance"> 距离选中地点的长度单位为 <span></span> km</div>
-							<input type="range" min="10" max="100" step="10" value="30" data-orientation="horizontal">
-						</div>
-					</div>
+
+
 				</div>
 				<!-- /row -->
 			</div>
@@ -117,7 +114,7 @@
 
 			<div class="isotope-wrapper">
 
-				<restaurant_item :key="selectKey" :selectTag="selectKey" :parentName="this.myName"></restaurant_item>
+				<restaurant_item :key="selectKey" :selectTag="selectKey" :parentName="this.myName" :rankBy="rankBy"></restaurant_item>
 
 			</div>
 			<!-- /isotope-wrapper
@@ -152,7 +149,8 @@
             selectedCategory:"",
             selectedRegion:"",
             selectKey:"",
-            myName:"RestaurantList"
+            myName:"RestaurantList",
+            rankBy:1,
           }
         },
         components: {Footer_com, Header_WB,Pagination,restaurant_item},
@@ -162,6 +160,10 @@
 
         },
         methods:{
+          //
+          rankBy_(flag){
+            this.rankBy=flag;
+          },
           getTagsList(){
             var tagsList=JSON.parse(getLocalStore("tagsList"));
             this.categories_list=tagsList['种类'];

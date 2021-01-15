@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h4><strong>{{total_count}}</strong> 种搜索结果</h4>
+
+        <h4><strong>{{total_count}}</strong> 家餐厅</h4>
+
         <div class="company_listing isotope-item high" v-for="Restaurant in restaurant_list">
             <div class="row">
                 <div class="col-md-9">
@@ -9,14 +11,24 @@
                         <h3> {{Restaurant.res_name}} </h3>
                         <p> {{Restaurant.res_address}} </p>
                         <p><i class="ti-star ant-tag-orange">收藏数：</i>{{Restaurant.collection_count}}</p>
+
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="text-center float-lg-right">
-                    <span class="rating"><strong>吃货的评论数:800+  排名:5  分数：{{Math.round(Restaurant.score)}}</strong>
+
+                    <span class="rating"><strong>reviews:{{Restaurant.review_count }}  score：{{Math.round(Restaurant.score)}}</strong>
                         <i class="icon_star" v-for="(item,index) in 5" :class="[{'empty':(index-Math.round(Restaurant.score))>=0}]"></i>
                     </span>
-                    <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">了解更多</button>
+                    <div class="row">
+                      <a-space size="small">
+                        <button class="btn_1 small" @click="showResMenu(Restaurant.id)"><i class="ti-write"/>菜单</button>
+                        <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">Read more</button>
+                      </a-space>
+
+                    </div>
+
+
                     </div>
                 </div>
             </div>
@@ -28,13 +40,12 @@
 
 <script>
 import Pagination from './Pagination.vue';
-import Nrange from '../../utils/utils'
 import {getLocalStore} from "../../assets/storage/localstorage";
 import I_CallSection from "../index_components/I_CallSection";
 export default {
     components: {I_CallSection, Pagination },
     name:"restaurant_item",
-    props:['selectTag','parentName'],
+    props:['selectTag','parentName','rankBy'],
     data(){
         return{
             restaurant_list:[
@@ -56,6 +67,11 @@ export default {
         showSingleRes(res_id){
           //传参数时 不能用path传递参数
           this.$router.push({name:'restaurant',query:{id:res_id}});
+        },
+        //跳转到菜单的编辑页面
+        showResMenu(res_id){
+          //传参使用name
+          this.$router.push({name:'menu',query:{id:res_id}});
         },
         pageChange(pageNumber){
           if (this.parentName==='RestaurantList'){
@@ -103,7 +119,6 @@ export default {
       }
       //如果父组件为用户信息页面
       else if (this.parentName==='UserInfo'){
-
           this.getResList(this.$api.User.userCollectionRes.replace("{id}",this.uerId));
       }
     },

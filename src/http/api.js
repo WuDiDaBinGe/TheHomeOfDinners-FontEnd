@@ -30,6 +30,9 @@ export default{
   Menu:{
     resMenu:'/menu/{id}/restaurant_menu/',        //查看餐馆的菜单
     recommendMenu:'/menu/recommended/' ,          //菜单推荐
+    delMenu:'/menu/{id}/',                        //菜单删除
+    update:'/menu/{id}/',                         //菜品更新
+    create:'/menu/',                               //菜品创建
   },
   //标签
   Tag:{
@@ -44,6 +47,10 @@ export default{
     create: '/review/',                                    //创建餐馆
     RestaurantReview:'/review/{id}/restaurant_review',     //查询餐馆的评论
     del:'/review/{id}/',                                   //删除评论
+  },
+  //手机验证码
+  SmsCode:{
+    read: '/smscode/{mobile}/'                    //向手机发送验证码
   },
   //测试
   Test:{
