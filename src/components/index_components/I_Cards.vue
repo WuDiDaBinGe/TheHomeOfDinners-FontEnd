@@ -7,7 +7,7 @@
 				</div>
             <div class="row justify-content-center">
 
-				<div class="col-lg-3 col-6" v-for="item in card_lists">
+				<div class="col-lg-4 col-6" v-for="item in card_lists">
 					<a  class="box_cat_home">
 						<img :src="item.img_path" width="65" height="65" alt="">
 						<h3>{{item.name}}</h3>
@@ -30,14 +30,11 @@
         data(){
           return{
             card_lists:[
-              {name:"label",result:2,review_num:100,img_path:"/static/img/taco.svg"},
-              {name:"Cafe",result:2,review_num:100,img_path:"/static/img/latte.svg"},
-              {name:"Bar",result:2,review_num:100,img_path:"/static/img/glass.svg"},
-              {name:"Pizza",result:2,review_num:100,img_path:"/static/img/pizza.svg"},
-              {name:"Seafood",result:2,review_num:100,img_path:"/static/img/tom-yum.svg"},
-              {name:"Roast",result:2,review_num:100,img_path:"/static/img/sausage.svg"},
-              {name:"Spaghetti",result:2,review_num:100,img_path:"/static/img/food.svg"},
-              {name:"Dessert",result:2,review_num:100,img_path:"/static/img/pancake.svg"},
+              {name:"火锅",result:2,review_num:100,img_path:"/static/img/hotpot.svg"},
+              {name:"面粉馆",result:2,review_num:100,img_path:"/static/img/noodles.svg"},
+              {name:"西餐",result:2,review_num:100,img_path:"/static/img/pizza.svg"},
+              {name:"小吃",result:2,review_num:100,img_path:"/static/img/taco.svg"},
+              {name:"自助餐",result:2,review_num:100,img_path:"/static/img/xican.svg"},
             ],
           }
         }
