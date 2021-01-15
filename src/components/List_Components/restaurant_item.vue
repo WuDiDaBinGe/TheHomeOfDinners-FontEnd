@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h4><strong>{{total_count}}</strong> result for "Category"</h4>
+        <h4><strong>{{total_count}}</strong> 家餐厅</h4>
         <div class="company_listing isotope-item high" v-for="Restaurant in restaurant_list">
             <div class="row">
                 <div class="col-md-9">
@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="text-center float-lg-right">
-                    <span class="rating"><strong>reviews:800+  rank:5  score：{{Math.round(Restaurant.score)}}</strong>
+                    <span class="rating"><strong>reviews:{{Restaurant.review_count }}  score：{{Math.round(Restaurant.score)}}</strong>
                         <i class="icon_star" v-for="(item,index) in 5" :class="[{'empty':(index-Math.round(Restaurant.score))>=0}]"></i>
                     </span>
                     <div class="row">
@@ -36,13 +36,12 @@
 
 <script>
 import Pagination from './Pagination.vue';
-import Nrange from '../../utils/utils'
 import {getLocalStore} from "../../assets/storage/localstorage";
 import I_CallSection from "../index_components/I_CallSection";
 export default {
     components: {I_CallSection, Pagination },
     name:"restaurant_item",
-    props:['selectTag','parentName'],
+    props:['selectTag','parentName','rankBy'],
     data(){
         return{
             restaurant_list:[
@@ -116,7 +115,6 @@ export default {
       }
       //如果父组件为用户信息页面
       else if (this.parentName==='UserInfo'){
-
           this.getResList(this.$api.User.userCollectionRes.replace("{id}",this.uerId));
       }
     },

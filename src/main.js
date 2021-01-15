@@ -61,5 +61,5 @@ new Vue({
   template: '<App/>',
   store:store,
 });
-
+export default Vue;
 //index.html->main.js->app.Vue

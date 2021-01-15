@@ -86,7 +86,7 @@
               else {
                 tmpThis.errinfo="";
                 tmpThis.classlo="";
-                tmpThis.this.nameFlag=true;
+                tmpThis.nameFlag=true;
               }
             })
             .catch(function (err) {
