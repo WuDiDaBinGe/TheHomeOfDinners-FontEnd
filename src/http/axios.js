@@ -1,4 +1,7 @@
 import axios from 'axios';
+import Vue from '../main'
+import {message} from "ant-design-vue";
+import response from "vue-resource/src/http/response";
 //http://192.168.137.1:8000
 //http://192.168.43.41/
 //http://192.168.43.103/
@@ -24,19 +27,11 @@ axios.interceptors.response.use(response => {
 }, error => {
     // 请求失败
       if (error && error.response) {
-            switch (error.response.status) {
-                case 400:
-                    console.log("404错误！");
-                    // 对400 错误您的处理
-                break;
-                case 401:
-                    console.log("401错误！");
-                    // 对 401 错误进行处理
-                break;
-                default:
-                  console.log("其他错误！");
-                  // 如果以上都不是的处理
-                return Promise.reject(error);
-          }
+        if(error.response.status===400){
+          console.log("400错误！");
+          // 对400 错误您的处理
+          message.warning(error.response.data['non_field_errors']);
+        }
+        Promise.reject(error);
     }
 });
