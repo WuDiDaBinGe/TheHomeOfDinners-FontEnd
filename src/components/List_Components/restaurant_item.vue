@@ -22,12 +22,12 @@
                     </span>
                     <div class="row">
                       <a-space size="small">
-                        <button class="btn_1 small" @click="showResMenu(Restaurant.id)"><i class="ti-write"/>菜单</button>
+                        <button class="btn_1 small" @click="showResMenu(Restaurant.id)" v-show="editMenu">编辑菜单</button>
+                        <span class="small"  v-show="!editMenu"></span>
                         <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">Read more</button>
                       </a-space>
 
                     </div>
-
 
                     </div>
                 </div>
@@ -60,6 +60,7 @@ export default {
             page_size_:8,
             current_page:1,
             total_page:0,
+            editMenu:false,
         }
     },
     methods:{
@@ -130,12 +131,18 @@ export default {
       //如果父组件为用户信息页面
       else if (this.parentName==='UserInfo'){
           this.getResList(this.$api.User.userCollectionRes.replace("{id}",this.uerId));
+          if (this.userRole==='2'){
+            this.editMenu=true;
+          }
       }
     },
     computed:{
       uerId(){
         return JSON.parse(getLocalStore("userLogin"))['user_id'];
-      }
+      },
+      userRole(){
+        return JSON.parse(getLocalStore("userLogin"))['role'];
+      },
     }
 }
 </script>

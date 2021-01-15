@@ -18,14 +18,15 @@
 								</div>
 
                 <div class="col-lg-3">
-									<select class="wide nice-select" name="find2">
+									<select class="wide nice-select" name="find2" v-model="tag">
+                    <option value="全部">全部</option>
 										<option v-for="item in tags_list" v-bind:value="item">{{item}}</option>
 									</select>
 								</div>
 
 
                 <div class="col-lg-2">
-									<input type="submit" value="搜一搜">
+									<input type="submit" value="搜一搜" @click="search">
 								</div>
 
 
@@ -45,6 +46,8 @@
         name: "Search_part",
         data(){
           return{
+            searchName:"",
+            tag:"",
             tags_list:["All Categories","Lebanese","Cafe","Bar","Pizza","Seafood","Roast","Spaghetti","Dessert"]
           }
         },
@@ -52,6 +55,9 @@
         this.getTagsList();
       },
       methods:{
+          search(){
+
+          },
           getTagsList(){
             var tmpThis=this;
             this.$httpM.get(this.$api.Tag.lists,false)

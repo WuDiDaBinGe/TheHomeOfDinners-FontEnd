@@ -56,9 +56,9 @@
             </li>
         </ul>
         <ul class="tab-pane fade recommend-photo" id="safe_certificate">
-            <li class="pictures_item">
-                <img data-src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg" src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg">
-                4
+            <li>
+
+              <img class="img-rounded wordCloud " :src="wordCloudUrl">
             </li>
         </ul>
     </div>
@@ -68,7 +68,7 @@
 <script>
     export default {
         name: "Restaurant_Pictures_Tab",
-        props:['resObj'],
+        props:['resObj','wordCloudUrl'],
         data(){
             return{
                 pictures_navs:[{
@@ -84,7 +84,7 @@
                     target_dive:"#prices"
                 },
                 {
-                    navs_titile:"食品安全档案袋",
+                    navs_titile:"评论词云",
                     target_dive:"#safe_certificate"
                 },
                 ],
@@ -102,6 +102,7 @@
         methods:{
             setCurrentItem(index){
                 this.select_tabs=index;
+                console.log("url:"+this.wordCloudUrl);
             },
             //获取餐馆的菜单
             getResMenu(){

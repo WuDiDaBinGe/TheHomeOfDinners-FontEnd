@@ -6,7 +6,13 @@
 				<div class="col-lg-8">
           <TableComponent :resId="resId"></TableComponent>
         </div>
-
+        <div class="col-lg-4" id="sidebar">
+					<div class="box_general">
+						<h5>删除餐馆</h5>
+						<p>删除之后，您的餐馆一切信息将被清空</p>
+						<a href="#" class="btn_1 small" >删除餐馆</a>
+					</div>
+				</div>
       </div>
     </div>
     <Footer_com></Footer_com>

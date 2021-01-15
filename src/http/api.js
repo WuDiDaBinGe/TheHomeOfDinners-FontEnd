@@ -7,11 +7,12 @@ export default{
   User:{
     register:'/users/',                           //注册
     login:'/login/',                              //登录
-    userMobileCount:'/mobile/count',                      //手机号判断
-    userNameCount:'/username/count',                      //用户名判断是否重复
-    read:'/user/{id}/',                                   //根据用户ID读取信息
-    userReview:'/review/{id}/user_review/',               //获取用户的评论
-    userCollectionRes:'/restaurant/{id}/user_collections/'//获取用户收藏的餐馆
+    userMobileCount:'/mobile/count',                       //手机号判断
+    userNameCount:'/username/count',                       //用户名判断是否重复
+    read:'/user/{id}/',                                    //根据用户ID读取信息
+    userReview:'/review/{id}/user_review/',                //获取用户的评论
+    userCollectionRes:'/restaurant/{id}/user_collections/',//获取用户收藏的餐馆
+    update:'/user/{id}/'                                   //修改用户信息
   },
   //用户收藏餐馆
   Collection:{
@@ -25,6 +26,8 @@ export default{
     create:'/restaurant/',                        //创建餐馆
     singleRestaurant:"/restaurant/",              //查询一个餐馆
     scoreCount:"/restaurant/{id}/reviews_count/", //查询餐馆下各个评分的个数
+    modelpredict:"/restaurant/{id}/pos_or_nav_reviews_count/", //查询餐馆模型评分
+    wordCloud:"/restaurant/{id}/wordCloud/"       //词云图片
   },
   //菜单
   Menu:{
@@ -32,7 +35,7 @@ export default{
     recommendMenu:'/menu/recommended/' ,          //菜单推荐
     delMenu:'/menu/{id}/',                        //菜单删除
     update:'/menu/{id}/',                         //菜品更新
-    create:'/menu/',                               //菜品创建
+    create:'/menu/',                              //菜品创建
   },
   //标签
   Tag:{
