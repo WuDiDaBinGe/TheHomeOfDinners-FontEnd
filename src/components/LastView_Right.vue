@@ -13,7 +13,7 @@
           <p>{{review.review_context}}</p>
           <ul class="clearfix">
             <li><small>{{review.review_time}}</small></li>
-            <li><a href="{% url 'category-companies-listings-filterstop-mer' %}?name=" class="btn_1 small">Read other reviews</a></li>
+            <li><a href="{% url 'category-companies-listings-filterstop-mer' %}?name=" class="btn_1 small">其他评论</a></li>
           </ul>
         </div>
         <!-- /  -->

@@ -1,6 +1,8 @@
 <template>
     <div>
+
         <h4><strong>{{total_count}}</strong> 家餐厅</h4>
+
         <div class="company_listing isotope-item high" v-for="Restaurant in restaurant_list">
             <div class="row">
                 <div class="col-md-9">
@@ -14,6 +16,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="text-center float-lg-right">
+
                     <span class="rating"><strong>reviews:{{Restaurant.review_count }}  score：{{Math.round(Restaurant.score)}}</strong>
                         <i class="icon_star" v-for="(item,index) in 5" :class="[{'empty':(index-Math.round(Restaurant.score))>=0}]"></i>
                     </span>
@@ -24,6 +27,7 @@
                       </a-space>
 
                     </div>
+
 
                     </div>
                 </div>

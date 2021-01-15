@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-4">
+      <div>
     <div class="box_general company_info">
       <h3>{{resobj.res_name}}</h3>
 
@@ -10,8 +10,8 @@
       <p class="follow_company"><strong>分享</strong><br><a href="#0"><i class="social_facebook_circle"></i></a><a href="#0"><i class="social_twitter_circle"></i></a><a href="#0"><i class="social_googleplus_circle"></i></a><a href="#0"><i class="social_instagram_circle"></i></a></p>
       <p><button class="btn-info btn-lg" @click="writeReview">写评论</button></p>
     </div>
-    <div id="main3" style="width: 400px;height:400px;margin:0 auto;"></div>
-  </div>
+<!--    <div id="main3" style="width: 400px;height:400px;margin:0 auto;"></div>-->
+        </div>
 </template>
 
 <script>

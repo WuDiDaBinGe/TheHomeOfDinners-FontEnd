@@ -7,11 +7,11 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="box_general write_review">
-              <h1>Write a review of {{resObj.res_name}}</h1>
+              <h1>给{{resObj.res_name}}写下吃货的评论吧！</h1>
               <h4>({{resObj.res_address}})</h4>
               <div class="rating_submit">
                 <div class="form-group">
-                <label class="d-block">Overall rating</label>
+                <label class="d-block">此餐馆在您心中的分数</label>
                 <span class="rating">
                   <input type="radio" class="rating-input" id="5_star"  value="5" v-model="newReview.score"><label for="5_star" class="rating-star"></label>
                   <input type="radio" class="rating-input" id="4_star"  value="4" v-model="newReview.score"><label for="4_star" class="rating-star"></label>
@@ -23,8 +23,8 @@
               </div>
               <!-- /rating_submit -->
               <div class="form-group">
-                <label>Your review</label>
-                <textarea class="form-control" style="height: 180px;" v-model="newReview.text" placeholder="Write your review to help others learn about this online business"></textarea>
+                <label>吃货的评论</label>
+                <textarea class="form-control" style="height: 180px;" v-model="newReview.text" placeholder="您的意见将会帮助其他吃货还有提高餐馆的质量哦"></textarea>
               </div>
               <div class="form-group">
                 <label>就餐时间</label>
@@ -32,7 +32,7 @@
                 <a-time-picker  use12-hours @change="onChangeTime" />
               </div>
               <div class="form-group">
-                <label>Add your photo (optional) </label>
+                <label>添加图片(可选) </label>
                 <div class="fileupload"><input type="file" name="fileupload" accept="image/*"></div>
               </div>
               <div class="form-group">

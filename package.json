@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@jiaminghi/charts": "^0.2.18",
     "ant-design-vue": "^1.7.2",
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",

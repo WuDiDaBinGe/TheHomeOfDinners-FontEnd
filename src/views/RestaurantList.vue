@@ -15,7 +15,7 @@
 						<div class="row no-gutters custom-search-input-2 inner">
 							<div class="col-lg-7">
 								<div class="form-group">
-									<input class="form-control" type="text" placeholder="Search reviews for a company">
+									<input class="form-control" type="text" placeholder="今天要吃啥呢">
 									<i class="icon_search"></i>
 								</div>
 							</div>
@@ -59,14 +59,16 @@
 					<li>
 						<div class="switch-field">
 							<input type="radio" id="all" name="listing_filter" value="all" checked data-filter="*" class="selected">
+
 							<label for="all" @click="rankBy_(1)">全部</label>
 							<input type="radio" id="high" name="listing_filter" value="high" data-filter=".high">
-							<label for="high" @click="rankBy_(2)">高评分</label>
+							<label for="high" @click="rankBy_(2)">评分由高到低</label>
 							<input type="radio" id="low" name="listing_filter" value="low" data-filter=".low">
-							<label for="low" @click="rankBy_(3)">低评分</label>
+							<label for="low" @click="rankBy_(3)">评分由低到高</label>
+
 						</div>
 					</li>
-					<li><a class="btn_filt" data-toggle="collapse" href="#filters" aria-expanded="false" aria-controls="filters" data-text-swap="Less filters" data-text-original="More filters">More filters</a></li>
+					<li><a class="btn_filt" data-toggle="collapse" href="#filters" aria-expanded="false" aria-controls="filters" data-text-swap="Less filters" data-text-original="More filters">筛选</a></li>
 				</ul>
 			</div>
 			<!-- /container -->
@@ -100,6 +102,8 @@
 							</li>
 						</ul>
 					</div>
+
+
 				</div>
 				<!-- /row -->
 			</div>

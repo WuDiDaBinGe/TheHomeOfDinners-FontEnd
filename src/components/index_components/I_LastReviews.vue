@@ -17,12 +17,12 @@
 							<span class="rating"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star empty"></i><i class="icon_star empty"></i><em>{{item.score}}/5.00</em></span>
 							<small>用餐日期：{{item.eat_date}}</small>
 						</div>
-						<h3><strong>{{item.restaurant_name}}</strong> reviewed {{item.username}}!</h3>
+						<h3>{{item.username}}!评论<strong>{{item.restaurant_name}}</strong> </h3>
 						<h4>"{{item.review_title}}"</h4>
 						<p>{{item.review_context}}</p>
 						<ul class="clearfix">
-							<li><small>Published: {{item.review_time}}</small></li>
-							<li><a href="" class="btn_1 small">Read all reviews</a></li>
+							<li><small>评论发布于：{{item.review_time}}</small></li>
+							<li><a href="" class="btn_1 small">评论详情</a></li>
 						</ul>
 					</div>
 				</div>
