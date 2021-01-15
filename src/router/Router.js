@@ -39,6 +39,12 @@ const routes=[
     name:"write_reviews",
     component:()=>import("../views/WriteReviews")
   },
+  //搜索结果列表
+  {
+    path:'searchResults',
+    name: 'searchResults',
+    component:()=>import("../views/SearchResults"),
+  },
   //所有餐馆列表
   {
     path:"/restaurant_list",
