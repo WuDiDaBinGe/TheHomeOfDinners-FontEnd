@@ -8,9 +8,6 @@
 
     <I_Cards></I_Cards>
 
-    <I_LastReviews></I_LastReviews>
-
-    <I_RegionList></I_RegionList>
 
     <I_CallSection></I_CallSection>
 

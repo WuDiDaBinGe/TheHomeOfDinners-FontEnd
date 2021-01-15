@@ -124,7 +124,7 @@
                 else {
                   tmpThis.errInfo = "";
                   tmpThis.clearfix = "";
-                  this.formFlag.NameFlag=true;
+                  tmpThis.formFlag.NameFlag=true;
                 }
               })
               .catch(function (err) {
@@ -160,7 +160,7 @@
           },
           verifyPwd:function () {
             //Must contain 5 characters or more
-            var WeakPass = /^(?=.{5,20}).$/;
+            var WeakPass = /^[a-zA-Z0-9]{5,20}$/;
             //Must contain lower case letters and at least one digit.
             var MediumPass = /^(?=\S*?[a-z])(?=\S*?[0-9])\S{5,20}$/;
             //Must contain at least one upper case letter, one lower case letter and one digit.
@@ -251,16 +251,23 @@
             }
           },
           user_register(){
+            if(!this.canRegister){
+              this.$message.error("请检查注册信息");
+              return ;
+            }
+            let tmpThis=this;
             if (this.canRegister){
               this.$httpM.post(this.$api.User.register,this.peopleInfo,false)
-                .then(response=>  {
-                    console.log(response);
-                    this.$message.success("注册成功！");
-                    this.$router.push({path:'/login'})
+                .then(function (response)  {
+                  console.log("response:"+response);
+                   if(response!==undefined){
+                      tmpThis.$message.success("注册成功！");
+                      tmpThis.$router.push({path:'/login'})
+                   }
+
                 })
-                .catch(err => {
-                  this.$message.error("出错出错",err);
-                  console.log(err);
+                .catch(function (error) {
+
                 })
             }
 
