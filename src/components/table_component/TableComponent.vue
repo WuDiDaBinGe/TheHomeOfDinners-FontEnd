@@ -1,8 +1,5 @@
 <template>
   <div>
-    <a-button class="editable-add-btn" @click="handleAdd">
-      添加菜品
-    </a-button>
     <a-table class="bg-light" :data-source="dataSource" :columns="columns" :rowKey="record => record.id">
       <template slot="name" slot-scope="text,record">
         <EditTableCell :text="text" @change="onCellChange(record.id, 'name', $event)"></EditTableCell>
@@ -27,6 +24,9 @@
       </template>
 
     </a-table>
+    <a-button class="editable-add-btn" @click="handleAdd">
+      添加菜品
+    </a-button>
   </div>
 </template>
 

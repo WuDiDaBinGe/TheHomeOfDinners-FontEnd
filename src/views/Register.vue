@@ -232,8 +232,9 @@
               }, 1000)}
           },
           checkSmsCode(){
-            if (this.peopleInfo.sms_code.length===0) {
-              this.errInfo = "请填写验证码";
+            var smsCode = /^[0-9]{3,10}$/;
+            if (!smsCode.test(this.peopleInfo.sms_code.length)) {
+              this.errInfo = "请填写正确的验证码";
               this.clearfix = "weakPass";
             } else {
               this.errInfo = "";
