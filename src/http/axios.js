@@ -4,7 +4,7 @@ import axios from 'axios';
 //http://192.168.43.103/
 
 //39.96.37.82:8888
-axios.defaults.baseURL="http://192.168.137.1:8000";
+axios.defaults.baseURL="http://39.96.37.82:8888";
 
 // 请求拦截
 axios.interceptors.request.use(config => {

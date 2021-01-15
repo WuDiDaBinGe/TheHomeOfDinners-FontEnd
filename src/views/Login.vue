@@ -86,7 +86,7 @@
               else {
                 tmpThis.errinfo="";
                 tmpThis.classlo="";
-                tmpThis.this.nameFlag=true;
+                tmpThis.nameFlag=true;
               }
             })
             .catch(function (err) {
@@ -110,7 +110,6 @@
         checkRole(){
           console.log(this.peopleInfo.role);
           if (this.peopleInfo.role==='0'){
-            console.log("sadsa");
               this.errinfo="请输入用户角色";
               this.classlo="weakPass";
           }
@@ -121,6 +120,7 @@
           }
         },
         userLogin(){
+          console.log(this.roleFlag,this.nameFlag,this.passFlag);
           //表单验证不通过
           if (!this.canLoginFlag){
               this.errinfo="请正确填写登录信息";
