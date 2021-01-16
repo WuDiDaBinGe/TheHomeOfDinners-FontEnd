@@ -20,22 +20,23 @@
 			<!-- /container -->
 		</div>
 <div class="container margin_60_35">
-			<div class="row">
 
-			<div class="col-md-8">
+			<div class="isotope-wrapper">
         <Reviews_Cards v-for="review in Good_Reviews_Cmputed" :review="review" :key="review.id" v-show="Good_Reviews_Show"></Reviews_Cards>
 <Reviews_Cards v-for="review in Bad_Reviews_Cmputed" :review="review" :key="review.id" v-show="Bad_Reviews_Show"></Reviews_Cards>
       </div>
       </div>
-</div>
+
+  <Footer_com></Footer_com>
 </div>
 </template>
 
 <script>
 import Header_WB from "../components/Header_WB";
 import Reviews_Cards from "../components/List_Components/Reviews_Cards"
+import Footer_com from "../components/Footer_com"
 export default {
-  components:{Header_WB,Reviews_Cards},
+  components:{Header_WB,Reviews_Cards,Footer_com},
 name: "Restaurant_Review_AnalyzeResult",
   data(){
     return{
