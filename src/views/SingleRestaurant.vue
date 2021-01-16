@@ -11,8 +11,9 @@
 			<div class="row">
 
 			<div class="col-lg-8">
-					<Restaurant_Pictures_Tab :resObj="res"></Restaurant_Pictures_Tab>
-					<!-- /review_card -->
+					<Restaurant_Pictures_Tab :resObj="res" :wordCloudUrl="wordCloudUrl"></Restaurant_Pictures_Tab>
+
+          <!-- /review_card -->
 					<Reviews_Cards v-for="review in resReviews" :review="review" :key="review.id"></Reviews_Cards>
 
           <a-pagination :default-current="0" :total="total_count" :defaultPageSize="page_size_" class="pagination__wrapper add_bottom_30" @change="pageChange"/>
@@ -22,8 +23,8 @@
 
              <div class="col-lg-4">
                <Restaurant_Info_Card :resobj="res"></Restaurant_Info_Card>
-        <Restaurant_reviews_pie_graph :pie_data="pie_data"></Restaurant_reviews_pie_graph>
-<!--        <Restaurant_reviews_wordcloud :wordcloud_data="wordcloud_data"></Restaurant_reviews_wordcloud>-->
+               <Restaurant_reviews_pie_graph :nav="pie_d.nav" :pos="pie_d.pos" ></Restaurant_reviews_pie_graph>
+
            </div>
 			</div>
 			<!-- /row -->
@@ -63,12 +64,11 @@
             page_size_:8,
             current_page:1,
             total_page:0,
-            pie_data: {
-            res_name: "",
-            pie_a: 0,
-            pie_b: 0,
-          },
-          wordcloud_data: {},
+            pie_d:{
+              pos:0,
+              nav:0,
+            },
+            wordCloudUrl:"",
           }
       },
       methods:{
@@ -84,15 +84,11 @@
           this.$httpM.get(this.$api.Restaurant.singleRestaurant+res_id,false)
           .then(response=>{
             tmpThis.res=response.data;
-        tmpThis.pie_data = {
-                res_name: tmpThis.res.res_name,
-                pie_a: 0,
-                pie_b: 0,
-              };
           })
           .catch(err=>{
             alert("出错！");
           })
+          //查询模型识别的餐馆好评与坏评
         },
         getResReviews(url){
           let tmpThis=this;
@@ -107,37 +103,50 @@
           .catch(function (err) {
 
           })
+        },
+        getPieData() {
+          let tmpThis = this;
+          let res_id = this.res_id;
+          this.$httpM.get(this.$api.Restaurant.modelpredict.replace("{id}",res_id), false)
+            .then(response => {
+              let sum=response.data.pos+response.data.nav;
+              tmpThis.pie_d.pos = Math.round(response.data.pos*100/sum);
+              tmpThis.pie_d.nav = 100-tmpThis.pie_d.pos;
+          }).catch(function (err) {
+
+          })
+        },
+        //获取词云图片
+        getWordCloud(){
+          let tmpThis=this;
+          this.$httpM.get(this.$api.Restaurant.wordCloud.replace("{id}",this.res_id))
+          .then(function (response){
+            tmpThis.wordCloudUrl='http://39.96.37.82:8888/'+response.data;
+
+          })
+          .catch(function (err){
+
+          })
         }
       },
-      getPieData() {
-          let tmpThis = this;
-          let res_id = this.res_id;
-          this.$httpM.get(this.$api.Restaurant.singleRestaurant + res_id, false).then(response => {
-            tmpThis.pie_data = response.data;
-
-          }).catch(function (err) {
-
-          })
-        },
-        getWordCloud() {
-          let tmpThis = this;
-          let res_id = this.res_id;
-          this.$httpM.get(this.$api.Restaurant.singleRestaurant + res_id, false).then(response => {
-            tmpThis.wordcloud_data = response.data;
-          }).catch(function (err) {
-          })
-
-        },
       created() {
         let res_id=this.res_id;
         let url=this.$api.Review.RestaurantReview.replace('{id}',res_id);
         this.getResInfo();
         this.getResReviews(url);
+        this.getPieData();
+        this.getWordCloud();
       },
 
     }
 </script>
 
 <style scoped>
-
+.wordCloud{
+  background-color: transparent;
+  border:12px #987cb9 groove;
+  display: block;
+  width:300px ;
+  height:300px;
+}
 </style>

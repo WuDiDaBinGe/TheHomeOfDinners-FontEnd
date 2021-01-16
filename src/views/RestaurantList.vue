@@ -144,6 +144,8 @@
         name: "RestaurantList",
         data(){
           return{
+            searchName:this.$route.query.searchName,
+            tag:this.$route.query.tag,
             categories_list:[],
             region_list:[],
             selectedCategory:"",
@@ -206,7 +208,11 @@
            },
           getKey(){
             this.changed = true;
-          }
+          },
+          //搜索方法
+          getSearchResult(){
+
+          },
         }
 
     }

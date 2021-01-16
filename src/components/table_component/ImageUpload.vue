@@ -59,11 +59,14 @@ export default {
       this.$httpM.patch(this.$api.Menu.update.replace("{id}",this.menuId),formData,false)
       .then(function (response){
         tmpThis.resposeUrl=response.data.picture;
+        console.log(tmpThis.resposeUrl);
+        console.log("change触发");
       })
       .catch(function (err){
 
       })
       this.$emit('change', this.resposeUrl);
+
     },
     handleCancel() {
       this.previewVisible = false;
@@ -75,10 +78,10 @@ export default {
       this.previewImage = file.url || file.preview;
       this.previewVisible = true;
     },
+    //上传图片的回调方法
     handleChange({ fileList }) {
       this.fileList = fileList;
       console.log(this.fileList[0]);
-      var responseUrl="hhas";
       //这里添加上传图片的方法
 
     },

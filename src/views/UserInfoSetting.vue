@@ -42,7 +42,7 @@
 		<div class="container margin_60_35">
 			<div class="row">
 				<div class="col-lg-8">
-          <UserInfo_form v-show="myInfoFlag"></UserInfo_form>
+          <UserInfo_form v-show="myInfoFlag" :userL="user"></UserInfo_form>
           <div v-show="myReviewFlag">
             <Reviews_Cards v-for="review in myReviewListInfo.results" :review="review" :key="review.id"></Reviews_Cards>
             <a-pagination :default-current="0" :total="myReviewListInfo.count" :defaultPageSize="8" class="pagination__wrapper add_bottom_30" @change="pageChange"/>
@@ -54,7 +54,7 @@
 					<div class="box_general">
 						<h5>删除账户</h5>
 						<p>删除之后，您的一切信息将被清空</p>
-						<a href="#" class="btn_1 small" onclick="document.getElementById('cho').value='2';document.getElementById('changeuser').submit();">删除账户</a>
+						<a href="#" class="btn_1 small" >删除账户</a>
 					</div>
 				</div>
 			</div>

@@ -4,12 +4,12 @@
   <Header_WB></Header_WB>
 
 	<main class="margin_main_container">
-		<div class="container margin_60_35">
+		<div class="container ">
       <form>
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="box_general write_review">
-						<h1>餐馆的创建</h1>
+						<h1>创建餐馆</h1>
 						<div class="rating_submit">
 							<div class="form-group">
 
@@ -42,7 +42,7 @@
 				</div>
 				<!-- /col -->
 				<div class="col-lg-4">
-          <LastView_Right></LastView_Right>
+          <!--<LastView_Right></LastView_Right> -->
 					<!-- /latest_review -->
 				</div>
 			</div>
@@ -80,6 +80,17 @@
             this.new_restaurant.picture=event.target.files[0];
           },
           submitRes(){
+            var reg = /^[a-zA-Z0-9]{5,20}$/;
+            var phonereg = /^1[3|4|5|7|8][0-9]{9}$/;
+            var restaurantInfo=this.new_restaurant;
+            if (!reg.test(restaurantInfo.res_name)||!reg.test(restaurantInfo.res_address)){
+              this.$message.error("餐馆名称和地址必须5-20字符！");
+              return;
+            }
+            else if (!phonereg.test(restaurantInfo.mobile)){
+              this.$message.error("填写正确的手机号！");
+              return;
+            }
             this.new_restaurant.owner=JSON.parse(getLocalStore("userLogin"))['user_id'];
             let param=new FormData();
             param.append("res_name",this.new_restaurant.res_name);           //向对象中添加数据

@@ -12,20 +12,21 @@
 
 								<div class="col-lg-7">
 									<div class="form-group">
-										<input class="form-control" type="text" name="find1" placeholder="今天要吃啥呢">
+										<input class="form-control" type="text" v-model="searchName" placeholder="今天要吃啥呢">
 										<i class="icon_search"></i>
 									</div>
 								</div>
 
                 <div class="col-lg-3">
-									<select class="wide nice-select" name="find2">
+									<select class="wide nice-select" name="find2" v-model="tag">
+                    <option value="全部">全部</option>
 										<option v-for="item in tags_list" v-bind:value="item">{{item}}</option>
 									</select>
 								</div>
 
 
                 <div class="col-lg-2">
-									<input type="submit" value="搜一搜">
+									<input type="submit" value="搜一搜" @click="search">
 								</div>
 
 
@@ -45,6 +46,8 @@
         name: "Search_part",
         data(){
           return{
+            searchName:"",
+            tag:"全部",
             tags_list:["All Categories","Lebanese","Cafe","Bar","Pizza","Seafood","Roast","Spaghetti","Dessert"]
           }
         },
@@ -52,6 +55,14 @@
         this.getTagsList();
       },
       methods:{
+          search(){
+            if(this.searchName.length<1){
+              this.$message.error("请输入搜索名称！");
+            }
+            else {
+              this.$router.push({name:'searchResults',query:{tag:this.tag,searchName:this.searchName}});
+            }
+          },
           getTagsList(){
             var tmpThis=this;
             this.$httpM.get(this.$api.Tag.lists,false)
