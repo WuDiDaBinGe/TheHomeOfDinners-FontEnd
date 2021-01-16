@@ -5,7 +5,7 @@
 
         <div class="company_listing isotope-item high" v-for="Restaurant in restaurant_list">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="company_info">
                         <figure><img :src="Restaurant.picture"  width="25%" ></figure>
                         <h3> {{Restaurant.res_name}} </h3>
@@ -13,7 +13,7 @@
                         <p><i class="ti-star ant-tag-orange">收藏数：</i>{{Restaurant.collection_count}}</p>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="text-center float-lg-right">
 
                     <span class="rating"><strong>reviews:{{Restaurant.review_count }}  score：{{Math.round(Restaurant.score)}}</strong>
@@ -25,7 +25,7 @@
                         <button class="btn_1 small" @click="showResReviewAnalyze(Restaurant.id)" v-show="ReviewAnalyzeFlag">评论模型</button>
                         <button class="btn_1 small" @click="showResMenu(Restaurant.id)" v-show="editMenu">编辑菜单</button>
                         <span class="small"  v-show="!editMenu"></span>
-                        <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">Read more</button>
+                        <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">餐馆详情</button>
 
                       </a-space>
 
