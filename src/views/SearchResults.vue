@@ -28,9 +28,7 @@
                     </span>
                     <div class="row">
                       <a-space size="small">
-                        <button class="btn_1 small" @click="showResMenu(Restaurant.id)" v-show="editMenu">编辑菜单</button>
-                        <span class="small"  v-show="!editMenu"></span>
-                        <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">Read more</button>
+                        <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">餐馆详情</button>
                       </a-space>
 
                     </div>
@@ -68,6 +66,9 @@ export default {
     }
   },
   methods:{
+    showSingleRes(res_id){
+      this.$router.push({name:'restaurant',query:{id:res_id}});
+    },
     //分页
     pageChange(pageNumber){
       if (this.tagRes==="全部"){
@@ -75,7 +76,7 @@ export default {
         this.getSearchResult(url);
       }
       else{
-        let url=this.$api.Tag_Res+'c'+this.tagRes+"?page="+pageNumber+"&res_name="+this.resName;
+        let url=this.$api.Tag_Res.list+'c'+this.tagRes+"?page="+pageNumber+"&res_name="+this.resName;
         this.getSearchResult(url);
       }
     },
@@ -103,7 +104,8 @@ export default {
       this.getSearchResult(url);
     }
     else{
-      let url=this.$api.Tag_Res+'c'+this.tagRes+"?res_name="+this.resName;
+      let url=this.$api.Tag_Res.list+'c'+this.tagRes+"?res_name="+this.resName;
+      console.log(url);
       this.getSearchResult(url);
     }
   }

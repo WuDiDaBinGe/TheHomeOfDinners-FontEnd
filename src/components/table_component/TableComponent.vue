@@ -13,7 +13,7 @@
         <ImageUpload :key="text" :text="text" :resId="resId" :menuId="record.id" @change="onCellChangeImage(record.id, 'picture', $event)"></ImageUpload>
       </template>
 
-      <template slot="operation" slot-scope="text, record">
+      <template slot="operation" slot-scope="text,record">
         <a-popconfirm
           v-if="dataSource.length"
           title="确定删除该菜品吗？"
@@ -118,9 +118,7 @@ export default {
         this.$message.success("修改成功！");
       })
       .catch(err=>{
-
       })
-
     },
     //改变图片
     onCellChangeImage(key, dataIndex, value){
@@ -130,8 +128,8 @@ export default {
       if (target) {
         target[dataIndex] = value;
         this.dataSource = dataSource;
+        console.log(target);
       }
-
     },
     //删除
     onDelete(key) {
@@ -160,7 +158,7 @@ export default {
       })
       .catch(function (err){
 
-      })
+      });
 
       this.count = count + 1;
     },
