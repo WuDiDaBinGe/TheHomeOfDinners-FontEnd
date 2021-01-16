@@ -15,10 +15,6 @@
                 <label>修改手机号</label>
                 <input class="form-control" type="text"  v-model="userL.mobile" >
             </div>
-            <!--<div class="form-group">
-                <label>编辑姓名</label>
-                <input class="form-control" type="text"  v-model="user.username" @blur="updateName">
-            </div> -->
             <p class="text-right"><a class="btn_1 small add_top_15" @click="changeUserInfo">保存个人信息</a></p>
         </div>
         <!-- /settings_panel -->
@@ -50,16 +46,16 @@
 import UserAvatar from "./UserAvatar";
 export default {
     name:"userInfo_form",
-  components: {UserAvatar},
-  props:['userL'],
-    data(){
-        return{
-            user:this.userL,
-            password:{
+    components: {UserAvatar},
+    props:['userL'],
+      data(){
+          return{
+              user:this.userL,
+              password:{
 
-            },
-        }
-    },
+              },
+          }
+      },
     methods: {
       changeUserInfo(){
         var phonereg = /^1[3|4|5|7|8][0-9]{9}$/;

@@ -219,10 +219,6 @@
           getKey(){
             this.changed = true;
           },
-          //搜索方法
-          getSearchResult(){
-
-          },
         }
 
     }

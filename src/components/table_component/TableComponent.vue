@@ -10,7 +10,7 @@
       </template>
 
       <template slot="picture" slot-scope="text,record">
-        <ImageUpload :text="text" :resId="resId" :menuId="record.id" @change="onCellChangeImage(record.id, 'picture', $event)"></ImageUpload>
+        <ImageUpload :key="text" :text="text" :resId="resId" :menuId="record.id" @change="onCellChangeImage(record.id, 'picture', $event)"></ImageUpload>
       </template>
 
       <template slot="operation" slot-scope="text,record">
