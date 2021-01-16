@@ -71,14 +71,17 @@
         //检查用户名
         checkUsername(){
           let name=this.peopleInfo.username;
+
           let tmpThis=this;
           if (name.length<5||name.length>20){
             this.errinfo="用户名应为5-20字符之间";
             this.classlo="weakPass";
+
           }
           else {
             this.$httpM.get(this.$api.User.userNameCount,{params:{'username':this.peopleInfo.username}})
             .then(function (response) {
+              console.log(response);
               if (response.data['count']===0){
                 tmpThis.errinfo="用户名不存在！";
                 tmpThis.classlo="weakPass";
@@ -120,7 +123,7 @@
           }
         },
         userLogin(){
-          console.log(this.roleFlag,this.nameFlag,this.passFlag);
+          console.log(this.nameFlag,this.passFlag,this.roleFlag);
           //表单验证不通过
           if (!this.canLoginFlag){
               this.errinfo="请正确填写登录信息";
