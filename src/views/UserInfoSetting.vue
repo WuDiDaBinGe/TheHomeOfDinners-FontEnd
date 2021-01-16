@@ -47,7 +47,7 @@
             <Reviews_Cards v-for="review in myReviewListInfo.results" :review="review" :key="review.id"></Reviews_Cards>
             <a-pagination :default-current="0" :total="myReviewListInfo.count" :defaultPageSize="8" class="pagination__wrapper add_bottom_30" @change="pageChange"/>
           </div>
-          <restaurant_item v-show="myCollectionFlag" :parentName="this.MyName"></restaurant_item>
+          <restaurant_item v-show="myCollectionFlag" :parentName="this.MyName" :userRole="this.user.role"> </restaurant_item>
 				</div>
 				<!-- /col -->
 				<div class="col-lg-4" id="sidebar">
