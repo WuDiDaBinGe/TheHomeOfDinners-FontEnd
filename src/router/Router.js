@@ -6,6 +6,10 @@ Vue.use(VueRouter);
 const routes=[
   //主页
   {
+    path:'/test',
+    component:()=>import("../views/Restaurant_Review_AnalyzeResult")
+  },
+  {
     path:'/index',
     component:()=>import("../views/index.vue")
   },
@@ -101,6 +105,12 @@ const routes=[
   {
     path:"/comfirm",
     component:()=>import("../views/Confirm")
+  },
+  //评论分析结果页面
+  {
+    path: "/review_analyze",
+    name:"review_analyze",
+    component:()=>import("../views/Restaurant_Review_AnalyzeResult")
   },
 
   {

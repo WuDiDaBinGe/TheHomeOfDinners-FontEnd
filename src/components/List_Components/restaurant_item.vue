@@ -5,16 +5,15 @@
 
         <div class="company_listing isotope-item high" v-for="Restaurant in restaurant_list">
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <div class="company_info">
                         <figure><img :src="Restaurant.picture"  width="25%" ></figure>
                         <h3> {{Restaurant.res_name}} </h3>
                         <p> {{Restaurant.res_address}} </p>
                         <p><i class="ti-star ant-tag-orange">收藏数：</i>{{Restaurant.collection_count}}</p>
-
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="text-center float-lg-right">
 
                     <span class="rating"><strong>reviews:{{Restaurant.review_count }}  score：{{Math.round(Restaurant.score)}}</strong>
@@ -22,8 +21,9 @@
                     </span>
                     <div class="row">
                       <a-space size="small">
-                        <button class="btn_1 small" @click="showResMenu(Restaurant.id)"><i class="ti-write"/>菜单</button>
-                        <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">Read more</button>
+                        <button class="btn_1 small" @click="showResReviewAnalyze(Restaurant.id)" v-show="ReviewAnalyzeFlag">评论模型</button>
+                        <button class="btn_1 small" @click="showResMenu(Restaurant.id)" ><i class="ti-write"/>菜单</button>
+                        <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">餐馆详情</button>
                       </a-space>
 
                     </div>
@@ -45,7 +45,7 @@ import I_CallSection from "../index_components/I_CallSection";
 export default {
     components: {I_CallSection, Pagination },
     name:"restaurant_item",
-    props:['selectTag','parentName','rankBy'],
+    props:['selectTag','parentName','rankBy','userRole'],
     data(){
         return{
             restaurant_list:[
@@ -60,10 +60,14 @@ export default {
             page_size_:8,
             current_page:1,
             total_page:0,
+          ReviewAnalyzeFlag:true,
         }
     },
     methods:{
         //跳转到一个餐馆
+      showResReviewAnalyze(res_id){
+       this.$router.push({name:'review_analyze',query:{id:res_id}});
+      },
         showSingleRes(res_id){
           //传参数时 不能用path传递参数
           this.$router.push({name:'restaurant',query:{id:res_id}});
@@ -114,7 +118,12 @@ export default {
                 alert(err);
                 console.log(err)
             })
+        },
+      GetReviewAnalyzeFlag(){
+        if(this.parentName==="RestaurantList"||this.userRole==="1"){
+          this.ReviewAnalyzeFlag=false;
         }
+      }
     },
     created(){
       //如果父组件为餐馆列表
@@ -131,6 +140,7 @@ export default {
       else if (this.parentName==='UserInfo'){
           this.getResList(this.$api.User.userCollectionRes.replace("{id}",this.uerId));
       }
+      this.GetReviewAnalyzeFlag();
     },
     computed:{
       uerId(){

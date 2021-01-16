@@ -4,6 +4,7 @@
 	<Header_WB></Header_WB>
 
 	<main>
+
 		<Restaurant_reviews_summary :resobj="res"></Restaurant_reviews_summary>
 
 		<div class="container margin_60_35">
