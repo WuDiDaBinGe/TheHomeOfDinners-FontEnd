@@ -1,15 +1,13 @@
 <template>
-  <div class="clearfix">
+ <div class="clearfix">
     <a-upload
       action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
       list-type="picture-card"
       :file-list="fileList"
-      accept="image/jpeg,image/jpg,image/png"
-      :customRequest="uploadImage"
       @preview="handlePreview"
       @change="handleChange"
     >
-      <div v-if="fileList.length < 1">
+      <div v-if="fileList.length < 8">
         <a-icon type="plus" />
         <div class="ant-upload-text">
           Upload
@@ -21,6 +19,7 @@
     </a-modal>
   </div>
 </template>
+
 <script>
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -31,8 +30,7 @@ function getBase64(file) {
   });
 }
 export default {
-  name:"ImageUpload",
-  props:['text','resId','menuId'],
+name: "ImageUp"
   data() {
     return {
       previewVisible: false,
@@ -42,37 +40,35 @@ export default {
           uid: '-1',
           name: 'image.png',
           status: 'done',
-          url: this.text,
+          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        },
+        {
+          uid: '-2',
+          name: 'image.png',
+          status: 'done',
+          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        },
+        {
+          uid: '-3',
+          name: 'image.png',
+          status: 'done',
+          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        },
+        {
+          uid: '-4',
+          name: 'image.png',
+          status: 'done',
+          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        },
+        {
+          uid: '-5',
+          name: 'image.png',
+          status: 'error',
         },
       ],
-      resposeUrl:"",
     };
   },
-  watch:{
-    resposeUrl:function (newValue){
-      this.$emit('change', newValue);
-    }
-  },
   methods: {
-    //上传图片
-    uploadImage(file){
-      var tmpThis=this;
-      var formData=new FormData();
-      formData.append('picture', file.file,file.file.name);
-      console.log("上传图片！");
-      console.log(formData);
-      this.$httpM.patch(this.$api.Menu.update.replace("{id}",this.menuId),formData,false)
-      .then(function (response){
-        tmpThis.resposeUrl=response.data.picture;
-        console.log(tmpThis.resposeUrl);
-        console.log("change触发");
-      })
-      .catch(function (err){
-
-      })
-
-
-    },
     handleCancel() {
       this.previewVisible = false;
     },
@@ -83,17 +79,14 @@ export default {
       this.previewImage = file.url || file.preview;
       this.previewVisible = true;
     },
-    //上传图片的回调方法
     handleChange({ fileList }) {
       this.fileList = fileList;
-      console.log(this.fileList[0]);
-      //这里添加上传图片的方法
-
     },
   },
-};
+}
 </script>
-<style>
+
+<style scoped>
 /* you can make up upload button and sample style by using stylesheets */
 .ant-upload-select-picture-card i {
   font-size: 32px;
@@ -105,4 +98,3 @@ export default {
   color: #666;
 }
 </style>
-
