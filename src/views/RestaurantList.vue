@@ -15,17 +15,18 @@
 						<div class="row no-gutters custom-search-input-2 inner">
 							<div class="col-lg-7">
 								<div class="form-group">
-									<input class="form-control" type="text" placeholder="今天要吃啥呢">
+									<input class="form-control" type="text" placeholder="今天要吃啥呢" v-model="searchName">
 									<i class="icon_search"></i>
 								</div>
 							</div>
 							<div class="col-lg-4">
 								<select class="wide nice-select">
-									<option v-for="item in categories_list">{{item}}</option>
+                  <option value="全部">全部</option>
+									<option v-for="item in categories_list" v-bind:value="item">{{item}}</option>
 								</select>
 							</div>
 							<div class="col-xl-1 col-lg-1">
-								<input type="submit" value="Search">
+								<input type="submit" value="Search" @click="search">
 							</div>
 						</div>
 				   </div>
@@ -144,8 +145,8 @@
         name: "RestaurantList",
         data(){
           return{
-            searchName:this.$route.query.searchName,
-            tag:this.$route.query.tag,
+            searchName:"",
+            tag:"全部",
             categories_list:[],
             region_list:[],
             selectedCategory:"",
@@ -175,6 +176,15 @@
           this.getTagsList();
         },
         methods:{
+          search(){
+            //表单判断
+            if(this.searchName.length<1){
+              this.$message.error("请输入搜索名称！");
+            }
+            else {
+              this.$router.push({name:'searchResults',query:{tag:this.tag,searchName:this.searchName}});
+            }
+          },
           rankBy_(flag){
             this.rankBy=flag;
             //全部

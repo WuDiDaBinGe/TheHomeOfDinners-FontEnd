@@ -1,10 +1,9 @@
 <template>
   <div class="clearfix">
     <a-upload
-      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+      action=""
       list-type="picture-card"
       :file-list="fileList"
-      accept="image/jpeg,image/jpg,image/png"
       :customRequest="uploadImage"
       @preview="handlePreview"
       @change="handleChange"
@@ -48,6 +47,13 @@ export default {
       resposeUrl:"",
     };
   },
+  watch:{
+    resposeUrl:function(newValue){
+      console.log("watch:"+newValue);
+      this.resposeUrl=newValue;
+      this.$emit('change', newValue);
+    }
+  },
   methods: {
     //上传图片
     uploadImage(file){
@@ -60,13 +66,12 @@ export default {
       .then(function (response){
         tmpThis.resposeUrl=response.data.picture;
         console.log(tmpThis.resposeUrl);
+
         console.log("change触发");
       })
       .catch(function (err){
 
-      })
-      this.$emit('change', this.resposeUrl);
-
+      });
     },
     handleCancel() {
       this.previewVisible = false;

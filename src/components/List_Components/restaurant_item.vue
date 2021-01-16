@@ -69,9 +69,9 @@ export default {
     },
     methods:{
         //跳转到一个餐馆
-      showResReviewAnalyze(res_id){
-       this.$router.push({name:'review_analyze',query:{id:res_id}});
-      },
+        showResReviewAnalyze(res_id){
+         this.$router.push({name:'review_analyze',query:{id:res_id}});
+        },
         showSingleRes(res_id){
           //传参数时 不能用path传递参数
           this.$router.push({name:'restaurant',query:{id:res_id}});
