@@ -83,7 +83,7 @@
         name: "New_Restaurant",
         data(){
           return{
-            tags_list:["1","2","3"],
+            tags_list:[],
             regions_list:[],
             new_restaurant:{
               res_name:"",
@@ -120,8 +120,8 @@
               this.$message.error("请选择地区！");
               return;
             }
-            let res_tag_id= this.tags_list.findIndex(item => item===restaurantInfo.res_tag);
-             let res_region_id = this.regions_list.findIndex(item => item===restaurantInfo.res_region_tag);
+            // let res_tag_id= this.tags_list.findIndex(item => item===restaurantInfo.res_tag);
+            //  let res_region_id = this.regions_list.findIndex(item => item===restaurantInfo.res_region_tag);
             this.new_restaurant.owner=JSON.parse(getLocalStore("userLogin"))['user_id'];
             let param=new FormData();
             param.append("res_name",this.new_restaurant.res_name);           //向对象中添加数据
@@ -130,8 +130,8 @@
             param.append("business_time",this.new_restaurant.business_time);
             param.append("mobile",this.new_restaurant.mobile);
             param.append("owner",this.new_restaurant.owner);
-            param.append("tag1",res_tag_id);
-            param.append("tag2",res_region_id);
+            param.append("res_tag",this.new_restaurant.res_tag);
+            param.append("res_region_tag",this.new_restaurant.res_region_tag);
             this.$httpM.post(this.$api.Restaurant.create,param,false)
             .then(function (response) {
               console.log("response:",response);
@@ -155,7 +155,7 @@
         },
         components: {Footer_com, LastView_Right, Header_WB},
       created() {
-          this.getTagsList()
+          this.getTagsList();
       }
     }
 </script>
