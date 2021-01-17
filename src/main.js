@@ -28,15 +28,18 @@ import http from './http/http'
 import './http/axios'
 
 //全局工具类
+//引入elementUI
 import {Nrange} from './utils/utils';
-
-
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import {MessageBox} from 'element-ui';
+Vue.prototype.$confirm = MessageBox.confirm;
 //全局注册
 Vue.prototype.$api=api;
 Vue.prototype.$httpM=http;
 
 Vue.use(Antd);
-
+Vue.use(ElementUI);
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 

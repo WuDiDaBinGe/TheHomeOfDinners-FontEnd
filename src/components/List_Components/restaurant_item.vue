@@ -23,7 +23,7 @@
                       <a-space size="small">
 
                         <button class="btn_1 small" @click="showResReviewAnalyze(Restaurant.id)" v-show="ReviewAnalyzeFlag">评论模型</button>
-                        <button class="btn_1 small" @click="showResMenu(Restaurant.id)" v-show="editMenu">编辑菜单</button>
+                        <button class="btn_1 small" @click="showResMenu(Restaurant.id)" v-show="editMenu">编辑餐馆</button>
                         <span class="small"  v-show="!editMenu"></span>
                         <button class="btn_1 small" @click="showSingleRes(Restaurant.id)">餐馆详情</button>
 

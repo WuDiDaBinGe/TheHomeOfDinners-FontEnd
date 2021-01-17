@@ -1,4 +1,4 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
   <div id="page">
 
   <Header_WB></Header_WB>
@@ -20,6 +20,16 @@
               <label>餐馆名称：</label><span class="text-danger">*</span>
 							<input class="form-control" type="text"  v-model="new_restaurant.res_name">
 						</div>
+             <div class="form-group" >
+             <label>餐馆类型：</label><span class="text-danger">*</span>
+               <div class="col-lg-3">
+									<select class="wide nice-select" name="find2" v-model="new_restaurant.res_tag">
+                    <option value="请选择">请选择</option>
+										<option v-for="item in tags_list" v-bind:value="item">{{item}}</option>
+                  </select>
+               </div>
+                </div>
+            <br></br>
             <div class="form-group">
 							<label>地址：</label><span class="text-danger">*</span>
 							<input class="form-control" type="text"  placeholder="餐馆的地点" v-model="new_restaurant.res_address">
@@ -66,9 +76,11 @@
         name: "New_Restaurant",
         data(){
           return{
+            tags_list:["All Categories","Lebanese","Cafe","Bar","Pizza","Seafood","Roast","Spaghetti","Dessert"],
             new_restaurant:{
               res_name:"",
               res_address:"",
+              res_tag:"请选择",
               picture:null,
               business_time:null,
               mobile:"",
@@ -91,6 +103,10 @@
               this.$message.error("填写正确的手机号！");
               return;
             }
+            if(restaurantInfo.res_tag==="请选择"){
+              this.$message.error("请选择餐馆类型！");
+              return;
+            }
             this.new_restaurant.owner=JSON.parse(getLocalStore("userLogin"))['user_id'];
             let param=new FormData();
             param.append("res_name",this.new_restaurant.res_name);           //向对象中添加数据
@@ -99,6 +115,7 @@
             param.append("business_time",this.new_restaurant.business_time);
             param.append("mobile",this.new_restaurant.mobile);
             param.append("owner",this.new_restaurant.owner);
+            param.append("res_tag",this.new_restaurant.res_tag);
             this.$httpM.post(this.$api.Restaurant.create,param,false)
             .then(function (response) {
               console.log("response:",response);
@@ -106,10 +123,23 @@
             .catch(function (err) {
               console.log("err:",err);
             })
-          }
+          },
+          getTagsList(){
+            var tmpThis=this;
+            this.$httpM.get(this.$api.Tag.lists,false)
+            .then(function (response) {
 
+                tmpThis.tags_list=response.data['种类'];
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+          }
         },
-        components: {Footer_com, LastView_Right, Header_WB}
+        components: {Footer_com, LastView_Right, Header_WB},
+      created() {
+          this.getTagsList()
+      }
     }
 </script>
 
