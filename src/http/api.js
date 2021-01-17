@@ -24,6 +24,7 @@ export default{
   Restaurant:{
     list:'/restaurant',                           //查询餐馆列表
     create:'/restaurant/',                        //创建餐馆
+    delete:'/restaurant/{id}/',
     singleRestaurant:"/restaurant/",              //查询一个餐馆
     scoreCount:"/restaurant/{id}/reviews_count/", //查询餐馆下各个评分的个数
     modelpredict:"/restaurant/{id}/pos_or_nav_reviews_count/", //查询餐馆模型评分
