@@ -177,7 +177,7 @@
         this.myCollectionFlag=true;
       },
       handleOk(){
-        this.$httpM.delete(this.$api.User.delete.replace("{id}",this.user.id)).catch(function (error){
+        this.$httpM.del(this.$api.User.delete.replace("{id}",this.user.id)).catch(function (error){
                              console.log("error",error);});
                              this.$message.success("删除用户成功！");
                              this.visible=false;

@@ -34,7 +34,7 @@
                 <input class="form-control" type="password" v-model="lineReNewPassword" @blur="verifyPwd2">
             </div>
           <div id="pass-info" v-bind:class="clearfix" v-show="!canChangePassword">{{errInfo}}</div>
-            <p class="text-right"><a class="btn_1 small">保存密码</a></p>
+            <p class="text-right"><a class="btn_1 small" @click="changeUserPassword">保存密码</a></p>
         </div>
         <!-- /settings_panel -->
       </form>
@@ -119,12 +119,15 @@ export default {
             }
           },
       changeUserPassword(){
-        if(!canChangePassword()){
+        if(!this.canChangePassword){
           this.$message.error("输入有错误，请检查！");
+           console.log("输入错误");
+          return ;
         }
         else{
           this.$httpM.put(this.$api.User.update.replace("{id}",this.userL.id),{password:this.lineNewPassword}).catch(function (error){
             console.log("error",error);
+             console.log("不会对了吧！");
           });
         }
       },

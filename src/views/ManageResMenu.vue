@@ -48,7 +48,7 @@
            this.visible=true;
             },
           handleOk(){
-        this.$httpM.delete(this.$api.Restaurant.delete.replace("{id}",this.res_id)).catch(function (error){
+        this.$httpM.del(this.$api.Restaurant.delete.replace("{id}",this.res_id)).catch(function (error){
                              console.log("error",error);});
                              this.$message.success("删除餐馆成功！");
                              this.visible=false;
