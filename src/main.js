@@ -6,7 +6,7 @@ import VueRouter from "vue-router";
 import router from "./router/Router.js";
 import "bootstrap";
 import Antd from "ant-design-vue";
-import {message} from "ant-design-vue";
+import {message,Modal} from "ant-design-vue";
 import 'ant-design-vue/dist/antd.css'
 //引入全局样式
 import "./assets/bootstrap-4.5.0-dist/css/bootstrap.min.css"
@@ -26,23 +26,16 @@ import api from './http/api'
 import http from './http/http'
 //axios拦截器
 import './http/axios'
-
+Vue.component(Modal.name, Modal);
 //全局工具类
-//引入elementUI
-import {Nrange} from './utils/utils';
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-import {MessageBox} from 'element-ui';
-Vue.prototype.$confirm = MessageBox.confirm;
+
 //全局注册
 Vue.prototype.$api=api;
 Vue.prototype.$httpM=http;
 
 Vue.use(Antd);
-Vue.use(ElementUI);
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
-
 Vue.prototype.setStore = setLocalStore;
 Vue.prototype.getStore = getLocalStore;
 Vue.prototype.removeStore = removeLocalStore;
