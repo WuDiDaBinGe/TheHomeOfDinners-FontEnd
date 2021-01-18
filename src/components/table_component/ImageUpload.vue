@@ -50,6 +50,7 @@ export default {
   watch:{
     resposeUrl:function (newValue){
       this.$emit('change', newValue);
+      this.$message.success("上传图片成功！");
     }
   },
   methods: {
