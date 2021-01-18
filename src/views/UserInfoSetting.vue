@@ -27,7 +27,7 @@
 								</li>
 								<li @click="getMyRes">
 									<strong>{{myCollection.count}}</strong>
-                  <a><i class="icon_star"></i> 收藏</a>
+                  <a><i class="icon_star"></i> {{user.role===1?"收藏":"我的餐馆"}}</a>
 								</li>
 							</ul>
 						</div>

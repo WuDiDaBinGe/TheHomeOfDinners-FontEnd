@@ -30,13 +30,13 @@ axios.interceptors.response.use(response => {
 
   return response;
 }, error => {
-    // 请求失败
+      // 请求失败
       if (error && error.response) {
         if(error.response.status===400){
           console.log("400错误！");
           // 对400 错误您的处理
           message.warning(error.response.data);
         }
-        Promise.reject(error);
+        return Promise.reject(error);
     }
 });
