@@ -2,7 +2,7 @@
   <div class="review_card">
     <div class="row">
       <div class="col-md-2 user_info">
-        <figure><img src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2531206692,1963771943&fm=26&gp=0.jpg" alt=""></figure>
+        <figure><img :src="reviewUser.picture" alt=""></figure>
         <h5>{{reviewUser.username}}</h5>
       </div>
       <div class="col-md-10 review_content">
@@ -12,32 +12,17 @@
           <small> {{review.meal_time}} </small>
         </div>
         <h5>{{review.text}}</h5>
-        <input name="text" id="text" value="** review.text *" style="display: none">
-        <input name="rname" id="rname" value="** review.rest *" style="display: none">
 
         <ul>
-          <li><a href="#0" value='**review.text*' onclick="var i=this.getAttribute('value');u(i);"><i class="icon_like_alt"></i><span>Useful</span></a></li>
-          <li><a href="#0"><i class="icon_dislike_alt"></i><span>Not useful</span></a></li>
+          <li :class="[{'text-danger':review.analyze_result},{'text-success':!review.analyze_result}]" class="">分析结果：{{review.analyze_result==='0'?'坏评':'好评'}}</li>
+          <li></li>
           <li>评论时间：{{review.datetime.split("T")[0]}}</li>
-          <li @click="showDelReviewConfirm"><a><i class="ti-trash text-danger">删除</i></a></li>
+          <li @click="showDelReviewConfirm" v-show="loginUserID===review.user"><a><i class="ti-trash text-danger">删除</i></a></li>
         </ul>
 
       </div>
     </div>
     <!-- /row -->
-    <div class="row reply">
-      <div class="col-md-2 user_info">
-        <figure><img src="/static/img/avatar.jpg" alt=""></figure>
-      </div>
-      <div class="col-md-10">
-        <div class="review_content">
-          <strong>Reply from Good Electronics</strong>
-          <em>Published 3 minutes ago</em>
-          <p><br>Hi Monika,<br><br>Glad you are satisfied with the dishes and services in our restaurant, we will do our best to make you enjoy the best service, thank you for coming and hope to see you again next time!<br><br>Thanks</p>
-        </div>
-      </div>
-    </div>
-    <!-- /reply -->
   </div>
 <!-- /review_card -->
 </template>
@@ -56,6 +41,12 @@
             role: "",
             username: "",
           },
+        }
+      },
+      computed:{
+        loginUserID(){
+          let user_id=JSON.parse(getLocalStore("userLogin")).user_id;
+          return user_id;
         }
       },
       created() {
@@ -98,7 +89,6 @@
               })
             },
             onCancel() {
-              console.log('Cancel');
             },
           });
         },

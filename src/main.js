@@ -49,9 +49,9 @@ Vue.prototype.removeStore = removeLocalStore;
 
 Vue.prototype.$message = message;
 message.config({
-    //duration: 2,// 持续时间
-    top:`100px`, // 到页面顶部距离
-    maxCount: 3 // 最大显示数, 超过限制时，最早的消息会被自动关闭
+    //duration: 2,    // 持续时间
+    top:`100px`,      // 到页面顶部距离
+    maxCount: 3       // 最大显示数, 超过限制时，最早的消息会被自动关闭
 });
 
 

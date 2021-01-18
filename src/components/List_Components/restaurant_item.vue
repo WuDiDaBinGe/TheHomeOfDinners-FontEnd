@@ -47,7 +47,7 @@ import I_CallSection from "../index_components/I_CallSection";
 export default {
     components: {I_CallSection, Pagination },
     name:"restaurant_item",
-    props:['selectTag','parentName','rankBy','userRole'],
+    props:['selectTag','parentName','rankBy'],
     data(){
         return{
             restaurant_list:[
@@ -83,8 +83,12 @@ export default {
         },
         pageChange(pageNumber){
           if (this.parentName==='RestaurantList'){
-            var urlList=this.$api.Restaurant.list+"?page="+pageNumber;
-            this.getResList(urlList);
+            if (this.selectTag===""){
+              this.getResList(this.$api.Restaurant.list+"?page="+pageNumber);
+            }
+            else {
+              this.getResList(this.$api.Tag_Res.list+this.selectTag+"?page="+pageNumber);
+            }
           }
           else if(this.parentName==='UserInfo'){
             var urlCollect=this.$api.User.userCollectionRes.replace("{id}",this.uerId);
@@ -130,6 +134,7 @@ export default {
       }
     },
     created(){
+      console.log(this.selectTag);
       //如果父组件为餐馆列表
       if (this.parentName==='RestaurantList'){
         //没有筛选条件返回全部列表
