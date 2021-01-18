@@ -12,6 +12,7 @@ export default{
     read:'/user/{id}/',                                    //根据用户ID读取信息
     userReview:'/review/{id}/user_review/',                //获取用户的评论
     userCollectionRes:'/restaurant/{id}/user_collections/',//获取用户收藏的餐馆
+    uploadAvtor:'/uploadUserPicture/{id}/',                 //修改用户头像
     update:'/user/{id}/',                                   //修改用户信息
     delete:'/user/{id}/',                                   //删除用户信息
     checkOldPassword:'/user/{id}/'                         //检查旧密码是否正确

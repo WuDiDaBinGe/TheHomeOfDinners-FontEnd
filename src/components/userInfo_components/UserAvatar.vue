@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import {setLocalStore} from "../../assets/storage/localstorage";
+
 function getBase64(img, callback) {
   const reader = new FileReader();
   reader.addEventListener('load', () => callback(reader.result));
@@ -33,6 +35,12 @@ export default {
       loading: false,
       imageUrl: '',
     };
+  },
+  watch:{
+    imageUrl:function (newValue){
+      this.$message.success("上传成功！");
+      this.$emit("changeAva",newValue);
+    }
   },
   methods: {
     handleChange(info) {
@@ -60,17 +68,13 @@ export default {
       return isJpgOrPng && isLt2M;
     },
     uploadAvator(file){
-      console.log("上传");
-      console.log(file);
       var tmpThis=this;
       var formData=new FormData();
-      formData.append('picture', file.file);
-      console.log("上传头像！");
-      console.log(formData);
-      this.$httpM.put(this.$api.User.update.replace("{id}",this.userId),{picture:formData})
+      formData.append('picture', file.file,file.name);
+      this.$httpM.put(this.$api.User.uploadAvtor.replace("{id}",this.userId),formData,false)
       .then(function (response){
-        tmpThis.imageUrl=response.data['picture'];
-        console.log(response.data);
+        tmpThis.imageUrl=response.data.picture;
+
       })
       .catch(function (err){
 

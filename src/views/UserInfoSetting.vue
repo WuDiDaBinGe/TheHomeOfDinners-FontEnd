@@ -10,10 +10,10 @@
 					<div class="row">
 						<div class="col-md-6">
 							<figure>
-								<img src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2531206692,1963771943&fm=26&gp=0.jpg">
+								<img :src="user.picture">
 							</figure>
 							<h1>{{user.username}}</h1>
-							<span>角色：{{user.role}}</span>
+							<span>角色：{{user.role===1?"用户":"商家"}}</span>
 						</div>
 						<div class="col-md-6">
 							<ul>
@@ -42,7 +42,7 @@
 		<div class="container margin_60_35">
 			<div class="row">
 				<div class="col-lg-8">
-          <UserInfo_form v-show="myInfoFlag" :userL="user"></UserInfo_form>
+          <UserInfo_form v-show="myInfoFlag" :userL="user" @avatarChange="changAvatar"></UserInfo_form>
           <div v-show="myReviewFlag">
             <Reviews_Cards v-for="review in myReviewListInfo.results" :review="review" :key="review.id"></Reviews_Cards>
             <a-pagination :default-current="0" :total="myReviewListInfo.count" :defaultPageSize="8" class="pagination__wrapper add_bottom_30" @change="pageChange"/>
@@ -111,7 +111,10 @@
     computed:{
       userId(){
         return JSON.parse(getLocalStore("userLogin"))['user_id'];
-      }
+      },
+      avatarUrl(){
+        return getLocalStore('Avatar');
+      },
     },
     created() {
       //查询用户信息
@@ -122,6 +125,9 @@
       this.getMyCollectRes();
     },
     methods:{
+      changAvatar(newUrl){
+        this.user.picture=newUrl;
+      },
       //查询用户信息
       getMyInfo(){
         let tmpThis=this;

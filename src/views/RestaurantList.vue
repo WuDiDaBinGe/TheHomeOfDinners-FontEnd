@@ -21,7 +21,7 @@
 							</div>
 							<div class="col-lg-4">
 								<select class="wide nice-select">
-                  <option value="全部">全部</option>
+                  <option value="全部">全部{{selectedCategory}}</option>
 									<option v-for="item in categories_list" v-bind:value="item">{{item}}</option>
 								</select>
 							</div>
@@ -43,7 +43,7 @@
 							<i class="icon_pin_alt"></i>
 						</div>
 						<select class="wide">
-							<option v-for="item in categories_list">{{item}}</option>
+							<option v-for="item in categories_list">{{item.name}}</option>
 						</select>
 						<input type="submit" value="Search">
 					</div>
@@ -83,8 +83,8 @@
 						<h6>分类</h6>
 						<ul>
 							<li v-for="cate in categories_list">
-								  <label class="container_check">{{cate}} <small>67</small>
-								  <input type="radio" name="category" id="category" v-model="selectedCategory" :value="cate" @change="getKey" @click="controlSingel($event)">
+								  <label class="container_check">{{cate.name}} <small>{{cate.num}}</small>
+								  <input type="radio" name="category" id="category" v-model="selectedCategory" :value="cate.name" @change="getKey" @click="controlSingel($event)">
 								  <span class="checkmark" ></span>
 								</label>
 							</li>
@@ -96,8 +96,8 @@
 						<h6>地区</h6>
 						<ul>
 							<li v-for="region in region_list" >
-								<label class="container_check">{{region}} <small>12</small>
-								  <input type="radio" name="location" id="region" v-model="selectedRegion" :value="region" @change="getKey" @click="controlSingel($event)">
+								<label class="container_check">{{region.name}} <small>{{region.num}}</small>
+								  <input type="radio" name="location" id="region" v-model="selectedRegion" :value="region.name" @change="getKey" @click="controlSingel($event)">
 								  <span class="checkmark" ></span>
 								</label>
 							</li>
@@ -147,9 +147,9 @@
           return{
             searchName:"",
             tag:"全部",
-            categories_list:[],
+            categories_list: [],
             region_list:[],
-            selectedCategory:"",
+            selectedCategory:this.$route.query.tagName===undefined?"":this.$route.query.tagName,
             selectedRegion:"",
             myName:"RestaurantList",
             rankBy:1,
@@ -170,7 +170,7 @@
               selectKey="c"+this.selectedCategory+"l"+this.selectedRegion;
             }
             return selectKey;
-          }
+          },
         },
         created() {
           this.getTagsList();
@@ -194,9 +194,34 @@
             }
           },
           getTagsList(){
-            var tagsList=JSON.parse(getLocalStore("tagsList"));
-            this.categories_list=tagsList['种类'];
-            this.region_list=tagsList['地区'];
+            let tmpList=new Array();
+            var tagsList=JSON.parse(getLocalStore("tagsList"))['种类'];
+            for (var cator of tagsList){
+              let nums=getLocalStore(cator);
+              var tmpNum= {
+                name:'',
+                num:'',
+              };
+              tmpNum.name=cator;
+              tmpNum.num=nums===null?'0':nums;
+              tmpList.push(tmpNum);
+            }
+            this.categories_list=tmpList;
+            tmpList=new Array();
+            tagsList=JSON.parse(getLocalStore('tagsList'))['地区'];
+            console.log(tagsList);
+            for (var location of tagsList){
+              let nums=getLocalStore(location);
+              var tmpNum= {
+                name:'',
+                num:'',
+              };
+              tmpNum.name=location;
+              tmpNum.num=nums===null?'0':nums;
+              console.log(tmpNum);
+              tmpList.push(tmpNum);
+            }
+            this.region_list=tmpList;
           },
           //实现单选按钮取消功能
           controlSingel($event) {

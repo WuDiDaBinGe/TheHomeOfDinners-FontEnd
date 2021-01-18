@@ -9,7 +9,7 @@
 
             <div class="form-group">
                 <label>上传头像</label>
-                <UserAvatar :userId="userL.id"></UserAvatar>
+                <UserAvatar :userId="userL.id" @changeAva="getAvatar"></UserAvatar>
             </div>
             <div class="form-group">
                 <label>修改手机号</label>
@@ -64,7 +64,10 @@ export default {
           }
       },
     methods: {
-      changeUserMobile_picture(){
+      getAvatar(value){
+        this.$emit("avatarChange",value);
+      },
+      changeUserInfo(){
         var phonereg = /^1[3|4|5|7|8][0-9]{9}$/;
         if (!phonereg.test(this.userL.mobile)){
           this.$message.error("输入正确的手机号");
