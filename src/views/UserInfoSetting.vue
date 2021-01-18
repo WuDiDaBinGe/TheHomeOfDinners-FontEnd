@@ -54,7 +54,14 @@
 					<div class="box_general">
 						<h5>删除账户</h5>
 						<p>删除之后，您的一切信息将被清空</p>
-						<a href="#" class="btn_1 small" >删除账户</a>
+						<a  class="btn_1 small" @click="deleteUser()">删除账户</a>
+            <a-modal
+              title="警告"
+              :visible="visible"
+              cancelText="取消"
+              okText="确定"
+              @ok="handleOk"
+              @cancel="handleCancel"><p>您的所有的用户信息都会删除！</p></a-modal>
 					</div>
 				</div>
 			</div>
@@ -98,6 +105,7 @@
         myReviewListInfo:{},
         myCollection:{},
         MyName:"UserInfo",
+        visible:false,
 			}
 		},
     computed:{
@@ -174,6 +182,19 @@
         this.myReviewFlag=false;
         this.myCollectionFlag=true;
       },
+      handleOk(){
+        this.$httpM.del(this.$api.User.delete.replace("{id}",this.user.id)).catch(function (error){
+                             console.log("error",error);});
+                             this.$message.success("删除用户成功！");
+                             this.visible=false;
+      },
+      handleCancel(){
+        this.$message.success("取消删除");
+        this.visible=false;
+      },
+      deleteUser(){
+        this.visible=true;
+          }
 
 		}
 
