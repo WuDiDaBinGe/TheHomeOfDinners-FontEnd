@@ -60,6 +60,7 @@
             nameFlag:false,
             passFlag:false,
             roleFlag:false,
+            postResponse:false,
           }
       },
       computed:{
@@ -71,12 +72,10 @@
         //检查用户名
         checkUsername(){
           let name=this.peopleInfo.username;
-
           let tmpThis=this;
           if (name.length<5||name.length>20){
             this.errinfo="用户名应为5-20字符之间";
             this.classlo="weakPass";
-
           }
           else {
             this.$httpM.get(this.$api.User.userNameCount,{params:{'username':this.peopleInfo.username}})
@@ -130,7 +129,7 @@
               this.classlo="weakPass";
               return ;
           }
-          var tmpThis=this;
+          let tmpThis=this;
           this.$httpM.post(this.$api.User.login,this.peopleInfo,false)
           .then(function (response){
             if (response.status===200){
@@ -150,17 +149,19 @@
               if (err.response.status===510){
                 tmpThis.errinfo=err.response.data;
                 tmpThis.classlo="weakPass";
+                tmpThis.roleFlag=false;
               }
               else if (err.response.status===509){
                 tmpThis.errinfo="密码错误！";
                 tmpThis.classlo="weakPass";
+                tmpThis.passFlag=false;
               }
             }else if (err.request){
               console.log(err.request);
             } else {
               console.log('Error',err.message);
             }
-            console.log(err.config);
+            //console.log(err.config);
           })
 
         }
