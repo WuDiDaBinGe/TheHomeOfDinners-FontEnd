@@ -31,7 +31,7 @@ import {getLocalStore, setLocalStore} from "../../assets/storage/localstorage";
           return{
             card_lists:[
               {name:"火锅",result:2,img_path:"/static/img/hotpot.svg"},
-              {name:"面粉馆",result:2,img_path:"/static/img/noodles.svg"},
+              {name:"粉面馆",result:2,img_path:"/static/img/noodles.svg"},
               {name:"西餐",result:2,img_path:"/static/img/xican.svg"},
               {name:"小吃",result:2,img_path:"/static/img/taco.svg"},
               {name:"自助餐",result:2,img_path:"/static/img/pizza.svg"},

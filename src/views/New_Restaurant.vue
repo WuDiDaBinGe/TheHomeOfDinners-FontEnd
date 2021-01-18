@@ -135,6 +135,7 @@
             this.$httpM.post(this.$api.Restaurant.create,param,false)
             .then(function (response) {
               console.log("response:",response);
+               this.$router.push('/confirm');
             })
             .catch(function (err) {
               console.log("err:",err);

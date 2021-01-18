@@ -68,19 +68,19 @@
 							<div id="message-newsletter"></div>
 							<form method="post" action="assets/newsletter.php" name="newsletter_form" id="newsletter_form">
 								<div class="form-group">
-									<input type="email" name="email_newsletter" id="email_newsletter" class="form-control" placeholder="Your email">
-									<input type="submit" value="Submit" id="submit-newsletter">
+									<input type="email" name="email_newsletter" id="email_newsletter" class="form-control" placeholder="你的邮箱">
+									<input type="submit" value="提交" id="submit-newsletter">
 								</div>
 							</form>
 						</div>
 						<div class="follow_us">
 							<h5>这里也可以找到我们！</h5>
 							<ul>
-								<li><a href="www.facebook.com"><i class="ti-facebook"></i></a></li>
-								<li><a href="www.twitter.com"><i class="ti-twitter-alt"></i></a></li>
-								<li><a href="www.google.com"><i class="ti-google"></i></a></li>
-								<li><a href="www.pinterest.com"><i class="ti-pinterest"></i></a></li>
-								<li><a href="www.ti-instagram.com"><i class="ti-instagram"></i></a></li>
+								<li><a href="http://www.facebook.com"><i class="ti-facebook"></i></a></li>
+								<li><a href="http://www.twitter.com"><i class="ti-twitter-alt"></i></a></li>
+								<li><a href="http://www.google.com"><i class="ti-google"></i></a></li>
+								<li><a href="http://www.pinterest.com"><i class="ti-pinterest"></i></a></li>
+								<li><a href="http://www.ti-instagram.com"><i class="ti-instagram"></i></a></li>
 							</ul>
 						</div>
 					</div>

@@ -14,37 +14,37 @@
 								</g>
 							</svg>
 						</div>
-					<h2>Review submitted!</h2>
-					<p>Thanks for your feedback!</p>
+					<h2>操作成功！</h2>
+					<p>感谢您的操作!</p>
 					</div>
 				</div>
 			</div>
 			<!-- /row -->
 		</div>
 		<!-- /container -->
-		
+
 		<div class="bg_color_1">
 			<div class="container margin_60_35">
 				<div class="row">
 					<div class="col-lg-4">
-						<a href="#0" class="boxed_list">
+						<a href="/faq" class="boxed_list">
 							<i class="pe-7s-help2"></i>
-							<h4>Need Help?</h4>
-							<p>Cum appareat maiestatis interpretaris et, et sit epicurei tractatos constituam ad mel.</p>
+							<h4>需要帮助?</h4>
+							<p>更好的了解如何使用食客之家。</p>
 						</a>
 					</div>
 					<div class="col-lg-4">
-						<a href="#0" class="boxed_list">
+						<a href="/faq" class="boxed_list">
 							<i class="pe-7s-flag"></i>
-							<h4>Report Abuse</h4>
-							<p>Cum appareat maiestatis interpretaris et, et sit epicurei tractatos constituam ad mel.</p>
+							<h4>举报</h4>
+							<p>举报不符合平台规则的行为。</p>
 						</a>
 					</div>
 					<div class="col-lg-4">
-						<a href="#0" class="boxed_list">
+						<a href="/faq" class="boxed_list">
 							<i class="pe-7s-note2"></i>
-							<h4>Cancel Policy</h4>
-							<p>Cum appareat maiestatis interpretaris et, et sit epicurei tractatos constituam ad mel.</p>
+							<h4>条款和协议</h4>
+							<p>条款和协议说明了商家和用户的权利以及遵守的规则。</p>
 						</a>
 					</div>
 				</div>
@@ -55,9 +55,9 @@
 		<!-- /bg_color_1 -->
 	</main>
 	<!--/main-->
-	
+
         <Footer_com></Footer_com>
-    </div>    
+    </div>
 </template>
 
 <script>

@@ -14,7 +14,7 @@
         <h5>{{review.text}}</h5>
 
         <ul>
-          <li :class="[{'text-danger':review.analyze_result},{'text-success':!review.analyze_result}]" class="">分析结果：{{review.analyze_result==='0'?'坏评':'好评'}}</li>
+          <li :class="[{'text-danger':!review.analyze_result},{'text-success':review.analyze_result}]" class="">分析结果：{{review.analyze_result!=='0'?'坏评':'好评'}}</li>
           <li></li>
           <li>评论时间：{{review.datetime.split("T")[0]}}</li>
           <li @click="showDelReviewConfirm" v-show="loginUserID===review.user"><a><i class="ti-trash text-danger">删除</i></a></li>
