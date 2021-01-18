@@ -1,5 +1,5 @@
 <template>
-    <div class="copy">© 2020 食客之家</div>
+    <div class="copy">© 2021 食客之家</div>
 </template>
 
 <script>

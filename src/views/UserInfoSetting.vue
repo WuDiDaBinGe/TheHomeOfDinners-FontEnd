@@ -145,6 +145,7 @@
         this.$httpM.get(this.$api.User.userCollectionRes.replace("{id}",this.userId),false)
         .then(function (response) {
           tmpThis.myCollection=response.data;
+          console.log("data",response.data);
         })
         .catch(function (err) {
 
@@ -187,6 +188,7 @@
                              console.log("error",error);});
                              this.$message.success("删除用户成功！");
                              this.visible=false;
+                             this.$router.push('/confirm');
       },
       handleCancel(){
         this.$message.success("取消删除");

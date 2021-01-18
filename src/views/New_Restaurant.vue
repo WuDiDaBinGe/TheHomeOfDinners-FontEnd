@@ -42,7 +42,7 @@
 							<input class="form-control" type="text"  placeholder="餐馆的具体地点" v-model="new_restaurant.res_address">
 						</div>
             <div class="form-group">
-							<label>加一点餐馆和菜品的图片(可选)</label>
+							<label>加一点餐馆和菜品的图片(必选)</label>
 							<div class="fileupload"><input type="file"  name="imgLocal" accept="image/*" @change="triggerFile($event)"></div>
 						</div>
             <div class="form-group">
@@ -94,7 +94,7 @@
               business_time:null,
               mobile:"",
               owner:"",
-            }
+            },
         }},
         methods: {
           triggerFile(event) {
@@ -106,6 +106,7 @@
             var restaurantInfo=this.new_restaurant;
             var resNameL=restaurantInfo.res_name;
             var resAddressL=restaurantInfo.res_address;
+            var create_tag=false;
             if ((resNameL<5||resNameL>20)||(resAddressL<5||resAddressL>20)){
               this.$message.error("餐馆名称和地址必须5-20字符！");
               return;
@@ -128,7 +129,9 @@
             let param=new FormData();
             param.append("res_name",this.new_restaurant.res_name);           //向对象中添加数据
             param.append("res_address",this.new_restaurant.res_address);
+            if(this.new_restaurant.picture!=null)
             param.append("picture",this.new_restaurant.picture,this.new_restaurant.picture.name);
+            if(this.new_restaurant.business_time!=null)
             param.append("business_time",this.new_restaurant.business_time);
             param.append("mobile",this.new_restaurant.mobile);
             param.append("owner",this.new_restaurant.owner);
@@ -137,10 +140,13 @@
             this.$httpM.post(this.$api.Restaurant.create,param,false)
             .then(function (response) {
               console.log("response:",response);
+              if(response.status===201)
+               alert("已提交管理员审核！");
+             location.reload();
             })
             .catch(function (err) {
               console.log("err:",err);
-            })
+            });
           },
           getTagsList(){
             var tmpThis=this;
@@ -153,13 +159,15 @@
             .catch(function (err) {
                 console.log(err);
             })
-          }
+          },
         },
         components: {Footer_com, LastView_Right, Header_WB},
       created() {
           this.getTagsList();
-      }
+      },
+
     }
+
 </script>
 
 <style scoped>
