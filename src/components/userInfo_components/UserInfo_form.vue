@@ -52,11 +52,11 @@ export default {
           return{
               user:this.userL,
               lineOlderPassword:"",
-            lineNewPassword:"",
-            lineReNewPassword:"",
-            clearfix:"",
-            errInfo:"",
-            formFlag:{
+              lineNewPassword:"",
+              lineReNewPassword:"",
+              clearfix:"",
+              errInfo:"",
+              formFlag:{
                 OldPwdFlag:false,
                 PwdFlag:false,
                 Pwd2Flag:false,

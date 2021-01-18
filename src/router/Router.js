@@ -109,7 +109,7 @@ const routes=[
   },
   //确认页面
   {
-    path:"/comfirm",
+    path:"/confirm",
     component:()=>import("../views/Confirm")
   },
   //评论分析结果页面
