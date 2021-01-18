@@ -23,7 +23,7 @@
             <hr>
             <div class="form-group">
                 <label>旧密码</label>
-                <input class="form-control" type="password"   v-model="lineOlderPassword" @blur="verifyOldwd">
+                <input class="form-control" type="password"   v-model="lineOlderPassword" >
             </div>
             <div class="form-group">
                 <label>新密码</label>
@@ -91,7 +91,7 @@ export default {
               tmpThis.clearfix="";
           }else{
            tmpThis.formFlag.OldPwdFlag=false;
-           tmpThis.errInfo="与旧密码不匹配！";
+           tmpThis.errInfo="请输入正确的旧密码！";
            tmpThis.clearfix="weakPass";
           }
         });
@@ -133,6 +133,7 @@ export default {
             }
           },
       changeUserPassword(){
+        this.verifyOldwd()
         if(!this.canChangePassword){
           this.$message.error("输入有错误，请检查！");
           return ;
