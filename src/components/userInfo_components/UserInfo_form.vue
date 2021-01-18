@@ -80,7 +80,18 @@ export default {
         })
       },
       verifyOldwd(){
-
+        let tmpThis = this;
+        this.$httpM.put(this.$api.User.checkOldPassword.replace("{id}",this.userL.id),{password:this.lineOlderPassword}).then(function (response){
+          if(response.data===true){
+             tmpThis.formFlag.OldPwdFlag=true;
+              tmpThis.errInfo="";
+              tmpThis.clearfix="";
+          }else{
+           tmpThis.formFlag.OldPwdFlag=false;
+           tmpThis.errInfo="与旧密码不匹配！";
+           tmpThis.clearfix="weakPass";
+          }
+        });
       },
       verifyPwd:function () {
             //Must contain 5 characters or more
@@ -121,13 +132,11 @@ export default {
       changeUserPassword(){
         if(!this.canChangePassword){
           this.$message.error("输入有错误，请检查！");
-           console.log("输入错误");
           return ;
         }
         else{
           this.$httpM.put(this.$api.User.update.replace("{id}",this.userL.id),{password:this.lineNewPassword}).catch(function (error){
             console.log("error",error);
-             console.log("不会对了吧！");
           });
         }
       },
