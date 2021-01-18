@@ -17,7 +17,6 @@
 							<li><a href="/faq">帮助</a></li>
 							<li><a href="/userinfo">我的账户</a></li>
 							<li><a href="/Register">创建账户</a></li>
-							<li><a href="http://www.17sucai.com/">联系我们</a></li>
 						</ul>
 					</div>
 				</div>
@@ -50,9 +49,9 @@
 					</a>
 					<div class="collapse show" id="collapse_ft_3">
 						<ul class="contacts">
-							<li><i class="ti-home"></i>97845 Baker st. 567<br>Los Angeles - US</li>
-							<li><i class="ti-headphone-alt"></i>+61 23 8093 3400</li>
-							<li><i class="ti-email"></i><a href="#0">info@domain.com</a></li>
+							<li><i class="ti-home"></i>国防科技大学软件工程方法与实践11组<br>中国 - 长沙</li>
+							<li><i class="ti-headphone-alt"></i>+0731 777 7777</li>
+							<li><i class="ti-email"></i><a href="https://www.nudt.edu.cn/">ruangongxiaozu11@nudt.com</a></li>
 						</ul>
 					</div>
 				</div>
@@ -62,7 +61,7 @@
 							<div class="horizontal"></div>
 							<div class="vertical"></div>
 						</div>
-						<h3>Keep in touch</h3>
+						<h3>联系我们</h3>
 					</a>
 					<div class="collapse show" id="collapse_ft_4">
 						<div id="newsletter">
@@ -77,11 +76,11 @@
 						<div class="follow_us">
 							<h5>这里也可以找到我们！</h5>
 							<ul>
-								<li><a href="#0"><i class="ti-facebook"></i></a></li>
-								<li><a href="#0"><i class="ti-twitter-alt"></i></a></li>
-								<li><a href="#0"><i class="ti-google"></i></a></li>
-								<li><a href="#0"><i class="ti-pinterest"></i></a></li>
-								<li><a href="#0"><i class="ti-instagram"></i></a></li>
+								<li><a href="www.facebook.com"><i class="ti-facebook"></i></a></li>
+								<li><a href="www.twitter.com"><i class="ti-twitter-alt"></i></a></li>
+								<li><a href="www.google.com"><i class="ti-google"></i></a></li>
+								<li><a href="www.pinterest.com"><i class="ti-pinterest"></i></a></li>
+								<li><a href="www.ti-instagram.com"><i class="ti-instagram"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -107,8 +106,8 @@
 				</div>
 				<div class="col-lg-6">
 					<ul id="additional_links">
-						<li><a href="#0">条款</a></li>
-						<li><a href="#0">隐私</a></li>
+						<li><a href="/faq">条款</a></li>
+						<li><a href="/faq">隐私</a></li>
 						<li><span>© 2021 食客之家</span></li>
 					</ul>
 				</div>
