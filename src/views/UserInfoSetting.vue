@@ -112,6 +112,9 @@
       userId(){
         return JSON.parse(getLocalStore("userLogin"))['user_id'];
       },
+      useRole(){
+        return JSON.parse(getLocalStore("userLogin"))['role'];
+      },
       avatarUrl(){
         return getLocalStore('Avatar');
       },
@@ -142,14 +145,27 @@
       //查询用户收藏
       getMyCollectRes(){
         let tmpThis=this;
-        this.$httpM.get(this.$api.User.userCollectionRes.replace("{id}",this.userId),false)
-        .then(function (response) {
-          tmpThis.myCollection=response.data;
-          console.log("data",response.data);
-        })
-        .catch(function (err) {
+        if (this.useRole==='1'){
+          this.$httpM.get(this.$api.User.userCollectionRes.replace("{id}",this.userId),false)
+          .then(function (response) {
+            tmpThis.myCollection=response.data;
+            console.log("data",response.data);
+          })
+          .catch(function (err) {
 
-        })
+          })
+        }
+        else if (this.useRole==='2'){
+          this.$httpM.get(this.$api.Restaurant.ownerList.replace("{id}",this.userId),false)
+          .then(function (response) {
+            tmpThis.myCollection=response.data;
+            console.log("data",response.data);
+          })
+          .catch(function (err) {
+
+          })
+        }
+
       },
       //查询用户评论
       getMyReviewList(url){
