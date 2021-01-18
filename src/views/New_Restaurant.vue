@@ -104,7 +104,9 @@
             var reg = /^[a-zA-Z0-9]{5,20}$/;
             var phonereg = /^1[3|4|5|7|8][0-9]{9}$/;
             var restaurantInfo=this.new_restaurant;
-            if (!reg.test(restaurantInfo.res_name)||!reg.test(restaurantInfo.res_address)){
+            var resNameL=restaurantInfo.res_name;
+            var resAddressL=restaurantInfo.res_address;
+            if ((resNameL<5||resNameL>20)||(resAddressL<5||resAddressL>20)){
               this.$message.error("餐馆名称和地址必须5-20字符！");
               return;
             }

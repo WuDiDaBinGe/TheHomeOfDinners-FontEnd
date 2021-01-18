@@ -253,6 +253,7 @@
           },
           user_register(){
             if(!this.canRegister){
+              console.log(this.formFlag);
               this.$message.error("请检查注册信息");
               return ;
             }

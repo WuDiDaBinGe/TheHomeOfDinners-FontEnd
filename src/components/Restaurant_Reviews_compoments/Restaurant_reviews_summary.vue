@@ -9,7 +9,7 @@
 							</figure>
 							<small><i class="ti-location-pin">{{this.resobj.res_address}}</i></small>
 							<h1 @click="collectRes">{{this.resobj.res_name}} <i class="icon_star_alt" :class="[{'iscollected':isCollected}]" ></i></h1>
-							<span class="rating"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star empty"></i><em>{{resobj.score}}/5.00 - based on {{reviewSumScore.totalSum}} reviews</em></span>
+							<span class="rating"><i class="icon_star" v-for="(i,index) in 5" :class="[{'empty':(index-resobj.score)>=0}]"></i><em>{{Math.round(resobj.score)}}/5.00 - based on {{reviewSumScore.totalSum}} reviews</em></span>
 						</div>
 						<div class="col-lg-4 review_detail">
 							<div class="row">

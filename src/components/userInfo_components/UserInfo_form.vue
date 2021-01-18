@@ -15,7 +15,7 @@
                 <label>修改手机号</label>
                 <input class="form-control" type="text"  v-model="userL.mobile" >
             </div>
-            <p class="text-right"><a class="btn_1 small add_top_15" @click="changeUserMobile_picture">保存个人信息</a></p>
+            <p class="text-right"><a class="btn_1 small add_top_15" @click="changeUserInfo">保存个人信息</a></p>
         </div>
         <!-- /settings_panel -->
         <div class="settings_panel">
@@ -52,11 +52,11 @@ export default {
           return{
               user:this.userL,
               lineOlderPassword:"",
-            lineNewPassword:"",
-            lineReNewPassword:"",
-            clearfix:"",
-            errInfo:"",
-            formFlag:{
+              lineNewPassword:"",
+              lineReNewPassword:"",
+              clearfix:"",
+              errInfo:"",
+              formFlag:{
                 OldPwdFlag:false,
                 PwdFlag:false,
                 Pwd2Flag:false,

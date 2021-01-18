@@ -125,7 +125,7 @@
           console.log(this.nameFlag,this.passFlag,this.roleFlag);
           //表单验证不通过
           if (!this.canLoginFlag){
-              this.errinfo="请正确填写登录信息";
+              this.errinfo="请正确填写登录名、密码、角色信息";
               this.classlo="weakPass";
               return ;
           }
