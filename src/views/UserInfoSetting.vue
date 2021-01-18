@@ -13,7 +13,7 @@
 								<img :src="user.picture">
 							</figure>
 							<h1>{{user.username}}</h1>
-							<span>角色：{{user.role===1?"用户":"商家"}}</span>
+							<span>角色：{{user.role==='1'?"用户":"商家"}}</span>
 						</div>
 						<div class="col-md-6">
 							<ul>
@@ -27,7 +27,7 @@
 								</li>
 								<li @click="getMyRes">
 									<strong>{{myCollection.count}}</strong>
-                  <a><i class="icon_star"></i> {{user.role===1?"收藏":"我的餐馆"}}</a>
+                  <a><i class="icon_star"></i> {{user.role==='1'?"收藏":"我的餐馆"}}</a>
 								</li>
 							</ul>
 						</div>
