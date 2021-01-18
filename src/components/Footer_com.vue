@@ -12,18 +12,18 @@
 					</a>
 					<div class="collapse show" id="collapse_ft_1">
 						<ul class="links">
-							<li><a href="#0">About us</a></li>
-							<li><a href="#0">Faq</a></li>
-							<li><a href="#0">Help</a></li>
-							<li><a href="#0">My account</a></li>
-							<li><a href="#0">Create account</a></li>
-							<li><a href="http://www.17sucai.com/">Contacts</a></li>
+							<li><a href="#0">关于我们</a></li>
+							<li><a href="/faq">平台规则</a></li>
+							<li><a href="/faq">帮助</a></li>
+							<li><a href="/userinfo">我的账户</a></li>
+							<li><a href="/Register">创建账户</a></li>
+							<li><a href="http://www.17sucai.com/">联系我们</a></li>
 						</ul>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<a data-toggle="collapse" data-target="#collapse_ft_2" aria-expanded="false" aria-controls="collapse_ft_2" class="collapse_bt_mobile">
-						<h3>Categories</h3>
+						<h3>餐馆种类</h3>
 						<div class="circle-plus closed">
 							<div class="horizontal"></div>
 							<div class="vertical"></div>
@@ -31,12 +31,12 @@
 					</a>
 					<div class="collapse show" id="collapse_ft_2">
 						<ul class="links">
-							<li><a href="#0">Shops</a></li>
-							<li><a href="#0">Hotels</a></li>
-							<li><a href="#0">Restaurants</a></li>
-							<li><a href="#0">Bars</a></li>
-							<li><a href="#0">Events</a></li>
-							<li><a href="#0">View all</a></li>
+							<li><a href="#0">小吃</a></li>
+							<li><a href="#0">火锅</a></li>
+							<li><a href="#0">西餐</a></li>
+							<li><a href="#0">自助餐</a></li>
+							<li><a href="#0">面粉馆</a></li>
+							<li><a href="#0">我全都要！</a></li>
 						</ul>
 					</div>
 				</div>
@@ -109,7 +109,7 @@
 					<ul id="additional_links">
 						<li><a href="#0">条款</a></li>
 						<li><a href="#0">隐私</a></li>
-						<li><span>© 2020 食客之家</span></li>
+						<li><span>© 2021 食客之家</span></li>
 					</ul>
 				</div>
 			</div>

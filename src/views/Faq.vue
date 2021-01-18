@@ -253,7 +253,7 @@
 import Footer_com from '../components/Footer_com.vue';
 import Header_wb from '../components/Header_WB';
 export default {
-  components: { Footer_com },
+  components: { Footer_com ,Header_wb },
 
 }
 </script>
