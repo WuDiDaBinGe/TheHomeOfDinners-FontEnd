@@ -23,22 +23,20 @@
              <div class="form-group" >
              <label>餐馆类型：</label><span class="text-danger">*</span>
                <div class="col-lg-4">
-									<select class="wide nice-select" name="find2" v-model="new_restaurant.res_tag">
-                    <option value="请选择">请选择餐馆类型</option>
-										<option v-for="item in tags_list" v-bind:value="item">{{item}}</option>
-                  </select>
+                 <a-select default-value="请选择"  @change="handleRestaurantTagChange">
+                 <a-select-option v-for="item in tags_list" v-bind:value="item">{{item}}</a-select-option>
+               </a-select>
+
                </div>
                 </div>
-            <br></br>
             <div class="form-group">
 							<label>地址：</label><span class="text-danger">*</span>
               <div class="col-lg-4">
-
-									<select class="wide nice-select" name="find2" v-model="new_restaurant.res_region_tag">
-                    <option value="请选择">请选择地区</option>
-										<option v-for="item in regions_list" v-bind:value="item">{{item}}</option>
-                  </select>
+									  <a-select default-value="请选择" @change="handleRegionTagChange">
+                 <a-select-option v-for="item in regions_list"  v-bind:value="item">{{item}}</a-select-option>
+               </a-select>
                </div>
+<br>
 							<input class="form-control" type="text"  placeholder="餐馆的具体地点" v-model="new_restaurant.res_address">
 						</div>
             <div class="form-group">
@@ -97,6 +95,15 @@
             },
         }},
         methods: {
+          handleRestaurantTagChange(value){
+            this.new_restaurant.res_tag=value;
+          },
+          handleRegionTagChange(value){
+            this.new_restaurant.res_region_tag=value;
+          },
+          Region_tag(item){
+            this.new_restaurant.res_region_tag=item;
+          },
           triggerFile(event) {
             this.new_restaurant.picture=event.target.files[0];
           },
