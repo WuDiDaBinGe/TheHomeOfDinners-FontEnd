@@ -23,17 +23,16 @@
              <div class="form-group" >
              <label>餐馆类型：</label><span class="text-danger">*</span>
                <div class="col-lg-4">
-									<select class="wide nice-select" name="find2" v-model="new_restaurant.res_tag">
+									<select class="wide nice-select"  v-model="new_restaurant.res_tag">
                     <option value="请选择">请选择餐馆类型</option>
 										<option v-for="item in tags_list" v-bind:value="item">{{item}}</option>
                   </select>
                </div>
                 </div>
-            <br></br>
+            <br>
             <div class="form-group">
 							<label>地址：</label><span class="text-danger">*</span>
               <div class="col-lg-4">
-
 									<select class="wide nice-select" name="find2" v-model="new_restaurant.res_region_tag">
                     <option value="请选择">请选择地区</option>
 										<option v-for="item in regions_list" v-bind:value="item">{{item}}</option>
@@ -96,11 +95,23 @@
               owner:"",
             },
         }},
+      computed:{
+      userId(){
+        return JSON.parse(getLocalStore("userLogin"))['user_id'];
+      },
+      useRole(){
+        return JSON.parse(getLocalStore("userLogin"))['role'];
+      },
+    },
         methods: {
           triggerFile(event) {
             this.new_restaurant.picture=event.target.files[0];
           },
           submitRes(){
+            if (this.useRole!=='2'){
+              this.$message.error("只有商户才能创建餐馆！");
+              return;
+            }
             var reg = /^[a-zA-Z0-9]{5,20}$/;
             var phonereg = /^1[3|4|5|7|8][0-9]{9}$/;
             var restaurantInfo=this.new_restaurant;

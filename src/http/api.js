@@ -26,12 +26,13 @@ export default{
   //餐馆
   Restaurant:{
     list:'/restaurant',                           //查询餐馆列表
+    ownerList:'/restaurant/{id}/get_by_owner/',   //查询拥有的餐馆
     create:'/restaurant/',                        //创建餐馆
     delete:'/restaurant/{id}/',                   //删除餐馆
     singleRestaurant:"/restaurant/",              //查询一个餐馆
     scoreCount:"/restaurant/{id}/reviews_count/", //查询餐馆下各个评分的个数
     modelpredict:"/restaurant/{id}/pos_or_nav_reviews_count/", //查询餐馆模型评分
-    wordCloud:"/restaurant/{id}/wordCloud/"       //词云图片
+    wordCloud:"/restaurant/{id}/wordCloud/",      //词云图片
   },
   //菜单
   Menu:{

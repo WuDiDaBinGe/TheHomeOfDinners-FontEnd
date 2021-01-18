@@ -8,7 +8,8 @@
                 <div class="col-md-7">
                     <div class="company_info">
                         <figure><img :src="Restaurant.picture"  width="25%" ></figure>
-                        <h3> {{Restaurant.res_name}} </h3>
+
+                        <h3> {{Restaurant.res_name}}<a-tooltip class="text-info"><template slot="title" class="text-warning">请联系管理员ruangongxiaozu11@nudt.com</template>{{Restaurant.verify==='0'?'(审核中)':(Restaurant.verify==='1'?'':'(审核不通过)')}}</a-tooltip> </h3>
                         <p> {{Restaurant.res_address}} </p>
                         <p><i class="ti-star ant-tag-orange">收藏数：</i>{{Restaurant.collection_count}}</p>
                     </div>
@@ -147,10 +148,16 @@ export default {
       }
       //如果父组件为用户信息页面
       else if (this.parentName==='UserInfo'){
+        //使用户读取收藏的餐馆
+        if (this.userRole==='1'){
           this.getResList(this.$api.User.userCollectionRes.replace("{id}",this.uerId));
-          if (this.userRole==='2'){
-            this.editMenu=true;
-          }
+        }
+        //用户角色为商家
+        else if(this.userRole==='2'){
+          this.editMenu=true;
+          this.getResList(this.$api.Restaurant.ownerList.replace('{id}',this.uerId));
+        }
+
       }
       this.GetReviewAnalyzeFlag();
     },
