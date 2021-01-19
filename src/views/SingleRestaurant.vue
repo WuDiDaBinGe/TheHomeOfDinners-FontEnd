@@ -65,8 +65,8 @@
             current_page:1,
             total_page:0,
             pie_d:{
-              pos:0,
-              nav:0,
+              pos:-1,
+              nav:-1,
             },
             wordCloudUrl:"",
           }
