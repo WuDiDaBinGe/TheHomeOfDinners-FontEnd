@@ -1,5 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import form from "vue-resource/src/http/interceptor/form";
+import {getLocalStore} from "../assets/storage/localstorage";
+import {message} from "ant-design-vue";
 
 Vue.use(VueRouter);
 
@@ -57,7 +60,7 @@ const routes=[
   },
   //某个餐馆页面
   {
-    path:'/restaurant/',
+    path:'/restaurant',
     name:"restaurant",
     component:()=>import("../views/SingleRestaurant")
   },
@@ -110,6 +113,7 @@ const routes=[
   //确认页面
   {
     path:"/confirm",
+    name:'confirm',
     component:()=>import("../views/Confirm")
   },
   //评论分析结果页面
@@ -136,6 +140,30 @@ const router = new VueRouter({
 });
 
 //待添加全局路由拦截
+// const isLogin = sessionStorage.getItem("sessiontoken");
+//   if (isLogin){
+//     next();
+//   }else{
+//     if (to.fullPath == "/Login") {
+//       next();
+//     }else{
+//       next({path: '/Login'})
+//     };
+//   };
+
+router.beforeEach((to,form,next)=>{
+  let isLogin = getLocalStore("userLogin");
+  if (isLogin!=null){
+    next();
+  }else{
+    if (to.fullPath === "/userinfo"||to.fullPath.indexOf('/restaurant?id')!==-1) {
+      message.error('请先登录！');
+      next({path: '/login'});
+    }else{
+      next();
+    }
+  }
+})
 
 
 export default router;

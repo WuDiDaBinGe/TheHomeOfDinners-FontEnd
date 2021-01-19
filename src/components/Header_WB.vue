@@ -42,13 +42,12 @@
                   <li><span><a href="#0">商户服务</a></span>
                 <ul>
                   <li><router-link to="/new_res">创建餐馆</router-link></li>
-                  <li><router-link to="">商户中心</router-link></li>
+                  <li><router-link to="/userinfo">商户中心</router-link></li>
                 </ul>
               </li>
               <li><span><a href="#0">帮助中心</a></span>
                 <ul>
                   <li><router-link to="/faq">平台规则</router-link></li>
-                  <li><router-link to="/">联系客服</router-link></li>
                   <li><router-link to="/register">注册</router-link></li>
                   <li><router-link to="/login">登录</router-link></li>
                 </ul>

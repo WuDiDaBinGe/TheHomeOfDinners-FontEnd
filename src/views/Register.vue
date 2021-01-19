@@ -3,7 +3,7 @@
   <div id="register">
 		<aside>
 			<figure>
-				<a href="{% url 'index' %}"><img src="../../static/img/logo_sticky.svg" width="140" height="35" alt="" class="logo_sticky"></a>
+				<router-link to="/index"><img src="../../static/img/logo_sticky.svg" width="140" height="35" alt="" class="logo_sticky"></router-link>
 			</figure>
 
       <div class="divider"><span>注册</span></div>
@@ -233,7 +233,7 @@
           },
           checkSmsCode(){
             var smsCode = /^[0-9]{3,10}$/;
-            if (!smsCode.test(this.peopleInfo.sms_code.length)) {
+            if (!smsCode.test(this.peopleInfo.sms_code)) {
               this.errInfo = "请填写正确的验证码";
               this.clearfix = "weakPass";
             } else {

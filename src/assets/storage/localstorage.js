@@ -17,7 +17,7 @@ export const setLocalStore = (name, content) => {
    * 获取localStorage
    */
   export const getLocalStore = name => {
-    if (!name) return
+    if (!name) return null;
     return window.localStorage.getItem(name)
   }
 
