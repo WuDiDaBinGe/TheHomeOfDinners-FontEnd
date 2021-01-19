@@ -82,7 +82,7 @@
               tmpThis.$httpM.del(tmpThis.$api.Review.del.replace("{id}",tmpThis.review.id))
               .then(response=>{
                 tmpThis.$message.success("删除成功！");
-                tmpThis.$router.push('/userinfo');
+                tmpThis.$router.push('/confirm');
               })
               .catch(function (err) {
 

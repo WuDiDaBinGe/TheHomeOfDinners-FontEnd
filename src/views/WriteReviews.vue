@@ -53,7 +53,7 @@
           </div>
           <!-- /col -->
           <div class="col-lg-4">
-            <LastView_Right></LastView_Right>
+
             <!-- /latest_review -->
           </div>
         </div>

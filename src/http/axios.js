@@ -35,7 +35,7 @@ axios.interceptors.response.use(response => {
         if(error.response.status===400){
           console.log("400错误！");
           // 对400 错误您的处理
-          message.warning(error.response.data);
+          message.warning(error.response.data['non_field_errors']);
         }
         return Promise.reject(error);
     }
