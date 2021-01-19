@@ -35,6 +35,7 @@
 									  <a-select default-value="请选择" @change="handleRegionTagChange">
                  <a-select-option v-for="item in regions_list"  v-bind:value="item">{{item}}</a-select-option>
                </a-select>
+
                </div>
 <br>
 							<input class="form-control" type="text"  placeholder="餐馆的具体地点" v-model="new_restaurant.res_address">
@@ -94,6 +95,14 @@
               owner:"",
             },
         }},
+      computed:{
+      userId(){
+        return JSON.parse(getLocalStore("userLogin"))['user_id'];
+      },
+      useRole(){
+        return JSON.parse(getLocalStore("userLogin"))['role'];
+      },
+    },
         methods: {
           handleRestaurantTagChange(value){
             this.new_restaurant.res_tag=value;
@@ -108,6 +117,10 @@
             this.new_restaurant.picture=event.target.files[0];
           },
           submitRes(){
+            if (this.useRole!=='2'){
+              this.$message.error("只有商户才能创建餐馆！");
+              return;
+            }
             var reg = /^[a-zA-Z0-9]{5,20}$/;
             var phonereg = /^1[3|4|5|7|8][0-9]{9}$/;
             var restaurantInfo=this.new_restaurant;
