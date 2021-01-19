@@ -15,49 +15,8 @@
                 <span class="price">￥{{food.price}}</span>
             </li>
         </ul>
-        <ul class="tab-pane fade recommend-photo" id="enviroment">
-            <li class="pictures_item">
-                <img data-src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg" src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg">
-                  2
-            </li>
-            <li class="pictures_item">
-                <img data-src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg" src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg">
-                  2
-            </li>
-            <li class="pictures_item">
-                <img data-src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg" src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg">
-                  2
-            </li>
-            <li class="pictures_item">
-                <img data-src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg" src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg">
-                  2
-            </li>
-            <li class="pictures_item">
-                <img data-src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg" src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg">
-                  2
-            </li>
-            <li class="pictures_item">
-                <img data-src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg" src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg">
-                  2
-            </li>
-            <li class="pictures_item">
-                <img data-src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg" src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg">
-                  2
-            </li>
-            <li class="pictures_item">
-                <img data-src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg" src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg">
-                  2
-            </li>
-        </ul>
-        <ul class="tab-pane fade recommend-photo" id="prices">
-            <li class="pictures_item">
-                <img data-src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg" src="https://qcloud.dpfile.com/pc/jVglaE5dvDGUxiQIki7aYtQO4hcP1gPu5WJ01mCkfPjHjlYGlwvmDrKgf1j7TbnguzFvxlbkWx5uwqY2qcjixFEuLYk00OmSS1IdNpm8K8sG4JN9RIm2mTKcbLtc2o2vfCF2ubeXzk49OsGrXt_KYDCngOyCwZK-s3fqawWswzk.jpg">
-                3
-            </li>
-        </ul>
         <ul class="tab-pane fade recommend-photo" id="safe_certificate">
             <li>
-
               <img class="img-rounded wordCloud " :src="wordCloudUrl">
             </li>
         </ul>
@@ -74,14 +33,6 @@
                 pictures_navs:[{
                     navs_titile:"推荐菜品",
                     target_dive:"#recommend_food"
-                },
-                {
-                    navs_titile:"环境",
-                    target_dive:"#enviroment"
-                },
-                {
-                    navs_titile:"价目表",
-                    target_dive:"#prices"
                 },
                 {
                     navs_titile:"评论词云",

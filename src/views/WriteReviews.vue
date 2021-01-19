@@ -24,7 +24,7 @@
               <!-- /rating_submit -->
               <div class="form-group">
                 <label>吃货的评论</label>
-                <textarea class="form-control" style="height: 180px;" v-model="newReview.text" placeholder="您的意见将会帮助其他吃货还有提高餐馆的质量哦"></textarea>
+                <textarea class="form-control" style="height: 180px;" v-model="newReview.text" placeholder="您的意见将会帮助其他吃货还有提高餐馆的质量哦(10字以上)"></textarea>
               </div>
               <div class="form-group">
                 <label>就餐时间</label>
@@ -48,7 +48,6 @@
                   </label>
                 </div>
               </div>
-              <P>{{isAgree}}</P>
               <a><input type="button" class="btn_1"  value="Submit review" @click="postNewReview"></a>
             </div>
           </div>
@@ -130,6 +129,10 @@
           postNewReview(){
             if (this.isAgree.length<=0){
               this.$message.warning("请勾选同意条款！");
+              return ;
+            }
+            else if(this.newReview.text.length<10){
+              this.$message.warning("评论内容必须大于10个字！");
               return ;
             }
             var tmpThis=this;

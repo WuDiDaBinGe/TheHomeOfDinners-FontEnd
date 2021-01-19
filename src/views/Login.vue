@@ -20,7 +20,6 @@
               <option value="0">请选择角色</option>
               <option value="1">用户</option>
               <option value="2">商家</option>
-              <option value="3">管理员</option>
             </select>
             <i class="ti-user"></i>
           </div>

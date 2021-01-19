@@ -147,6 +147,7 @@
             //  let res_region_id = this.regions_list.findIndex(item => item===restaurantInfo.res_region_tag);
             this.new_restaurant.owner=JSON.parse(getLocalStore("userLogin"))['user_id'];
             let param=new FormData();
+            let tmpThis=this;
             param.append("res_name",this.new_restaurant.res_name);           //向对象中添加数据
             param.append("res_address",this.new_restaurant.res_address);
             if(this.new_restaurant.picture!=null)
@@ -162,7 +163,9 @@
               console.log("response:",response);
               if(response.status===201)
                alert("已提交管理员审核！");
-             location.reload();
+
+             //location.reload();
+              tmpThis.$router.push({name:'confirm'})
             })
             .catch(function (err) {
               console.log("err:",err);
