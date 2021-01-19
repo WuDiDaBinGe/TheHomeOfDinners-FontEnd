@@ -24,13 +24,13 @@ export default {
     console.log(this.nav);
     console.log(this.pos);
     console.log("开始绘图！")
-
   },
   watch: {
     nav:function (newValue,oldValue){
         console.log(newValue+"newValue");
         this.draw(newValue,100-newValue);
     },
+
   },
   methods:{
     draw(pos,nav){
@@ -47,8 +47,8 @@ export default {
             radius: '40%',
             center: ['50%', '50%'],
             data: [
-              {name: '差评', value: nav},
-              {name: '好评', value: pos},
+              {name: '好评', value: nav},
+              {name: '差评', value: pos},
 
             ],
             insideLabel: {

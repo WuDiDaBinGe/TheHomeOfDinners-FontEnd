@@ -23,8 +23,8 @@
              <div class="form-group" >
              <label>餐馆类型：</label><span class="text-danger">*</span>
                <div class="col-lg-4">
-                 <a-select default-value="请选择"  @change="handleRestaurantTagChange">
-                 <a-select-option v-for="item in tags_list" v-bind:value="item">{{item}}</a-select-option>
+               <a-select default-value="请选择"  @change="handleRestaurantTagChange">
+                 <a-select-option v-for="item in tags_list" v-bind:value="item" :key="item">{{item}}</a-select-option>
                </a-select>
 
                </div>
@@ -32,12 +32,12 @@
             <div class="form-group">
 							<label>地址：</label><span class="text-danger">*</span>
               <div class="col-lg-4">
-									  <a-select default-value="请选择" @change="handleRegionTagChange">
-                 <a-select-option v-for="item in regions_list"  v-bind:value="item">{{item}}</a-select-option>
+                <a-select default-value="请选择" @change="handleRegionTagChange">
+                 <a-select-option v-for="item in regions_list"  v-bind:value="item" :key="item">{{item}}</a-select-option>
                </a-select>
 
                </div>
-<br>
+                <br>
 							<input class="form-control" type="text"  placeholder="餐馆的具体地点" v-model="new_restaurant.res_address">
 						</div>
             <div class="form-group">

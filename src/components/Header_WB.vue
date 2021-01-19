@@ -95,6 +95,7 @@
         loginOut(){
           this.is_login=false;
           removeLocalStore("userLogin");
+          this.$router.push({path:'/login'});
         }
       },
   }
